@@ -1,6 +1,6 @@
 <?php
 
-$plugin->version =  2021013100;
+$plugin->version =  2021051200;
 //                  YYYYMMDDXX
 $plugin->requires = 2010042803;
 $plugin->component = 'quizaccess_tomaetest';

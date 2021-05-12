@@ -150,7 +150,7 @@ class tomaetest_connection
             quizaccess_tomaetest_utils::createGuideLineValue("TETExamEndDelay", "number", $scanningTime)
         ];
         if (isset($verificationType) && $verificationType != null){
-            array_push($guidelineValues,quizaccess_tomaetest_utils::createGuideLineValue("TETExamVerificationType", "list", $verificationType));
+            array_push($guidelineValues,quizaccess_tomaetest_utils::createGuideLineValue("TETExamVerificationType", "multipleSelect", [$verificationType]));
         }
 
         $data["guidelineValue"] = $guidelineValues;
@@ -240,7 +240,7 @@ class tomaetest_connection
                         "TETElementPath" => "1",
                         "TETElementType" => "question",
                         "TETElementPin" => 1,
-                        "TETExamQuestionUseScan" => 1,
+                        "TETExamQuestionResponseType" => ["['scan']"],
                         "TETElementOriginalOrder" => 1,
                         "TETContinuousNumbering" => 0,
                     ]]
