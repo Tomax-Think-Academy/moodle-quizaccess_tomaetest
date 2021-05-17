@@ -99,7 +99,7 @@ class tomaetest_connection
 
         $quizName = $quiz->name;
         $courseName = $course->fullname;
-        // $teacherID = "204433"; //TODO: Replace with teacherid.
+        // $teacherID = "204433";
         $teacherID = null;
         if (isset($TETQuiz->extradata["TeacherID"])) {
             $user = $DB->get_record("user", array("id" => $TETQuiz->extradata["TeacherID"]));
@@ -149,9 +149,6 @@ class tomaetest_connection
             quizaccess_tomaetest_utils::createGuideLineValue("TETExamPasswordTrustNeeded", "list", $verificationTiming),
             quizaccess_tomaetest_utils::createGuideLineValue("TETExamEndDelay", "number", $scanningTime)
         ];
-        if (isset($verificationType) && $verificationType != null){
-            array_push($guidelineValues,quizaccess_tomaetest_utils::createGuideLineValue("TETExamVerificationType", "multipleSelect", [$verificationType]));
-        }
 
         $data["guidelineValue"] = $guidelineValues;
         $data["extraFieldValue"] = [
@@ -163,6 +160,16 @@ class tomaetest_connection
                 "value" => $proctoringType
             ]
         ];
+        if (isset($verificationType) && $verificationType != null) {
+            array_push($data["extraFieldValue"], 
+                [
+                    "objectExtraFieldDefinition" => [
+                        "name" => "TETExamVerificationType",
+                        "fieldType" => "multipleSelect",
+                    ],
+                    "value" => str_replace("\"", "'", json_encode([$verificationType]))
+                ]);
+        }
         if ($blockThirdParty) {
             $alertedAPPS = [];
             $deniedAPPS = [];
@@ -175,13 +182,13 @@ class tomaetest_connection
             });
 
             foreach ($keys as $key) {
-                $name = str_replace("tomaetest_appstate_","", $key);
+                $name = str_replace("tomaetest_appstate_", "", $key);
                 //alert
-                if(tomaetest_connection::$config->{$key} === "1"){
-                    array_push($alertedAPPS,$name);
-                //deny
-                }else if (tomaetest_connection::$config->{$key} === "2"){
-                    array_push($deniedAPPS,$name);
+                if (tomaetest_connection::$config->{$key} === "1") {
+                    array_push($alertedAPPS, $name);
+                    //deny
+                } else if (tomaetest_connection::$config->{$key} === "2") {
+                    array_push($deniedAPPS, $name);
                 }
             }
 
@@ -200,7 +207,7 @@ class tomaetest_connection
                 ],
                 "value" => $tETExamDeniedApps
             ]);
-        }else{
+        } else {
             // array_push($data["extraFieldValue"], [
             //     "objectExtraFieldDefinition" => [
             //         "name" => "TETExamAlertedApps",
@@ -295,4 +302,3 @@ class tomaetest_connection
     }
 }
 tomaetest_connection::$config = get_config('quizaccess_tomaetest');
-
