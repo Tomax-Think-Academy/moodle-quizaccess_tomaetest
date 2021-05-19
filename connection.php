@@ -247,7 +247,7 @@ class tomaetest_connection
                         "TETElementPath" => "1",
                         "TETElementType" => "question",
                         "TETElementPin" => 1,
-                        "TETExamQuestionResponseType" => ["['scan']"],
+                        "TETExamQuestionResponseType" => str_replace("\"", "'", json_encode(["scan"])),
                         "TETElementOriginalOrder" => 1,
                         "TETContinuousNumbering" => 0,
                     ]]
