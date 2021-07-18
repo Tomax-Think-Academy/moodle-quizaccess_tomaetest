@@ -136,39 +136,51 @@ class tomaetest_connection
                 "TETExamQuestionAnswerNumberingType" => "a",
                 "TETExam3rdPartyConfig" => $exam3rdPartyConfig,
                 "TETExamRecordingParticipantView" => $showParticipantOnScreen,
-                "TETExamUseUnlockParticipantPassword" => $reLogin
-            ]
-        ];
-        $proctoringType = str_replace("\"", "'", json_encode($proctoringType));
-        $guidelineValues = [
-            quizaccess_tomaetest_utils::createGuideLineValue("TETExamDuration", "number", $duration),
-            quizaccess_tomaetest_utils::createGuideLineValue("TETOverallExamOverTime", "number", 0),
-            quizaccess_tomaetest_utils::createGuideLineValue("TETExamLockComputer", "list", $lockComputer),
-            quizaccess_tomaetest_utils::createGuideLineValue("TETExamStartTime", "time", $startTime),
-            quizaccess_tomaetest_utils::createGuideLineValue("TETExamAuthorizationType", "list", 'saml'),
-            quizaccess_tomaetest_utils::createGuideLineValue("TETExamPasswordTrustNeeded", "list", $verificationTiming),
-            quizaccess_tomaetest_utils::createGuideLineValue("TETExamEndDelay", "number", $scanningTime)
-        ];
+                "TETExamUseUnlockParticipantPassword" => $reLogin,
+                "TETExamDuration" => $duration,
+                "TETOverallExamOverTime" => 0,
+                "TETExamLockComputer" => ["key" => $lockComputer],
+                "TETExamStartTime" => $startTime,
+                "TETExamAuthorizationType" => ["key" => "saml"],
+                "TETExamPasswordTrustNeeded" => ['key' => $verificationTiming],
+                "TETExamEndDelay" => $scanningTime,
+                "TETExamProctoringType" => array_map(function($proctoringType){
+                    return ["key" => $proctoringType];
+                }, $proctoringType)
 
-        $data["guidelineValue"] = $guidelineValues;
-        $data["extraFieldValue"] = [
-            [
-                "objectExtraFieldDefinition" => [
-                    "name" => "TETExamProctoringType",
-                    "fieldType" => "multipleSelect",
-                ],
-                "value" => $proctoringType
             ]
         ];
+        // $proctoringType = str_replace("\"", "'", json_encode($proctoringType));
+        // $guidelineValues = [
+        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamDuration", "number", $duration),
+        //     quizaccess_tomaetest_utils::createGuideLineValue("TETOverallExamOverTime", "number", 0),
+        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamLockComputer", "list", $lockComputer),
+        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamStartTime", "time", $startTime),
+        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamAuthorizationType", "list", 'saml'),
+        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamPasswordTrustNeeded", "list", $verificationTiming),
+        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamEndDelay", "number", $scanningTime)
+        // ];
+
+        // $data["guidelineValue"] = $guidelineValues;
+        // $data["extraFieldValue"] = [
+        //     [
+        //         "objectExtraFieldDefinition" => [
+        //             "name" => "TETExamProctoringType",
+        //             "fieldType" => "multipleSelect",
+        //         ],
+        //         "value" => $proctoringType
+        //     ]
+        // ];
         if (isset($verificationType) && $verificationType != null) {
-            array_push($data["extraFieldValue"], 
-                [
-                    "objectExtraFieldDefinition" => [
-                        "name" => "TETExamVerificationType",
-                        "fieldType" => "multipleSelect",
-                    ],
-                    "value" => str_replace("\"", "'", json_encode([$verificationType]))
-                ]);
+            // array_push($data["extraFieldValue"], 
+            //     [
+            //         "objectExtraFieldDefinition" => [
+            //             "name" => "TETExamVerificationType",
+            //             "fieldType" => "multipleSelect",
+            //         ],
+            //         "value" => str_replace("\"", "'", json_encode([$verificationType]))
+            //     ]);
+            $data['examParameter']["TETExamVerificationType"] = [["key" => $verificationType]];
         }
         if ($blockThirdParty) {
             $alertedAPPS = [];
@@ -192,21 +204,23 @@ class tomaetest_connection
                 }
             }
 
-            $tETExamAlertedApps = str_replace("\"", "'", json_encode($alertedAPPS));
-            $tETExamDeniedApps = str_replace("\"", "'", json_encode($deniedAPPS));
-            array_push($data["extraFieldValue"], [
-                "objectExtraFieldDefinition" => [
-                    "name" => "TETExamAlertedApps",
-                    "fieldType" => "multipleSelect",
-                ],
-                "value" => $tETExamAlertedApps
-            ], [
-                "objectExtraFieldDefinition" => [
-                    "name" => "TETExamDeniedApps",
-                    "fieldType" => "multipleSelect",
-                ],
-                "value" => $tETExamDeniedApps
-            ]);
+            // $tETExamAlertedApps = str_replace("\"", "'", json_encode($alertedAPPS));
+            // $tETExamDeniedApps = str_replace("\"", "'", json_encode($deniedAPPS));
+            $data['examParameter']["TETExamAlertedApps"] = $alertedAPPS;
+            $data['examParameter']["TETExamDeniedApps"] = $deniedAPPS;
+            // array_push($data["extraFieldValue"], [
+            //     "objectExtraFieldDefinition" => [
+            //         "name" => "TETExamAlertedApps",
+            //         "fieldType" => "multipleSelect",
+            //     ],
+            //     "value" => $tETExamAlertedApps
+            // ], [
+            //     "objectExtraFieldDefinition" => [
+            //         "name" => "TETExamDeniedApps",
+            //         "fieldType" => "multipleSelect",
+            //     ],
+            //     "value" => $tETExamDeniedApps
+            // ]);
         } else {
             // array_push($data["extraFieldValue"], [
             //     "objectExtraFieldDefinition" => [
