@@ -1,5 +1,26 @@
 <?php
-
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+/**
+ * version.php - version information.
+ *
+ * @package    quizaccess_tomaetest
+ * @subpackage quiz
+ * @copyright  2021 Tomax ltd <roy@tomax.co.il>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 if (!defined('MOODLE_INTERNAL')) {
     die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
 }
@@ -311,7 +332,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
 
                      var x = 0;
-                    var interval = setInterval( function() { 
+                    var interval = setInterval( function() {
                         var currentTeacher = document.getElementById('id_tomaetest_realted_user');
                         if (currentTeacher == undefined || currentTeacher == null) {
                             x++;
@@ -338,10 +359,10 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                             var email = this.value;
                             cleanSelectOptions();
                             setSelectByTeacher(email);
- 
+
                      } )
                     var scanModule = document.getElementById('id_tomaetest_scan_module');
-                    
+
                     if (document.getElementById('id_tomaetest_idmatchontg').disabled !== true){
                        document.getElementById('id_tomaetest_idmatchontg').disabled = !(scanModule.checked);
                        document.getElementById('id_tomaetest_scanningTime').disabled = !(scanModule.checked);
@@ -352,12 +373,12 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                             document.getElementById('id_tomaetest_idmatchontg').disabled = !(scanModule.checked);
                             document.getElementById('id_tomaetest_scanningTime').disabled = !(scanModule.checked);
                             setSelectByTeacher(document.getElementById('id_tomaetest_realted_user').value)
- 
+
                      } )
                     },250);
 
                     function setDefaultOptionToSelect(exam) {
-                     
+
                         var mySelect = document.getElementById('id_tomaetest_idmatchontg');
 
                         var length = mySelect.options.length;
@@ -390,7 +411,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                         console.log(email);
                         var exams = teachersHashMap[email];
                         var select = document.getElementById('id_tomaetest_idmatchontg');
-       
+
 
                         if (exams == null || exams == undefined) { return; }
 
@@ -400,7 +421,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                             opt.innerHTML = exams[exam];
                             select.appendChild(opt);
                         });
-                              
+
                     }
 
                     </script>");
@@ -424,7 +445,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         //If no verification timing, no verification type.
         $mform->disabledIf("tomaetest_verificationType", "tomaetest_verificationTiming","eq", "noVerification");
         // Show Participant on  screen only if computer camera is enabled.
-        $mform->disabledIf("tomaetest_showParticipant", "tomaetest_proctoringType_computer");        
+        $mform->disabledIf("tomaetest_showParticipant", "tomaetest_proctoringType_computer");
 
 
         if ($record !== null) {
@@ -549,7 +570,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 if ($user !== false){
                     $record->extradata["TeacherID"] = $user->id;
                 }
-                
+
                 $realtedUser = $user;
 
             }
@@ -573,7 +594,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $record->extradata["VerificationType"] = $verificationType;
             $record->extradata["VerificationTiming"] = $verificationTiming;
             $record->extradata["ProctoringType"] = $proctoringType;
-            
+
 
             // if ($record->extradata["ScanningModule"]){
             //     $connection = new tet_plugin_tomagrade_connection();
@@ -589,7 +610,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             //     $result = $connection->post_request("SaveUsers", json_encode($postdata));
             //     var_dump($result);
             // }
-            
+
 
             $result = tomaetest_connection::syncToTomaETestFromDatabase($quiz->id, $record);
             if (!$result["success"]) {

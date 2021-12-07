@@ -13,12 +13,13 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
+ * version.php - version information.
  *
- * @package   plagiarism_tomagrade
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    quizaccess_tomaetest
+ * @subpackage quiz
+ * @copyright  2021 Tomax ltd <roy@tomax.co.il>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 $string['pluginname'] = "TomaETest quiz access";
