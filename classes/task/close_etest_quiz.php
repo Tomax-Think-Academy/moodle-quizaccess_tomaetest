@@ -29,7 +29,7 @@ class close_etest_quiz extends \core\task\scheduled_task {
     }
 
     public function execute() {
-      global $CFG;
+        global $CFG;
         require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/cron.php");
     }
 }
