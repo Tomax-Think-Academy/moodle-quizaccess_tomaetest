@@ -33,7 +33,7 @@ $identifierarraystudent = array(
     quizaccess_tomaetest_utils::IDENTIFIER_BY_ORBITID => "Orbit id",
 );
 
-$identifierarray_TEACHER = array(
+$identifierarrayteacher = array(
     quizaccess_tomaetest_utils::IDENTIFIER_BY_EMAIL => "Email address",
     quizaccess_tomaetest_utils::IDENTIFIER_BY_ID => "ID",
     quizaccess_tomaetest_utils::IDENTIFIER_BY_HUJIID => "HUJI ID"
@@ -96,7 +96,7 @@ $settings->add(new
         'Set the Default Teacher identifier',
         '',
         '',
-    $identifierarray_TEACHER
+    $identifierarrayteacher
 ));
 
 $settings->add(new
