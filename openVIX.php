@@ -52,9 +52,9 @@ if (has_capability("mod/quiz:attempt", $context)) {
         $code = 'tst-' . $code;
     }
 
-    $courseModule = $cmid;
+    $coursemodule = $cmid;
     $moodleSession = $_COOKIE['MoodleSession' . $CFG->sessioncookie];
-    $loginToPanel = new moodle_url('/mod/quiz/accessrule/tomaetest/studentSSO.php', array('moodleSession' => $moodleSession, "courseModule" => $courseModule));
+    $loginToPanel = new moodle_url('/mod/quiz/accessrule/tomaetest/studentSSO.php', array('moodleSession' => $moodleSession, "courseModule" => $coursemodule));
     $loginToPanel = urlencode($loginToPanel);
     $result = tomaetest_connection::syncToTomaETestFromDatabase($quizid);
     $externalID = quizaccess_tomaetest_utils::getExternalIDForParticipant($USER);
