@@ -41,14 +41,14 @@ if (quizaccess_tomaetest_utils::isETestPluginEnabled()) {
     log_and_print("Starting - checkAllExamsIfClosed");
     checkAllExamsIfClosed();
     log_and_print("Done - checkAllExamsIfClosed");
-    log_and_print("Start - closeAllExams");
-    closeAllExams();
-    log_and_print("Done - closeAllExams");
+    log_and_print("Start - close_all_exams");
+    close_all_exams();
+    log_and_print("Done - close_all_exams");
 
 
 }
 
-function closeAllExams() {
+function close_all_exams() {
     global $DB;
 
     $delta = 30;
