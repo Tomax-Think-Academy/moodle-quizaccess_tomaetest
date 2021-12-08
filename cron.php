@@ -120,7 +120,8 @@ function closeAllExams()
 function checkAllExamsIfClosed()
 {
     global $DB;
-    $checkquizes = $DB->get_records_sql("SELECT  * FROM {quizaccess_tomaetest_main} where extradata not like ?", ["%\"isClosed\":true%"]);
+    $checkquizes = $DB->get_records_sql("SELECT  * FROM {quizaccess_tomaetest_main} where extradata not like ?",
+     ["%\"isClosed\":true%"]);
     $amount = count($checkquizes);
     log_and_print("checking $amount quizes");
     foreach ($checkquizes as $etestquiz) {
