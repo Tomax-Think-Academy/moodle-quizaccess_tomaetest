@@ -96,7 +96,7 @@ class tet_plugin_tomagrade_connection
         return json_decode($response, true);
     }
 
-    public function teacherLogin($id) {
+    public function teacher_login($id) {
         global $USER;
         $config = $this->config;
         $type = "TeacherID";
