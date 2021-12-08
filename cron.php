@@ -49,12 +49,11 @@ if (quizaccess_tomaetest_utils::isETestPluginEnabled()) {
 
 }
 
-function closeAllExams()
-{
+function closeAllExams() {
     global $DB;
 
     $delta = 30;
-    if (isset(tomaetest_connection::$config->tomaetest_closeExamDelta)){
+    if (isset(tomaetest_connection::$config->tomaetest_closeExamDelta)) {
         $delta = intval(tomaetest_connection::$config->tomaetest_closeExamDelta);
     }
     $dbtype = $DB->get_dbfamily();
