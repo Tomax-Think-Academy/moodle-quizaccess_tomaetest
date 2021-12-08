@@ -29,7 +29,7 @@ require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/connection.php");
 require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/utils.php");
 require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/rule.php");
 
-function logAndPrint($msg, &$log = null)
+function log_and_print($msg, &$log = null)
 {
     echo $msg;
     echo "\n";
@@ -38,13 +38,13 @@ function logAndPrint($msg, &$log = null)
 }
 
 if (quizaccess_tomaetest_utils::isETestPluginEnabled()) {
-    logAndPrint("ETest plugin enabled!");
-    logAndPrint("Starting - checkAllExamsIfClosed");
+    log_and_print("ETest plugin enabled!");
+    log_and_print("Starting - checkAllExamsIfClosed");
     checkAllExamsIfClosed();
-    logAndPrint("Done - checkAllExamsIfClosed");
-    logAndPrint("Start - closeAllExams");
+    log_and_print("Done - checkAllExamsIfClosed");
+    log_and_print("Start - closeAllExams");
     closeAllExams();
-    logAndPrint("Done - closeAllExams");
+    log_and_print("Done - closeAllExams");
 
 
 }
@@ -104,15 +104,15 @@ function closeAllExams()
         if ($quiz->extradata["isClosed"] === true){
             return;
         }
-        logAndPrint("Trying to close TomaETest exam $id (quizid " . $tempQuiz->quizid . ")");
+        log_and_print("Trying to close TomaETest exam $id (quizid " . $tempQuiz->quizid . ")");
         $result = tomaetest_connection::post_request("exam/CloseExam/edit", [], "?ID=$id&force=true");
         if ($result["success"] === true) {
-            logAndPrint("Closed TomaETest exam $id");
+            log_and_print("Closed TomaETest exam $id");
             $quiz->extradata["isClosed"] = true;
             quizaccess_tomaetest_utils::update_record($quiz);
         } else {
-            logAndPrint("Failed to close TomaETest exam $id, response:");
-            logAndPrint(json_encode($result));
+            log_and_print("Failed to close TomaETest exam $id, response:");
+            log_and_print(json_encode($result));
         }
     }
 }
@@ -122,7 +122,7 @@ function checkAllExamsIfClosed()
     global $DB;
     $checkQuizes = $DB->get_records_sql("SELECT  * FROM {quizaccess_tomaetest_main} where extradata not like ?", ["%\"isClosed\":true%"]);
     $amount = count($checkQuizes);
-    logAndPrint("checking $amount quizes");
+    log_and_print("checking $amount quizes");
     foreach ($checkQuizes as $etestQuiz) {
         if (isset($etestQuiz->extradata)) {
             $etestQuiz->extradata = json_decode($etestQuiz->extradata, true);
@@ -136,7 +136,7 @@ function checkAllExamsIfClosed()
 
         $etest = tomaetest_connection::getExamSpecificInformation($TETID);
         if (isset($etest["data"]["Entity"]["Attributes"]["TETExamWFStatus"]["key"]) && $etest["data"]["Entity"]["Attributes"]["TETExamWFStatus"]["key"] !== "imported") {
-            logAndPrint("CLOSING.. $TETID");
+            log_and_print("CLOSING.. $TETID");
             $etestQuiz->extradata["isClosed"] = true;
             quizaccess_tomaetest_utils::update_record($etestQuiz);
         }
