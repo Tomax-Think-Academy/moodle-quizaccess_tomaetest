@@ -60,10 +60,10 @@ if (has_capability("mod/quiz:attempt", $context)) {
     $externalid = quizaccess_tomaetest_utils::getExternalIDForParticipant($USER);
     $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalid]);
     if ($participant["success"]) {
-        $tokenRequest = tomaetest_connection::post_request("exam/thirdPartySSOMoodle/view", ["examID" => $quiz->extradata["TETID"], "parID" => $participant["data"]]);
-        if ($tokenRequest["success"]) {
-            $token = $tokenRequest["data"]["token"];
-            $parID = $tokenRequest["data"]["parID"];
+        $tokenrequest = tomaetest_connection::post_request("exam/thirdPartySSOMoodle/view", ["examID" => $quiz->extradata["TETID"], "parID" => $participant["data"]]);
+        if ($tokenrequest["success"]) {
+            $token = $tokenrequest["data"]["token"];
+            $parID = $tokenrequest["data"]["parID"];
             $url = "vix://?examCode=$code&token=$token&parID=$parID&thirdPartyStartupURL=$logintopanel";
             // echo $url;
             header("location: $url");
