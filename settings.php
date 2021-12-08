@@ -116,7 +116,7 @@ if ($ADMIN->fulltree) {
          <b>Alert</b> = The student will be alerted, and it will be saved on the integrity report.</br>
          <b>Deny access</b> = The student will have to close the program before entering."
     ));
-    foreach($apps as $app){
+    foreach ($apps as $app) {
         $name = $app["name"];
         $value = $app["value"];
         $settings->add(new admin_setting_configselect(
