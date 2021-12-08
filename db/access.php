@@ -39,4 +39,4 @@ $capabilities = array(
         )
     ),
 
-)
+);
