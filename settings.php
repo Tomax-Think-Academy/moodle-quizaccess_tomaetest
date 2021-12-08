@@ -172,7 +172,7 @@ if ($ADMIN->fulltree) {
     "TomaETest Defaults",
     "Define the default to be used when creating a new quiz"
     ));
-    // Defaults
+    // Defaults.
     $settings->add(new admin_setting_configcheckbox(
     'quizaccess_tomaetest/tomaetest_allow',
     "Default TomaETest enable proctoring",
@@ -214,7 +214,7 @@ if ($ADMIN->fulltree) {
     ));
 
 
-    // Proctoring Types
+    // Proctoring Types.
     $settings->add(new admin_setting_configcheckbox(
     'quizaccess_tomaetest/tomaetest_proctoringType_computer',
     "Default Proctoring Type - Computer Camera",
