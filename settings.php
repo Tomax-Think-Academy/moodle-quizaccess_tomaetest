@@ -249,11 +249,11 @@ $settings->add(new admin_setting_configtext(
 ));
 
 
-$examCodeEnter = new moodle_url('/mod/quiz/accessrule/tomaetest/examCode.php');
+$examcodeenter = new moodle_url('/mod/quiz/accessrule/tomaetest/examCode.php');
 $settings->add(new admin_setting_heading(
     "quizaccess_permissions_config",
     "TomaETest Dashboard Permission",
-    "In order to define the roles which are allowed to access TomaETest Dashboard, please assign the capability 'mod/quizaccess_tomaetest:viewTomaETestMonitor' to the appropriate role.<br> OPTIONAL: This is the link to the ExamCode enter page: <a target='_blank' href='$examCodeEnter'>$examCodeEnter</a>"
+    "In order to define the roles which are allowed to access TomaETest Dashboard, please assign the capability 'mod/quizaccess_tomaetest:viewTomaETestMonitor' to the appropriate role.<br> OPTIONAL: This is the link to the ExamCode enter page: <a target='_blank' href='$examcodeenter'>$examcodeenter</a>"
 ));
 
 
