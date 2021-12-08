@@ -129,14 +129,14 @@ function checkAllExamsIfClosed()
         } else {
             $etestquiz->extradata = [];
         }
-        $TETID = $etestquiz->extradata["TETID"];
+        $tetid = $etestquiz->extradata["TETID"];
         if ($etestquiz->extradata["isClosed"] === true) {
             return;
         }
 
-        $etest = tomaetest_connection::getExamSpecificInformation($TETID);
+        $etest = tomaetest_connection::getExamSpecificInformation($tetid);
         if (isset($etest["data"]["Entity"]["Attributes"]["TETExamWFStatus"]["key"]) && $etest["data"]["Entity"]["Attributes"]["TETExamWFStatus"]["key"] !== "imported") {
-            log_and_print("CLOSING.. $TETID");
+            log_and_print("CLOSING.. $tetid");
             $etestquiz->extradata["isClosed"] = true;
             quizaccess_tomaetest_utils::update_record($etestquiz);
         }
