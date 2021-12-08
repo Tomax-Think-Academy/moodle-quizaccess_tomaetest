@@ -38,9 +38,9 @@ function log_and_print($msg, &$log = null) {
 
 if (quizaccess_tomaetest_utils::isETestPluginEnabled()) {
     log_and_print("ETest plugin enabled!");
-    log_and_print("Starting - checkAllExamsIfClosed");
-    checkAllExamsIfClosed();
-    log_and_print("Done - checkAllExamsIfClosed");
+    log_and_print("Starting - check_all_exams_if_closed");
+    check_all_exams_if_closed();
+    log_and_print("Done - check_all_exams_if_closed");
     log_and_print("Start - close_all_exams");
     close_all_exams();
     log_and_print("Done - close_all_exams");
@@ -117,7 +117,7 @@ function close_all_exams() {
     }
 }
 
-function checkAllExamsIfClosed() {
+function check_all_exams_if_closed() {
     global $DB;
     $checkquizes = $DB->get_records_sql("SELECT  * FROM {quizaccess_tomaetest_main} where extradata not like ?",
      ["%\"isClosed\":true%"]);
