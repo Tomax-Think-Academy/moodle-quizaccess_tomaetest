@@ -210,7 +210,7 @@ $settings->add(new admin_setting_configselect(
     'Default Verification Types',
     '',
     '',
-    quizaccess_tomaetest_utils::$verificationTypes
+    quizaccess_tomaetest_utils::$verificationtypes
 ));
 
 

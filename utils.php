@@ -46,7 +46,7 @@ class quizaccess_tomaetest_utils
         2 => "Deny access"
     ];
 
-    static $verificationTypes = [
+    static $verificationtypes = [
         "camera" => "Camera",
         "manual" => "Manual",
         "password" => "Password",
