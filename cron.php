@@ -29,12 +29,11 @@ require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/connection.php");
 require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/utils.php");
 require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/rule.php");
 
-function log_and_print($msg, &$log = null)
-{
+function log_and_print($msg, &$log = null) {
     echo $msg;
     echo "\n";
 
-    $log .=  "\n" . $msg;
+    $log .= "\n" . $msg;
 }
 
 if (quizaccess_tomaetest_utils::isETestPluginEnabled()) {
