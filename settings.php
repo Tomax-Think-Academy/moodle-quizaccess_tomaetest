@@ -81,14 +81,14 @@ $settings->add(new admin_setting_configpasswordunmask(
     ''
 ));
 
-$disclaimerHTML = new admin_setting_confightmleditor(
+$disclaimerhtml = new admin_setting_confightmleditor(
     'quizaccess_tomaetest/disclaimer',
     "Student Disclaimer",
     "",
     ''
 );
-$disclaimerHTML->set_updatedcallback('updateDisclaimer');
-$settings->add($disclaimerHTML);
+$disclaimerhtml->set_updatedcallback('updateDisclaimer');
+$settings->add($disclaimerhtml);
 
 $settings->add(new
     admin_setting_configselect(
