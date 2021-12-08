@@ -33,17 +33,17 @@ $value = $_GET["moodleSession"];
 $coursemodule = $_GET["courseModule"];
 $sessionname = 'MoodleSession' . $CFG->sessioncookie;
 $sessionpath = $CFG->sessioncookiepath;
-$sessionDomain = $CFG->sessioncookiedomain;
-$sessionSecure = $CFG->cookiesecure;
-$sessionHTTPOnly = $CFG->cookiehttponly;
+$sessiondomain = $CFG->sessioncookiedomain;
+$sessionsecure = $CFG->cookiesecure;
+$sessionhttponly = $CFG->cookiehttponly;
 
 if (
     !isset($_SERVER['HTTPS'])
 ) {
-    $sessionSecure = "0";
+    $sessionsecure = "0";
 }
 
-setcookie($sessionname,$value,0,$sessionpath,$sessionDomain,$sessionSecure,$sessionHTTPOnly);
+setcookie($sessionname,$value,0,$sessionpath,$sessiondomain,$sessionsecure,$sessionhttponly);
 
 $cmURL = new moodle_url('/mod/quiz/view.php', array('id' => $coursemodule));
 header("location: $cmURL");
