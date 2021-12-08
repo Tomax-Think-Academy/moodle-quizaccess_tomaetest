@@ -21,9 +21,9 @@
  * @copyright  2021 Tomax ltd <roy@tomax.co.il>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_login();
-require_once(dirname(dirname(__FILE__)) . '../../../../config.php');
 
+require_once(dirname(dirname(__FILE__)) . '../../../../config.php');
+require_login();
 if (!defined('MOODLE_INTERNAL')) {
     die('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
