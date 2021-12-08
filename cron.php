@@ -75,7 +75,8 @@ function closeAllExams()
                 group by quiz.id
             ) as v
             group by v.quizid
-            having extract(epoch FROM NOW() - INTERVAL '$delta' MINUTE) > max(COALESCE(v.userclose, v.groupclose, v.timeclose, 0)) and not max(COALESCE(v.userclose, v.groupclose, v.timeclose, 0)) = 0", ["%\"isClosed\":true%"]);
+            having extract(epoch FROM NOW() - INTERVAL '$delta' MINUTE) > max(COALESCE(v.userclose, v.groupclose, v.timeclose, 0))
+             and not max(COALESCE(v.userclose, v.groupclose, v.timeclose, 0)) = 0", ["%\"isClosed\":true%"]);
     } else {
         $endingquizes = $DB->get_records_sql("SELECT
     quizid,
