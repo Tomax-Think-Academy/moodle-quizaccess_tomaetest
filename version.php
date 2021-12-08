@@ -21,7 +21,8 @@
  * @copyright  2021 Tomax ltd <roy@tomax.co.il>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$plugin->version =  2021071800;
+defined('MOODLE_INTERNAL') || die();
+$plugin->version = 2021120801;
 $plugin->requires = 2010042803;
 $plugin->component = 'quizaccess_tomaetest';
 $plugin->maturity = MATURITY_STABLE;
