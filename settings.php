@@ -261,7 +261,9 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_heading(
     "quizaccess_permissions_config_2",
     "TomaETest Integrity Management Permission",
-    "In order to define the roles which are allowed to access TomaETest Integrity Report, please assign the capability 'mod/quizaccess_tomaetest:viewTomaETestAIR' to the appropriate role.<br>OPTIONAL: The link to view the Integrity Management is: <a target='_blank' href='$logintointegritymanagement'>$logintointegritymanagement </a>"
+    "In order to define the roles which are allowed to access TomaETest Integrity Report,
+     please assign the capability 'mod/quizaccess_tomaetest:viewTomaETestAIR' to the appropriate role.<br>
+     OPTIONAL: The link to view the Integrity Management is: <a target='_blank' href='$logintointegritymanagement'>$logintointegritymanagement </a>"
     ));
 
 }
