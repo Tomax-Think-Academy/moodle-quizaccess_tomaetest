@@ -54,7 +54,8 @@ if (has_capability("mod/quiz:attempt", $context)) {
 
     $coursemodule = $cmid;
     $moodlesession = $_COOKIE['MoodleSession' . $CFG->sessioncookie];
-    $logintopanel = new moodle_url('/mod/quiz/accessrule/tomaetest/studentSSO.php', array('moodleSession' => $moodlesession, "courseModule" => $coursemodule));
+    $logintopanel = new moodle_url('/mod/quiz/accessrule/tomaetest/studentSSO.php',
+     array('moodleSession' => $moodlesession, "courseModule" => $coursemodule));
     $logintopanel = urlencode($logintopanel);
     $result = tomaetest_connection::syncToTomaETestFromDatabase($quizid);
     $externalid = quizaccess_tomaetest_utils::getExternalIDForParticipant($USER);
