@@ -26,7 +26,7 @@ class quizaccess_tomaetest_utils
 {
 
 
-    const IDENTIFIER_BY_EMAIL = 0;
+    public const IDENTIFIER_BY_EMAIL = 0;
     const IDENTIFIER_BY_ID = 1;
     const IDENTIFIER_BY_USERNAME = 2;
     const IDENTIFIER_BY_ORBITID = 3;
