@@ -63,8 +63,8 @@ if (has_capability("mod/quiz:attempt", $context)) {
         $tokenrequest = tomaetest_connection::post_request("exam/thirdPartySSOMoodle/view", ["examID" => $quiz->extradata["TETID"], "parID" => $participant["data"]]);
         if ($tokenrequest["success"]) {
             $token = $tokenrequest["data"]["token"];
-            $parID = $tokenrequest["data"]["parID"];
-            $url = "vix://?examCode=$code&token=$token&parID=$parID&thirdPartyStartupURL=$logintopanel";
+            $parid = $tokenrequest["data"]["parID"];
+            $url = "vix://?examCode=$code&token=$token&parID=$parid&thirdPartyStartupURL=$logintopanel";
             // echo $url;
             header("location: $url");
             exit;
