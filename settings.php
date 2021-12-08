@@ -23,18 +23,10 @@
  */
 defined('MOODLE_INTERNAL') || die;
 
-
-// $settings->add(new admin_setting_configtext(
-//     'quizaccess_safeexambrowser/downloadlink',
-//     "get_string('safebrowserdownloadurl', 'quizaccess_safeexambrowser')",
-//     "get_string('safebrowserdownloadurl_desc', 'quizaccess_safeexambrowser')",
-//     '',
-//     PARAM_URL
-
 if ($ADMIN->fulltree) {
-require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/rule.php");
+    require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/rule.php");
 
-$identifierarray_STUDENT = array(
+$identifierarraystudent = array(
     quizaccess_tomaetest_utils::IDENTIFIER_BY_EMAIL => "Email address",
     quizaccess_tomaetest_utils::IDENTIFIER_BY_ID => "ID number",
     quizaccess_tomaetest_utils::IDENTIFIER_BY_USERNAME => "User name",
@@ -113,7 +105,7 @@ $settings->add(new
         'Set the Default Student identifier',
         '',
         '',
-    $identifierarray_STUDENT
+    $identifierarraystudent
 ));
 
     $settings->add(new admin_setting_heading(
