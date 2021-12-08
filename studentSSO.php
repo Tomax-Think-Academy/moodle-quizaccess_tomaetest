@@ -30,7 +30,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
 
 $value = $_GET["moodleSession"];
-$courseModule = $_GET["courseModule"];
+$coursemodule = $_GET["courseModule"];
 $sessionName = 'MoodleSession' . $CFG->sessioncookie;
 $sessionPath = $CFG->sessioncookiepath;
 $sessionDomain = $CFG->sessioncookiedomain;
@@ -45,5 +45,5 @@ if (
 
 setcookie($sessionName,$value,0,$sessionPath,$sessionDomain,$sessionSecure,$sessionHTTPOnly);
 
-$cmURL = new moodle_url('/mod/quiz/view.php', array('id' => $courseModule));
+$cmURL = new moodle_url('/mod/quiz/view.php', array('id' => $coursemodule));
 header("location: $cmURL");
