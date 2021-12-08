@@ -30,18 +30,18 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 
-$quizID = isset($_GET["quizID"]) ? $_GET["quizID"] : false;
+$quizid = isset($_GET["quizID"]) ? $_GET["quizID"] : false;
 
-if ($quizID === false) {
+if ($quizid === false) {
     echo 'window.close()';
 }
 
-$quiz = quizaccess_tomaetest_utils::get_etest_quiz($quizID);
+$quiz = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
 $code = $quiz->extradata["TETExamLink"];
 
 $domain = tomaetest_connection::$config->domain;
 
-$cmid = quizaccess_tomaetest_utils::getCMID($quizID);
+$cmid = quizaccess_tomaetest_utils::getCMID($quizid);
 $context = context_module::instance($cmid);
 if (has_capability("mod/quiz:attempt", $context)) {
 
@@ -56,7 +56,7 @@ if (has_capability("mod/quiz:attempt", $context)) {
     $moodleSession = $_COOKIE['MoodleSession' . $CFG->sessioncookie];
     $loginToPanel = new moodle_url('/mod/quiz/accessrule/tomaetest/studentSSO.php', array('moodleSession' => $moodleSession, "courseModule" => $courseModule));
     $loginToPanel = urlencode($loginToPanel);
-    $result = tomaetest_connection::syncToTomaETestFromDatabase($quizID);
+    $result = tomaetest_connection::syncToTomaETestFromDatabase($quizid);
     $externalID = quizaccess_tomaetest_utils::getExternalIDForParticipant($USER);
     $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalID]);
     if ($participant["success"]) {
