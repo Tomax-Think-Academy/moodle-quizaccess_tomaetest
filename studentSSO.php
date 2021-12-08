@@ -45,5 +45,5 @@ if (
 
 setcookie($sessionname, $value, 0, $sessionpath, $sessiondomain, $sessionsecure, $sessionhttponly);
 
-$cmURL = new moodle_url('/mod/quiz/view.php', array('id' => $coursemodule));
-header("location: $cmURL");
+$cmurl = new moodle_url('/mod/quiz/view.php', array('id' => $coursemodule));
+header("location: $cmurl");
