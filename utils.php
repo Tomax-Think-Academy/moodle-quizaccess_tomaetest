@@ -34,7 +34,7 @@ class quizaccess_tomaetest_utils
 
 
 
-    static $Lockcomputerenums = [
+    static $lockcomputerenums = [
         "no" => "Without",
         "semi" => "Soft Lock",
         "full" => "Hard Lock"
