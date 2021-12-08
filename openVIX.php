@@ -67,7 +67,6 @@ if (has_capability("mod/quiz:attempt", $context)) {
             $token = $tokenrequest["data"]["token"];
             $parid = $tokenrequest["data"]["parID"];
             $url = "vix://?examCode=$code&token=$token&parID=$parid&thirdPartyStartupURL=$logintopanel";
-            // echo $url;
             header("location: $url");
             exit;
         }
