@@ -54,8 +54,8 @@ if (has_capability("mod/quiz:attempt", $context)) {
 
     $coursemodule = $cmid;
     $moodlesession = $_COOKIE['MoodleSession' . $CFG->sessioncookie];
-    $loginToPanel = new moodle_url('/mod/quiz/accessrule/tomaetest/studentSSO.php', array('moodleSession' => $moodlesession, "courseModule" => $coursemodule));
-    $loginToPanel = urlencode($loginToPanel);
+    $logintopanel = new moodle_url('/mod/quiz/accessrule/tomaetest/studentSSO.php', array('moodleSession' => $moodlesession, "courseModule" => $coursemodule));
+    $logintopanel = urlencode($logintopanel);
     $result = tomaetest_connection::syncToTomaETestFromDatabase($quizid);
     $externalID = quizaccess_tomaetest_utils::getExternalIDForParticipant($USER);
     $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalID]);
@@ -64,7 +64,7 @@ if (has_capability("mod/quiz:attempt", $context)) {
         if ($tokenRequest["success"]) {
             $token = $tokenRequest["data"]["token"];
             $parID = $tokenRequest["data"]["parID"];
-            $url = "vix://?examCode=$code&token=$token&parID=$parID&thirdPartyStartupURL=$loginToPanel";
+            $url = "vix://?examCode=$code&token=$token&parID=$parID&thirdPartyStartupURL=$logintopanel";
             // echo $url;
             header("location: $url");
             exit;
