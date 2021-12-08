@@ -123,22 +123,22 @@ function checkAllExamsIfClosed()
     $checkQuizes = $DB->get_records_sql("SELECT  * FROM {quizaccess_tomaetest_main} where extradata not like ?", ["%\"isClosed\":true%"]);
     $amount = count($checkQuizes);
     log_and_print("checking $amount quizes");
-    foreach ($checkQuizes as $etestQuiz) {
-        if (isset($etestQuiz->extradata)) {
-            $etestQuiz->extradata = json_decode($etestQuiz->extradata, true);
+    foreach ($checkQuizes as $etestquiz) {
+        if (isset($etestquiz->extradata)) {
+            $etestquiz->extradata = json_decode($etestquiz->extradata, true);
         } else {
-            $etestQuiz->extradata = [];
+            $etestquiz->extradata = [];
         }
-        $TETID = $etestQuiz->extradata["TETID"];
-        if ($etestQuiz->extradata["isClosed"] === true) {
+        $TETID = $etestquiz->extradata["TETID"];
+        if ($etestquiz->extradata["isClosed"] === true) {
             return;
         }
 
         $etest = tomaetest_connection::getExamSpecificInformation($TETID);
         if (isset($etest["data"]["Entity"]["Attributes"]["TETExamWFStatus"]["key"]) && $etest["data"]["Entity"]["Attributes"]["TETExamWFStatus"]["key"] !== "imported") {
             log_and_print("CLOSING.. $TETID");
-            $etestQuiz->extradata["isClosed"] = true;
-            quizaccess_tomaetest_utils::update_record($etestQuiz);
+            $etestquiz->extradata["isClosed"] = true;
+            quizaccess_tomaetest_utils::update_record($etestquiz);
         }
     }
 }
