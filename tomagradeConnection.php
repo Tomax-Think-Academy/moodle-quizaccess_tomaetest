@@ -106,7 +106,6 @@ class tet_plugin_tomagrade_connection
         $information = quizaccess_tomaetest_utils::getExternalIDForTeacher($USER);
         $postdata = "{\"$type\":\"$information\"}";
 
-        // exit;//echo("POSRTDATA:".$postdata."<br>");
         $responsepost = $this->post_request("DoLogin", $postdata);
         return $responsepost;
     }
