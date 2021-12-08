@@ -21,7 +21,7 @@
  * @copyright  2021 Tomax ltd <roy@tomax.co.il>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+defined('MOODLE_INTERNAL') || die();
 $capabilities = array(
     'mod/quizaccess_tomaetest:viewTomaETestMonitor' => array(
         'captype'      => 'write',
