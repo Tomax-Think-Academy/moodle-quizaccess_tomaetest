@@ -124,7 +124,7 @@ foreach($apps as $app){
             $name,
             '',
             '',
-            quizaccess_tomaetest_utils::$APPLICATION_STATE
+            quizaccess_tomaetest_utils::$applicationstate
         ));
 }
 
@@ -193,7 +193,7 @@ $settings->add(new
         'Default Lock Computer',
         '',
         '',
-        quizaccess_tomaetest_utils::$LockComputerEnums
+        quizaccess_tomaetest_utils::$Lockcomputerenums
     ));
 
 

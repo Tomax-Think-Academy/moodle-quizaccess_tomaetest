@@ -34,13 +34,13 @@ class quizaccess_tomaetest_utils
 
 
 
-    static $LockComputerEnums = [
+    static $Lockcomputerenums = [
         "no" => "Without",
         "semi" => "Soft Lock",
         "full" => "Hard Lock"
     ];
 
-    static $APPLICATION_STATE = [
+    static $applicationstate = [
         0 => "Ignore",
         1 => "Alert",
         2 => "Deny access"
