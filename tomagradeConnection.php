@@ -42,7 +42,7 @@ class tet_plugin_tomagrade_connection
     const REPORT_HTML = 4;
     const REPORT_MATCHES = 5;
     const REPORT_PS = 6;
-    //const REPORT_RESERVED = 7;
+    const REPORT_RESERVED = 7;
     const REPORT_PDFHTML = 8;
     const REPORT_PDFREPORT = 9;
     const REPORT_HIGHLIGHT = 25;
