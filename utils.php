@@ -26,7 +26,7 @@ class quizaccess_tomaetest_utils
 {
 
 
-    public const IDENTIFIER_BY_EMAIL = 0;
+    const IDENTIFIER_BY_EMAIL = 0;
     const IDENTIFIER_BY_ID = 1;
     const IDENTIFIER_BY_USERNAME = 2;
     const IDENTIFIER_BY_ORBITID = 3;
@@ -34,26 +34,26 @@ class quizaccess_tomaetest_utils
 
 
 
-    static $lockcomputerenums = [
+    public static $lockcomputerenums = [
         "no" => "Without",
         "semi" => "Soft Lock",
         "full" => "Hard Lock"
     ];
 
-    static $applicationstate = [
+    public static $applicationstate = [
         0 => "Ignore",
         1 => "Alert",
         2 => "Deny access"
     ];
 
-    static $verificationtypes = [
+    public static $verificationtypes = [
         "camera" => "Camera",
         "manual" => "Manual",
         "password" => "Password",
         "no" => "Without"
     ];
 
-    static $verificationtimings = [
+    public static $verificationtimings = [
         "noVerification" => "Without",
         "beforeExam" => "Before Exam",
         "atExam" => "During Exam"
