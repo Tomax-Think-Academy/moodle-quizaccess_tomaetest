@@ -56,13 +56,11 @@ class tet_plugin_tomagrade_connection
     protected $username = -1;
     protected $nondisclosure = false;
 
-    function __construct()
-    {
+    public function __construct() {
         $this->config = get_config('quizaccess_tomaetest');
     }
 
-    function post_request($method, $postdata, $dontDecode = false, $parameters = "")
-    {
+    public function post_request($method, $postdata, $dontDecode = false, $parameters = "") {
         global $CFG;
         $params = null;
         $config = $this->config;
@@ -112,8 +110,7 @@ class tet_plugin_tomagrade_connection
         return json_decode($response, true);
     }
 
-    public function teacherLogin($id)
-    {
+    public function teacherLogin($id) {
         global $USER;
         $config = $this->config;
         $type = "TeacherID";
