@@ -59,7 +59,7 @@ function closeAllExams()
     }
     $dbType = $DB->get_dbfamily();
     if ($dbType === "postgres") {
-        $endingQuizes = $DB->get_records_sql("SELECT quizid,
+        $endingquizes = $DB->get_records_sql("SELECT quizid,
             max(COALESCE(v.userclose, v.groupclose, v.timeclose, 0)) AS finalDate
             from (
             SELECT quiz.id as quizid,
@@ -77,7 +77,7 @@ function closeAllExams()
             group by v.quizid
             having extract(epoch FROM NOW() - INTERVAL '$delta' MINUTE) > max(COALESCE(v.userclose, v.groupclose, v.timeclose, 0)) and not max(COALESCE(v.userclose, v.groupclose, v.timeclose, 0)) = 0", ["%\"isClosed\":true%"]);
     } else {
-        $endingQuizes = $DB->get_records_sql("SELECT
+        $endingquizes = $DB->get_records_sql("SELECT
     quizid,
      max(COALESCE(v.userclose, v.groupclose, v.timeclose, 0)) AS finalDate
   FROM (
@@ -96,9 +96,10 @@ function closeAllExams()
        having UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL $delta minute)) > finalDate and not finalDate = 0", ["%\"isClosed\":true%"]);
     }
 
-    foreach ($endingQuizes as $tempquiz) {
-        if ($tempquiz->quizid === null)
+    foreach ($endingquizes as $tempquiz) {
+        if ($tempquiz->quizid === null) {
             continue;
+        }
         $quiz = quizaccess_tomaetest_utils::get_etest_quiz($tempquiz->quizid);
         $id = $quiz->extradata["TETID"];
         if ($quiz->extradata["isClosed"] === true) {
