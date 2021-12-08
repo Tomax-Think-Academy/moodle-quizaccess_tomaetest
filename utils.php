@@ -53,7 +53,7 @@ class quizaccess_tomaetest_utils
         "no" => "Without"
     ];
 
-    static $verificationTimings = [
+    static $verificationtimings = [
         "noVerification" => "Without",
         "beforeExam" => "Before Exam",
         "atExam" => "During Exam"

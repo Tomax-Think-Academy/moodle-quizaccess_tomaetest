@@ -203,7 +203,7 @@ $settings->add(new admin_setting_configselect(
     'Default Verification Timing',
     '',
     '',
-    quizaccess_tomaetest_utils::$verificationTimings
+    quizaccess_tomaetest_utils::$verificationtimings
 ));
 $settings->add(new admin_setting_configselect(
     'quizaccess_tomaetest/tomaetest_verificationType',

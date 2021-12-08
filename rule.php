@@ -133,7 +133,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
         $lockComputer = $mform->addElement('select', 'tomaetest_lockComputer', "Lock type", quizaccess_tomaetest_utils::$LockComputerEnums, $lockedAtts);
 
-        $verificationTimings = $mform->addElement('select', 'tomaetest_verificationTiming', "Verification timing", quizaccess_tomaetest_utils::$verificationTimings, $lockedAtts);
+        $verificationtimings = $mform->addElement('select', 'tomaetest_verificationTiming', "Verification timing", quizaccess_tomaetest_utils::$verificationtimings, $lockedAtts);
 
         $verificationType = $mform->addElement('select', 'tomaetest_verificationType', "Verification type", quizaccess_tomaetest_utils::$verificationtypes, $lockedAtts);
 
@@ -459,7 +459,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                     $verificationType->setSelected($extradata["VerificationType"]);
                 }
                 if (isset($extradata["VerificationTiming"])) {
-                    $verificationTimings->setSelected($extradata["VerificationTiming"]);
+                    $verificationtimings->setSelected($extradata["VerificationTiming"]);
                 }
                 if (isset($extradata["ShowParticipant"])) {
                     $mform->setDefault('tomaetest_showParticipant', true);
@@ -507,7 +507,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
                 $verificationType->setSelected($config->tomaetest_verificationType);
 
-                $verificationTimings->setSelected($config->tomaetest_verificationTiming);
+                $verificationtimings->setSelected($config->tomaetest_verificationTiming);
 
                 $mform->setDefault('tomaetest_showParticipant', $config->tomaetest_showParticipant);
 
