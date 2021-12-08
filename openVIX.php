@@ -61,7 +61,8 @@ if (has_capability("mod/quiz:attempt", $context)) {
     $externalid = quizaccess_tomaetest_utils::getExternalIDForParticipant($USER);
     $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalid]);
     if ($participant["success"]) {
-        $tokenrequest = tomaetest_connection::post_request("exam/thirdPartySSOMoodle/view", ["examID" => $quiz->extradata["TETID"], "parID" => $participant["data"]]);
+        $tokenrequest = tomaetest_connection::post_request("exam/thirdPartySSOMoodle/view",
+         ["examID" => $quiz->extradata["TETID"], "parID" => $participant["data"]]);
         if ($tokenrequest["success"]) {
             $token = $tokenrequest["data"]["token"];
             $parid = $tokenrequest["data"]["parID"];
