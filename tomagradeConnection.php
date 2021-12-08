@@ -60,21 +60,15 @@ class tet_plugin_tomagrade_connection
         $this->config = get_config('quizaccess_tomaetest');
     }
 
-    public function post_request($method, $postdata, $dontDecode = false, $parameters = "") {
+    public function post_request($method, $postdata, $dontdecode = false, $parameters = "") {
         global $CFG;
         $params = null;
         $config = $this->config;
-        // tomagrade_log("================== post $method to $config->domain ====================");
-        // if (isset($CFG->TomaToken) && isset($CFG->TomaUser)) {
+
         if ($method !== "DoLogin") {
             $params = "TOKEN/" . $config->tg_userid;
         }
-        // }
-        //$params = (isset($params)) ? implode('/',$params) : "";
         $url = "https://$config->domain.tomagrade.com/TomaGrade/Server/php/WS.php/$method/" . $params . $parameters;
-        //$url = "https://tomagradedev.tomagrade.com/TomaGrade/Server/php/DoLogout.php/9";
-        // tomagrade_log("url : " . $url);
-        // tomagrade_log("postdata : " . json_encode($postdata));
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -88,8 +82,6 @@ class tet_plugin_tomagrade_connection
             CURLOPT_POSTFIELDS => $postdata,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_HTTPHEADER => array("cache-control: no-cache", "x-apikey: $config->tg_apikey", "x-userid: $config->tg_userid")
-            //CURLOPT_CAPATH => "/etc/apache2/ssl",
-            //CURLOPT_CAINFO => "/etc/apache2/ssl/certificate.ca"
 
         ));
 
@@ -97,13 +89,7 @@ class tet_plugin_tomagrade_connection
         $err = curl_error($curl);
         curl_close($curl);
 
-
-
-        //echo("response : ".json_encode($response));
-        // tomagrade_log("response : " . json_encode($response));
-        // tomagrade_log("================== end post $method to $config->tomagrade_server ====================");
-
-        if ($dontDecode) {
+        if ($dontdecode) {
             return $response;
         }
 
@@ -115,7 +101,7 @@ class tet_plugin_tomagrade_connection
         $config = $this->config;
         $type = "TeacherID";
         if (tomaetest_connection::$config->tomaetest_teacherID == quizaccess_tomaetest_utils::IDENTIFIER_BY_EMAIL) {
-            $type ="Email";
+            $type = "Email";
         }
         $information = quizaccess_tomaetest_utils::getExternalIDForTeacher($USER);
         $postdata = "{\"$type\":\"$information\"}";
