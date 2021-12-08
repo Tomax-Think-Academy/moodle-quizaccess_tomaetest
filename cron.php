@@ -57,8 +57,8 @@ function closeAllExams()
     if (isset(tomaetest_connection::$config->tomaetest_closeExamDelta)){
         $delta = intval(tomaetest_connection::$config->tomaetest_closeExamDelta);
     }
-    $dbType = $DB->get_dbfamily();
-    if ($dbType === "postgres") {
+    $dbtype = $DB->get_dbfamily();
+    if ($dbtype === "postgres") {
         $endingquizes = $DB->get_records_sql("SELECT quizid,
             max(COALESCE(v.userclose, v.groupclose, v.timeclose, 0)) AS finalDate
             from (
