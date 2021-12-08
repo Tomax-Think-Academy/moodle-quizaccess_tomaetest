@@ -107,8 +107,8 @@ class tet_plugin_tomagrade_connection
         $postdata = "{\"$type\":\"$information\"}";
 
         // exit;//echo("POSRTDATA:".$postdata."<br>");
-        $response_post = $this->post_request("DoLogin", $postdata);
-        return $response_post;
+        $responsepost = $this->post_request("DoLogin", $postdata);
+        return $responsepost;
     }
 
 }
