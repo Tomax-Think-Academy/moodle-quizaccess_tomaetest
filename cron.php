@@ -96,15 +96,15 @@ function closeAllExams()
        having UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL $delta minute)) > finalDate and not finalDate = 0", ["%\"isClosed\":true%"]);
     }
 
-    foreach ($endingQuizes as $tempQuiz) {
-        if ($tempQuiz->quizid === null)
+    foreach ($endingQuizes as $tempquiz) {
+        if ($tempquiz->quizid === null)
             continue;
-        $quiz = quizaccess_tomaetest_utils::get_etest_quiz($tempQuiz->quizid);
+        $quiz = quizaccess_tomaetest_utils::get_etest_quiz($tempquiz->quizid);
         $id = $quiz->extradata["TETID"];
-        if ($quiz->extradata["isClosed"] === true){
+        if ($quiz->extradata["isClosed"] === true) {
             return;
         }
-        log_and_print("Trying to close TomaETest exam $id (quizid " . $tempQuiz->quizid . ")");
+        log_and_print("Trying to close TomaETest exam $id (quizid " . $tempquiz->quizid . ")");
         $result = tomaetest_connection::post_request("exam/CloseExam/edit", [], "?ID=$id&force=true");
         if ($result["success"] === true) {
             log_and_print("Closed TomaETest exam $id");
@@ -117,8 +117,7 @@ function closeAllExams()
     }
 }
 
-function checkAllExamsIfClosed()
-{
+function checkAllExamsIfClosed() {
     global $DB;
     $checkquizes = $DB->get_records_sql("SELECT  * FROM {quizaccess_tomaetest_main} where extradata not like ?",
      ["%\"isClosed\":true%"]);
