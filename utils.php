@@ -207,7 +207,7 @@ class quizaccess_tomaetest_utils
         return $DB->get_record('course', array('id' => $courseid));
     }
 
-    public static function getCMID($quizid) {
+    public static function get_cmid($quizid) {
         global $DB;
         $record = $DB->get_record_sql("SELECT {course_modules}.ID from {course_modules}
         join {modules} on module = {modules}.id
@@ -219,7 +219,7 @@ class quizaccess_tomaetest_utils
     public static function getQuizStudents($quizid) {
         global $DB;
 
-        $CMID = static::getCMID($quizid);
+        $CMID = static::get_cmid($quizid);
         $context = context_module::instance($CMID);
 
         $students = get_users_by_capability($context, "mod/quiz:attempt");
@@ -279,7 +279,7 @@ class quizaccess_tomaetest_utils
             }
             return $teachers;
         }
-        $CMID = static::getCMID($quizid);
+        $CMID = static::get_cmid($quizid);
         $context = context_module::instance($CMID);
         $teachers = get_users_by_capability($context, "mod/quizaccess_tomaetest:viewTomaETestMonitor");
         if ($userid !== null) {

@@ -41,7 +41,7 @@ $code = $quiz->extradata["TETExamLink"];
 
 $domain = tomaetest_connection::$config->domain;
 
-$cmid = quizaccess_tomaetest_utils::getCMID($quizid);
+$cmid = quizaccess_tomaetest_utils::get_cmid($quizid);
 $context = context_module::instance($cmid);
 if (has_capability("mod/quiz:attempt", $context)) {
 

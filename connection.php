@@ -93,7 +93,7 @@ class tomaetest_connection
             $TETQuiz = quizaccess_tomaetest_utils::get_etest_quiz($quizID);
         }
         $quiz = quizaccess_tomaetest_utils::get_quiz($quizID);
-        $CMID = quizaccess_tomaetest_utils::getCMID($quizID);
+        $CMID = quizaccess_tomaetest_utils::get_cmid($quizID);
         $cm = quizaccess_tomaetest_utils::get_coursemodule($CMID);
         $course = quizaccess_tomaetest_utils::get_course_information($quiz->course);
 
