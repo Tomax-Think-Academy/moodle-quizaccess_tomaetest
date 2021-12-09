@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+    die('Direct access to this script is forbidden.');    // It must be included from a Moodle page.
 }
 
 global $CFG;
@@ -36,8 +36,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
     protected $extraData;
 
-    public function __construct($quizobj, $timenow)
-    {
+    public function __construct($quizobj, $timenow) {
         parent::__construct($quizobj, $timenow);
 
         if ($this->quiz->tomaetest_extradata) {
@@ -47,8 +46,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         }
     }
 
-    public static function make(quiz $quizobj, $timenow, $canignoretimelimits)
-    {
+    public static function make(quiz $quizobj, $timenow, $canignoretimelimits) {
         global $USER;
         $CMID = quizaccess_tomaetest_utils::get_cmid($quizobj->get_quiz()->id);
         $context = context_module::instance($CMID);
@@ -68,8 +66,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         return new self($quizobj, $timenow);
     }
 
-    public function prevent_access()
-    {
+    public function prevent_access() {
         if (!quizaccess_tomaetest_utils::check_access($this->extraData["TETSebHeader"], $this->extraData)) {
             return self::get_blocked_message(quizaccess_tomaetest_utils::is_from_etest());
         } else {
@@ -77,8 +74,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         }
     }
 
-    public function validate_preflight_check($data, $files, $errors, $attemptid)
-    {
+    public function validate_preflight_check($data, $files, $errors, $attemptid) {
         return ['not good'];
     }
 
@@ -523,8 +519,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         }
     }
 
-    public static function save_settings($quiz)
-    {
+    public static function save_settings($quiz) {
         global $DB;
         $record = quizaccess_tomaetest_utils::get_etest_quiz($quiz->id);
         // var_dump($quiz);
@@ -629,8 +624,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
     }
 
 
-    public function get_blocked_message($fromETEST)
-    {
+    public function get_blocked_message($fromETEST) {
         global $CFG, $USER;
         if ($fromETEST) {
             return '<b>Please make sure you choose the right quiz.</b>';
@@ -646,8 +640,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         }
     }
 
-    public static function get_settings_sql($quizid)
-    {
+    public static function get_settings_sql($quizid) {
         return array(
             'tomaetest.extradata AS tomaetest_extradata, tomaetest.id AS tomaetest_innerid',
             'LEFT JOIN {quizaccess_tomaetest_main} tomaetest ON tomaetest.quizid = quiz.id',
@@ -656,13 +649,11 @@ class quizaccess_tomaetest extends quiz_access_rule_base
     }
 }
 
-function etest_log($item)
-{
+function etest_log($item) {
 //    echo $item . "<br>----------------------------------------------------------------------------<br>";
 }
 
-function attempt_submitted($eventdata)
-{
+function attempt_submitted($eventdata) {
     global $DB;
     $eventdata = $eventdata->get_data();
     $quizID = $eventdata["other"]["quizid"];
@@ -684,8 +675,7 @@ function attempt_submitted($eventdata)
     }
 }
 
-function updateDisclaimer($arg)
-{
+function updateDisclaimer($arg) {
     $disclaimer = get_config('quizaccess_tomaetest')->disclaimer;
     $result = tomaetest_connection::post_request("/institution/edit", ['ID' => 1, "Attributes" => [
         'TETInstitutionProctoringDisclaimer' => $disclaimer
