@@ -157,17 +157,17 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $teachersids = array();
             $idinmoodletoemail = array();
             $teachersemailsarray = array();
-            $teachersIDsArray = array();
+            $teachersidsarray = array();
 
             // $isCurrentOwnerExistsInTeachersList = false;
             // $isLoggedUserExistsInTeachersList = false;
 
             // $loggedUserIdNumber = $USER->idnumber;
 
-            $teachersArr = quizaccess_tomaetest_utils::get_moodle_teachers_by_course($quiz->course);
+            $teachersarr = quizaccess_tomaetest_utils::get_moodle_teachers_by_course($quiz->course);
             $connection = new tet_plugin_tomagrade_connection();
 
-            foreach ($teachersArr as $teacher) {
+            foreach ($teachersarr as $teacher) {
 
                 $externalID = quizaccess_tomaetest_utils::get_external_id_for_teacher($teacher);
                 $teachers[$teacher->id] = $teacher->firstname . " " . $teacher->lastname;
@@ -176,7 +176,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $idinmoodletoemail[$teacher->id] = $teacher->email;
 
                 array_push($teachersemailsarray, $teacher->email);
-                array_push($teachersIDsArray, $externalID);
+                array_push($teachersidsarray, $externalID);
             }
 
 
@@ -185,7 +185,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             if ($identifyByEmail) {
                 $postdata['emails'] = $teachersemailsarray;
             } else {
-                $postdata['teacherCodes'] = $teachersIDsArray;
+                $postdata['teacherCodes'] = $teachersidsarray;
             }
 
 
@@ -237,7 +237,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             if ($identifyByEmail) {
                 $postdata['emails'] = $teachersemailsarray;
             } else {
-                $postdata['teacherCodes'] = $teachersIDsArray;
+                $postdata['teacherCodes'] = $teachersidsarray;
             }
             $response = $connection->post_request("MoodleGetExamsList", json_encode($postdata), true);
 
