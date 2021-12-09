@@ -193,13 +193,13 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
             $arrayteachersemailsandteachercode = $response['Message'];
 
-            $emailTeacherCodeMap = array();
+            $emailteachercodemap = array();
             $teacherCodeExists = array();
             $teachersThatExistsInTM = array();
 
 
             foreach ($arrayteachersemailsandteachercode as $teacher) {
-                $emailTeacherCodeMap[strtolower($teacher['Email'])] = $teacher['ExternalTeacherID'];
+                $emailteachercodemap[strtolower($teacher['Email'])] = $teacher['ExternalTeacherID'];
                 $teacherCodeExists[$teacher['ExternalTeacherID']] = true;
             }
 
@@ -209,7 +209,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
             foreach ($teachers as $value => $label) {
                 $teacherCode = $teachersids[$value];
-                if (($identifybyemail == true && isset($emailTeacherCodeMap[$value]) == false)
+                if (($identifybyemail == true && isset($emailteachercodemap[$value]) == false)
                     || ($identifybyemail == false && isset($teacherCodeExists[$teacherCode]) == false)
                 ) {
                     if ($value == strtolower($USER->email)) {
