@@ -48,8 +48,8 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
     public static function make(quiz $quizobj, $timenow, $canignoretimelimits) {
         global $USER;
-        $CMID = quizaccess_tomaetest_utils::get_cmid($quizobj->get_quiz()->id);
-        $context = context_module::instance($CMID);
+        $cmid = quizaccess_tomaetest_utils::get_cmid($quizobj->get_quiz()->id);
+        $context = context_module::instance($cmid);
         $students = get_users_by_capability($context, "mod/quiz:attempt");
         // Check if all students who passed.
         $allow = false;
