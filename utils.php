@@ -105,11 +105,11 @@ class quizaccess_tomaetest_utils
         } else if (tomaetest_connection::$config->tomaetest_studentID == self::IDENTIFIER_BY_ORBITID) {
             $output = $user->idnumber;
 
-            $orbitidData = $DB->get_records_sql("select o.orbitid from {import_interface_user} o JOIN {user} m ON o.username=m.username where m.id = ?", array($user->id));
+            $orbitiddata = $DB->get_records_sql("select o.orbitid from {import_interface_user} o JOIN {user} m ON o.username=m.username where m.id = ?", array($user->id));
 
-            if (count($orbitidData) > 0) {
+            if (count($orbitiddata) > 0) {
 
-                $output = reset($orbitidData)->orbitid;
+                $output = reset($orbitiddata)->orbitid;
             }
         }
         return $output;
