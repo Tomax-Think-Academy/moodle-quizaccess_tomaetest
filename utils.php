@@ -164,7 +164,7 @@ class quizaccess_tomaetest_utils
         return self::get_external_id_for_teacher($user);
     }
 
-    public static function createGuideLineValue($name, $type, $value) {
+    public static function create_guide_line_value($name, $type, $value) {
         return [
             "guidelineParameter" => [
                 "type" => $type,

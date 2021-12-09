@@ -172,13 +172,13 @@ class tomaetest_connection
         ];
         // $proctoringType = str_replace("\"", "'", json_encode($proctoringType));
         // $guidelineValues = [
-        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamDuration", "number", $duration),
-        //     quizaccess_tomaetest_utils::createGuideLineValue("TETOverallExamOverTime", "number", 0),
-        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamLockComputer", "list", $lockComputer),
-        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamStartTime", "time", $startTime),
-        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamAuthorizationType", "list", 'saml'),
-        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamPasswordTrustNeeded", "list", $verificationTiming),
-        //     quizaccess_tomaetest_utils::createGuideLineValue("TETExamEndDelay", "number", $scanningTime)
+        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamDuration", "number", $duration),
+        //     quizaccess_tomaetest_utils::create_guide_line_value("TETOverallExamOverTime", "number", 0),
+        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamLockComputer", "list", $lockComputer),
+        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamStartTime", "time", $startTime),
+        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamAuthorizationType", "list", 'saml'),
+        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamPasswordTrustNeeded", "list", $verificationTiming),
+        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamEndDelay", "number", $scanningTime)
         // ];
 
         // $data["guidelineValue"] = $guidelineValues;
