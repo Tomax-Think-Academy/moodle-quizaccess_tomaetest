@@ -197,8 +197,8 @@ class quizaccess_tomaetest_utils
         return $record;
     }
 
-    public static function is_on_going($tetID) {
-        $information = tomaetest_connection::getInformation($tetID);
+    public static function is_on_going($tetid) {
+        $information = tomaetest_connection::getInformation($tetid);
         return (strtotime($information["data"]["dynamicAttributes"]["ExamPublishTime"]) < time());
     }
 
