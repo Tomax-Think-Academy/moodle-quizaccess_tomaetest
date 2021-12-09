@@ -100,7 +100,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $quizId = $quiz->id;
             $record = quizaccess_tomaetest_utils::get_etest_quiz($quizId);
             if ($record != false) {
-                $isDuring = quizaccess_tomaetest_utils::isOnGoing($record->extradata["TETID"]);
+                $isDuring = quizaccess_tomaetest_utils::is_on_going($record->extradata["TETID"]);
                 $isClosed = (isset($record->extradata["isClosed"])) ? $record->extradata["isClosed"] : false;
                 $isAllDisabled = $isDuring || $isClosed;
             }
@@ -538,7 +538,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         } else {
             $externalID = $record->extradata["TETExternalID"];
             $isClosed = (isset($record->extradata["isClosed"])) ? $record->extradata["isClosed"] : false;
-            $isDuring = quizaccess_tomaetest_utils::isOnGoing($record->extradata["TETID"]);
+            $isDuring = quizaccess_tomaetest_utils::is_on_going($record->extradata["TETID"]);
             if ($isClosed || $isDuring) {
                 return;
             };
@@ -635,7 +635,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         if ($fromETEST) {
             return '<b>Please make sure you choose the right quiz.</b>';
         } else {
-            if (quizaccess_tomaetest_utils::isOnGoing($this->extraData["TETID"])) {
+            if (quizaccess_tomaetest_utils::is_on_going($this->extraData["TETID"])) {
                 $vixURL = new moodle_url('/mod/quiz/accessrule/tomaetest/openVIX.php', array('quizID' => $this->quiz->id));
                 return "<br>
                     <p> Make sure to install TomaETest first by <a target='_blank' href='https://setup.tomaetest.com/TomaETest/setup.html'>clicking here</a>.</p>
