@@ -85,8 +85,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
     ) {
         global $DB, $USER;
 
-        if (!quizaccess_tomaetest_utils::is_etest_plugin_enabled())
+        if (!quizaccess_tomaetest_utils::is_etest_plugin_enabled()) {
             return;
+        }
         $config = tomaetest_connection::$config;
         $record = null;
         $quiz = $quizform->get_current();
