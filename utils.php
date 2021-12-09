@@ -228,7 +228,7 @@ class quizaccess_tomaetest_utils
         return $students;
     }
 
-    public static function MoodleParticipantsToTETParticipants($moodleArray) {
+    public static function MoodleParticipantsToTETParticipants($moodlearray) {
         return
             array_map(function ($student) {
                 $newStudent = new stdClass();
@@ -237,7 +237,7 @@ class quizaccess_tomaetest_utils
                 $newStudent->TETParticipantPhone = $student->phone1;
                 $newStudent->TETParticipantIdentity = quizaccess_tomaetest_utils::get_external_id_for_participant($student);
                 return $newStudent;
-            }, $moodleArray);
+            }, $moodlearray);
     }
 
     public static function isETestPluginEnabled() {
@@ -253,7 +253,7 @@ class quizaccess_tomaetest_utils
         return $users;
     }
 
-    public static function MoodleUsersToTETUsers($moodleArray) {
+    public static function MoodleUsersToTETUsers($moodlearray) {
         return array_map(function ($user) {
             $newUser = new stdClass();
 
@@ -266,7 +266,7 @@ class quizaccess_tomaetest_utils
             $newUser->TETUserPhone = $user->phone1;
 
             return $newUser;
-        }, $moodleArray);
+        }, $moodlearray);
     }
 
     public static function getMoodleTeachers($quizid = null, $userid = null) {
