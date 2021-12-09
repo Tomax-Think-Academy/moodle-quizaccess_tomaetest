@@ -169,20 +169,20 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
             foreach ($teachersarr as $teacher) {
 
-                $externalID = quizaccess_tomaetest_utils::get_external_id_for_teacher($teacher);
+                $externalid = quizaccess_tomaetest_utils::get_external_id_for_teacher($teacher);
                 $teachers[$teacher->id] = $teacher->firstname . " " . $teacher->lastname;
-                $teachersids[$teacher->id] = $externalID; // email to id map
-                $teacherCodeToID[$externalID] = $teacher->id; // id to email map
+                $teachersids[$teacher->id] = $externalid; // email to id map
+                $teachercodetoid[$externalid] = $teacher->id; // id to email map
                 $idinmoodletoemail[$teacher->id] = $teacher->email;
 
                 array_push($teachersemailsarray, $teacher->email);
-                array_push($teachersidsarray, $externalID);
+                array_push($teachersidsarray, $externalid);
             }
 
 
-            $identifyByEmail = false;
+            $identifybyemail = false;
             $postdata = array();
-            if ($identifyByEmail) {
+            if ($identifybyemail) {
                 $postdata['emails'] = $teachersemailsarray;
             } else {
                 $postdata['teacherCodes'] = $teachersidsarray;
@@ -209,8 +209,8 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
             foreach ($teachers as $value => $label) {
                 $teacherCode = $teachersids[$value];
-                if (($identifyByEmail == true && isset($emailTeacherCodeMap[$value]) == false)
-                    || ($identifyByEmail == false && isset($teacherCodeExists[$teacherCode]) == false)
+                if (($identifybyemail == true && isset($emailTeacherCodeMap[$value]) == false)
+                    || ($identifybyemail == false && isset($teacherCodeExists[$teacherCode]) == false)
                 ) {
                     if ($value == strtolower($USER->email)) {
                         $isLoggedUserExistsInTM = false;
@@ -234,7 +234,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
             $postdata = array();
 
-            if ($identifyByEmail) {
+            if ($identifybyemail) {
                 $postdata['emails'] = $teachersemailsarray;
             } else {
                 $postdata['teacherCodes'] = $teachersidsarray;
@@ -289,7 +289,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                         }
                         $courses[$exam['ExamID']] = $stringForExam;
 
-                        $teacherIDInMoodle = isset($teacherCodeToID[$exam['TeacherCode']]) ? $teacherCodeToID[$exam['TeacherCode']] : "";
+                        $teacherIDInMoodle = isset($teachercodetoid[$exam['TeacherCode']]) ? $teachercodetoid[$exam['TeacherCode']] : "";
 
                         if ($teacherIDInMoodle != "") {
                             if (isset($examsByTeachersMap[$teacherIDInMoodle]) == false) {
@@ -527,10 +527,10 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $record->quizid = $quiz->id;
             $record->id = $DB->insert_record('quizaccess_tomaetest_main', $record);
             $record->extradata = [];
-            $externalID = "moodle-" . $quiz->id . "-" . time();
-            $record->extradata["TETExternalID"] = $externalID;
+            $externalid = "moodle-" . $quiz->id . "-" . time();
+            $record->extradata["TETExternalID"] = $externalid;
         } else {
-            $externalID = $record->extradata["TETExternalID"];
+            $externalid = $record->extradata["TETExternalID"];
             $isclosed = (isset($record->extradata["isClosed"])) ? $record->extradata["isClosed"] : false;
             $isduring = quizaccess_tomaetest_utils::is_on_going($record->extradata["TETID"]);
             if ($isclosed || $isduring) {
@@ -663,8 +663,8 @@ function attempt_submitted($eventdata) {
         $TETID = $record->extradata["TETID"];
 
         $user = $DB->get_record('user', array('id' => $userID));
-        $externalID = quizaccess_tomaetest_utils::get_external_id_for_participant($user);
-        $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalID]);
+        $externalid = quizaccess_tomaetest_utils::get_external_id_for_participant($user);
+        $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalid]);
         // var_dump($user->username);
         // var_dump($participant);
         if ($participant !== false) {
