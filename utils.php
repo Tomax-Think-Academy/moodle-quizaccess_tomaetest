@@ -331,15 +331,15 @@ class quizaccess_tomaetest_utils
         }
         $tetroleresponse = tomaetest_connection::post_request("role/getByName/view", ["Name" => "ROLE_MOODLE"]);
 
-        //Need to sync at least one exam to create ROLE_MOODLE...
+        // Need to sync at least one exam to create ROLE_MOODLE...
         if (!$tetroleresponse["success"]) {
             return "Please try and sync one quiz with a user attached to it first.";
         }
-        $RoleID = $tetroleresponse["data"]["Entity"]["ID"];
+        $roleid = $tetroleresponse["data"]["Entity"]["ID"];
         $responseConnect = tomaetest_connection::post_request("user/edit?ID=" . $tetuserid, [
             "ID" => $tetuserid,
             "Attributes" => new stdClass(),
-            "Roles" => ["Delete" => [], "Insert" => [$RoleID]]
+            "Roles" => ["Delete" => [], "Insert" => [$roleid]]
         ]);
         return true;
     }
