@@ -84,10 +84,10 @@ class quizaccess_tomaetest_utils
         } else if (tomaetest_connection::$config->tomaetest_teacherID == self::IDENTIFIER_BY_HUJIID) {
             $output = $user->idnumber;
 
-            $hudjidData = $DB->get_field_sql("SELECT hujiid FROM huji.userdata WHERE tz=?", array('tz' => $user->idnumber));
+            $hudjiddata = $DB->get_field_sql("SELECT hujiid FROM huji.userdata WHERE tz=?", array('tz' => $user->idnumber));
 
-            if ($hudjidData !== false ) {
-                $output = $hudjidData;
+            if ($hudjiddata !== false ) {
+                $output = $hudjiddata;
             }
         }
         return $output;
