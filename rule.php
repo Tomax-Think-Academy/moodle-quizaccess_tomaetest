@@ -132,7 +132,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
         $verificationtimings = $mform->addElement('select', 'tomaetest_verificationTiming', "Verification timing", quizaccess_tomaetest_utils::$verificationtimings, $lockedatts);
 
-        $verificationType = $mform->addElement('select', 'tomaetest_verificationType', "Verification type", quizaccess_tomaetest_utils::$verificationtypes, $lockedatts);
+        $verificationtype = $mform->addElement('select', 'tomaetest_verificationType', "Verification type", quizaccess_tomaetest_utils::$verificationtypes, $lockedatts);
 
         $mform->addElement('checkbox', 'tomaetest_proctoringType_computer', 'Proctoring Types', 'Computer Camera', $lockedatts);
         $mform->addElement('checkbox', 'tomaetest_proctoringType_monitor', 'Monitor Recording', '', $lockedatts);
@@ -452,7 +452,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                     $lockcomputer->setSelected($extradata["LockComputer"]);
                 }
                 if (isset($extradata["VerificationType"])) {
-                    $verificationType->setSelected($extradata["VerificationType"]);
+                    $verificationtype->setSelected($extradata["VerificationType"]);
                 }
                 if (isset($extradata["VerificationTiming"])) {
                     $verificationtimings->setSelected($extradata["VerificationTiming"]);
@@ -501,7 +501,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
                 $lockcomputer->setSelected($config->tomaetest_lockComputer);
 
-                $verificationType->setSelected($config->tomaetest_verificationType);
+                $verificationtype->setSelected($config->tomaetest_verificationType);
 
                 $verificationtimings->setSelected($config->tomaetest_verificationTiming);
 
@@ -541,7 +541,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         if (isset($quiz->tomaetest_allow) && ($quiz->tomaetest_allow == true)) {
 
             $lockcomputer = isset($quiz->tomaetest_lockComputer) ? $quiz->tomaetest_lockComputer : "no";
-            $verificationType = isset($quiz->tomaetest_verificationType) ? $quiz->tomaetest_verificationType : null;
+            $verificationtype = isset($quiz->tomaetest_verificationType) ? $quiz->tomaetest_verificationType : null;
             $verificationTiming = isset($quiz->tomaetest_verificationTiming) ? $quiz->tomaetest_verificationTiming : null;
 
             if (isset($quiz->tomaetest_showParticipant) && $quiz->tomaetest_showParticipant === "1") {
@@ -586,7 +586,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $record->extradata["TETExternalID"] = $quiz->tomaetest_idmatchontg;
             }
             $record->extradata["LockComputer"] = $lockcomputer;
-            $record->extradata["VerificationType"] = $verificationType;
+            $record->extradata["VerificationType"] = $verificationtype;
             $record->extradata["VerificationTiming"] = $verificationTiming;
             $record->extradata["ProctoringType"] = $proctoringType;
 
