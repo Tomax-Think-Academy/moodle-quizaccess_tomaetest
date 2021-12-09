@@ -245,7 +245,7 @@ class quizaccess_tomaetest_utils
     }
 
 
-    public static function getQuizTeachers($quizid) {
+    public static function get_quiz_teachers($quizid) {
         global $DB;
 
         $users = static::getMoodleTeachers($quizid);

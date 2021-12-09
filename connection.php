@@ -268,7 +268,7 @@ class tomaetest_connection
                 ]
             );
         }
-        $users = quizaccess_tomaetest_utils::getQuizTeachers($quizid);
+        $users = quizaccess_tomaetest_utils::get_quiz_teachers($quizid);
         $data["Users"] = $users;
         if ($scanningModule === true) {
             $data["bankExamDTO"] = array(
