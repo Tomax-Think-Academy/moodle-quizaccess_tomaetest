@@ -255,17 +255,17 @@ class quizaccess_tomaetest_utils
 
     public static function moodle_users_to_tet_users($moodlearray) {
         return array_map(function ($user) {
-            $newUser = new stdClass();
+            $newuser = new stdClass();
 
-            $newUser->Role = "ROLE_MOODLE";
-            $newUser->TETExternalID = static::get_external_id_for_teacher($user);
-            $newUser->UserName = static::get_external_id_for_teacher($user);
-            $newUser->TETUserLastName = $user->lastname;
-            $newUser->TETUserEmail = $user->email;
-            $newUser->TETUserFirstName = $user->firstname;
-            $newUser->TETUserPhone = $user->phone1;
+            $newuser->Role = "ROLE_MOODLE";
+            $newuser->TETExternalID = static::get_external_id_for_teacher($user);
+            $newuser->UserName = static::get_external_id_for_teacher($user);
+            $newuser->TETUserLastName = $user->lastname;
+            $newuser->TETUserEmail = $user->email;
+            $newuser->TETUserFirstName = $user->firstname;
+            $newuser->TETUserPhone = $user->phone1;
 
-            return $newUser;
+            return $newuser;
         }, $moodlearray);
     }
 
