@@ -91,7 +91,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         $config = tomaetest_connection::$config;
         $record = null;
         $quiz = $quizform->get_current();
-        $isAllDisabled = false;
+        $isalldisabled = false;
         $quizId = "";
         if ($quiz !== null) {
             $quizId = $quiz->id;
@@ -99,12 +99,12 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             if ($record != false) {
                 $isDuring = quizaccess_tomaetest_utils::is_on_going($record->extradata["TETID"]);
                 $isClosed = (isset($record->extradata["isClosed"])) ? $record->extradata["isClosed"] : false;
-                $isAllDisabled = $isDuring || $isClosed;
+                $isalldisabled = $isDuring || $isClosed;
             }
         }
 
         $lockedAtts = [];
-        if ($isAllDisabled) {
+        if ($isalldisabled) {
             $lockedAtts =  ["disabled"];
             $text = "The TomaETest exam is currently in progress, therefor it cannot be edited.";
             if ($isClosed){
