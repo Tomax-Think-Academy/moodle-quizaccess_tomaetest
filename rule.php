@@ -673,7 +673,7 @@ function attempt_submitted($eventdata)
         $TETID = $record->extradata["TETID"];
 
         $user = $DB->get_record('user', array('id' => $userID));
-        $externalID = quizaccess_tomaetest_utils::getExternalIDForParticipant($user);
+        $externalID = quizaccess_tomaetest_utils::get_external_id_for_participant($user);
         $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalID]);
         // var_dump($user->username);
         // var_dump($participant);

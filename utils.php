@@ -93,7 +93,7 @@ class quizaccess_tomaetest_utils
         return $output;
 
     }
-    public static function getExternalIDForParticipant($user){
+    public static function get_external_id_for_participant($user) {
 
         global $DB;
         if (tomaetest_connection::$config->tomaetest_studentID == self::IDENTIFIER_BY_EMAIL) {
@@ -249,7 +249,7 @@ class quizaccess_tomaetest_utils
                 $newStudent->TETParticipantFirstName = $student->firstname;
                 $newStudent->TETParticipantLastName = $student->lastname;
                 $newStudent->TETParticipantPhone = $student->phone1;
-                $newStudent->TETParticipantIdentity = quizaccess_tomaetest_utils::getExternalIDForParticipant($student);
+                $newStudent->TETParticipantIdentity = quizaccess_tomaetest_utils::get_external_id_for_participant($student);
                 return $newStudent;
             }, $moodleArray);
     }
