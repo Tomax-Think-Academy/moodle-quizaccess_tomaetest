@@ -219,8 +219,8 @@ class quizaccess_tomaetest_utils
     public static function get_quiz_students($quizid) {
         global $DB;
 
-        $CMID = static::get_cmid($quizid);
-        $context = context_module::instance($CMID);
+        $cmid = static::get_cmid($quizid);
+        $context = context_module::instance($cmid);
 
         $students = get_users_by_capability($context, "mod/quiz:attempt");
         $students = static::MoodleParticipantsToTETParticipants($students);
@@ -279,8 +279,8 @@ class quizaccess_tomaetest_utils
             }
             return $teachers;
         }
-        $CMID = static::get_cmid($quizid);
-        $context = context_module::instance($CMID);
+        $cmid = static::get_cmid($quizid);
+        $context = context_module::instance($cmid);
         $teachers = get_users_by_capability($context, "mod/quizaccess_tomaetest:viewTomaETestMonitor");
         if ($userid !== null) {
             $teachers = array_filter($teachers, function ($user) use ($userid) {
