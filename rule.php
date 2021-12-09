@@ -191,14 +191,14 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
             $response = $connection->post_request("GetTeacherIdMoodle", json_encode($postdata));
 
-            $arrayTeachersEmailsAndTeacherCode = $response['Message'];
+            $arrayteachersemailsandteachercode = $response['Message'];
 
             $emailTeacherCodeMap = array();
             $teacherCodeExists = array();
             $teachersThatExistsInTM = array();
 
 
-            foreach ($arrayTeachersEmailsAndTeacherCode as $teacher) {
+            foreach ($arrayteachersemailsandteachercode as $teacher) {
                 $emailTeacherCodeMap[strtolower($teacher['Email'])] = $teacher['ExternalTeacherID'];
                 $teacherCodeExists[$teacher['ExternalTeacherID']] = true;
             }
