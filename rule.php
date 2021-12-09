@@ -179,7 +179,6 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 array_push($teachersidsarray, $externalid);
             }
 
-
             $identifybyemail = false;
             $postdata = array();
             if ($identifybyemail) {
@@ -188,15 +187,13 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $postdata['teacherCodes'] = $teachersidsarray;
             }
 
-
             $response = $connection->post_request("GetTeacherIdMoodle", json_encode($postdata));
 
             $arrayteachersemailsandteachercode = $response['Message'];
 
             $emailteachercodemap = array();
             $teachercodeexists = array();
-            $teachersThatExistsInTM = array();
-
+            $$teachersthatexistsintm = array();
 
             foreach ($arrayteachersemailsandteachercode as $teacher) {
                 $emailteachercodemap[strtolower($teacher['Email'])] = $teacher['ExternalTeacherID'];
@@ -221,14 +218,14 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                     $select->addOption($label, $value);
                     // }
                 } else {
-                    $teachersThatExistsInTM[$value] = $label;
+                    $$teachersthatexistsintm[$value] = $label;
                     $select->addOption($label, $value);
                 }
             }
             $mform->addElement($select);
 
             $teachersemailsarray = array();
-            foreach ($teachersThatExistsInTM as $email => $name) {
+            foreach ($$teachersthatexistsintm as $email => $name) {
                 array_push($teachersemailsarray, $email);
             }
 
@@ -442,7 +439,6 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         // Show Participant on  screen only if computer camera is enabled.
         $mform->disabledIf("tomaetest_showParticipant", "tomaetest_proctoringType_computer");
 
-
         if ($record !== null) {
             if ($record) {
                 $mform->setDefault('tomaetest_allow', true);
@@ -588,23 +584,6 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $record->extradata["VerificationType"] = $verificationtype;
             $record->extradata["VerificationTiming"] = $verificationTiming;
             $record->extradata["ProctoringType"] = $proctoringType;
-
-
-            // if ($record->extradata["ScanningModule"]){
-            //     $connection = new tet_plugin_tomagrade_connection();
-            //     $postdata = [];
-            //     $postdata["usersData"] = [[
-            //         "Email" => $realtedUser->email,
-            //         "FirstName"=>$user->firstName,
-            //         "LastName"=>$user->lastName,
-            //         "RoleID" => 0,
-            //         "TeacherCode" => $user->idnumber,
-            //         "IsOTP" => 0,
-            //     ]];
-            //     $result = $connection->post_request("SaveUsers", json_encode($postdata));
-            //     var_dump($result);
-            // }
-
 
             $result = tomaetest_connection::syncToTomaETestFromDatabase($quiz->id, $record);
             if (!$result["success"]) {
