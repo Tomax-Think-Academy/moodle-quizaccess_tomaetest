@@ -103,9 +103,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             }
         }
 
-        $lockedAtts = [];
+        $lockedatts = [];
         if ($isalldisabled) {
-            $lockedAtts =  ["disabled"];
+            $lockedatts =  ["disabled"];
             $text = "The TomaETest exam is currently in progress, therefor it cannot be edited.";
             if ($isclosed){
                 $text = "The TomaETest exam is closed, therefor it cannot be edited.";
@@ -125,23 +125,23 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             'tomaetest_allow',
             "Allow TomaETest Proctoring module",
             ' ',
-            $lockedAtts
+            $lockedatts
         );
 
-        $lockComputer = $mform->addElement('select', 'tomaetest_lockComputer', "Lock type", quizaccess_tomaetest_utils::$lockcomputerenums, $lockedAtts);
+        $lockComputer = $mform->addElement('select', 'tomaetest_lockComputer', "Lock type", quizaccess_tomaetest_utils::$lockcomputerenums, $lockedatts);
 
-        $verificationtimings = $mform->addElement('select', 'tomaetest_verificationTiming', "Verification timing", quizaccess_tomaetest_utils::$verificationtimings, $lockedAtts);
+        $verificationtimings = $mform->addElement('select', 'tomaetest_verificationTiming', "Verification timing", quizaccess_tomaetest_utils::$verificationtimings, $lockedatts);
 
-        $verificationType = $mform->addElement('select', 'tomaetest_verificationType', "Verification type", quizaccess_tomaetest_utils::$verificationtypes, $lockedAtts);
+        $verificationType = $mform->addElement('select', 'tomaetest_verificationType', "Verification type", quizaccess_tomaetest_utils::$verificationtypes, $lockedatts);
 
-        $mform->addElement('checkbox', 'tomaetest_proctoringType_computer', 'Proctoring Types', 'Computer Camera', $lockedAtts);
-        $mform->addElement('checkbox', 'tomaetest_proctoringType_monitor', 'Monitor Recording', '', $lockedAtts);
+        $mform->addElement('checkbox', 'tomaetest_proctoringType_computer', 'Proctoring Types', 'Computer Camera', $lockedatts);
+        $mform->addElement('checkbox', 'tomaetest_proctoringType_monitor', 'Monitor Recording', '', $lockedatts);
         $mform->addElement('checkbox', 'tomaetest_proctoringType_second', 'Second Camera', '', ["disabled"]);
         $mform->addElement('checkbox', 'tomaetest_proctoringType_room', 'Room Verification', '', ["disabled"]);
 
-        $mform->addElement('checkbox', 'tomaetest_showParticipant', 'Show Participant on screen', ' ', $lockedAtts);
-        $mform->addElement('checkbox', 'tomaetest_blockThirdParty', 'Block Third Party', ' ', $lockedAtts);
-        $mform->addElement('checkbox', 'tomaetest_requireReLogin', 'Require Re-Login Process', ' ', $lockedAtts);
+        $mform->addElement('checkbox', 'tomaetest_showParticipant', 'Show Participant on screen', ' ', $lockedatts);
+        $mform->addElement('checkbox', 'tomaetest_blockThirdParty', 'Block Third Party', ' ', $lockedatts);
+        $mform->addElement('checkbox', 'tomaetest_requireReLogin', 'Require Re-Login Process', ' ', $lockedatts);
 
 
         if ($config->tomagrade_sync_further === "1") {
@@ -151,7 +151,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 'tomaetest_scan_module',
                 "Use TomaETest Scanning module",
                 ' ',
-                $lockedAtts
+                $lockedatts
             );
             // teachers list
             $teachers = array();
@@ -205,7 +205,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $teacherCodeExists[$teacher['ExternalTeacherID']] = true;
             }
 
-            $select = $mform->createElement('select', 'tomaetest_realted_user', 'Related TomaETest User (Required for scanning module)', '',$lockedAtts);
+            $select = $mform->createElement('select', 'tomaetest_realted_user', 'Related TomaETest User (Required for scanning module)', '',$lockedatts);
 
             $select->addOption("No Teacher Selected", -1);
 
@@ -301,9 +301,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                         }
                     }
                 }
-                $mform->addElement('select', 'tomaetest_idmatchontg','ID Match On TomaETest',$courses, $lockedAtts);
+                $mform->addElement('select', 'tomaetest_idmatchontg','ID Match On TomaETest',$courses, $lockedatts);
 
-                $mform->addElement('text', 'tomaetest_scanningTime','Student scanning time',$lockedAtts);
+                $mform->addElement('text', 'tomaetest_scanningTime','Student scanning time',$lockedatts);
                 $mform->setType('tomaetest_scanningTime',PARAM_INT);
                 $mform->addRule('tomaetest_scanningTime', 'Numeric','numeric',null,'client');
 
