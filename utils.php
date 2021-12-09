@@ -161,7 +161,7 @@ class quizaccess_tomaetest_utils
     public static function get_teacher_id($userid) {
         global $DB;
         $user = $DB->get_record('user', array('id' => $userid));
-        return quizaccess_tomaetest_utils::get_external_id_for_teacher($user);
+        return self::get_external_id_for_teacher($user);
     }
 
     public static function createGuideLineValue($name, $type, $value) {
