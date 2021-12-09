@@ -105,9 +105,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
         $lockedatts = [];
         if ($isalldisabled) {
-            $lockedatts =  ["disabled"];
+            $lockedatts = ["disabled"];
             $text = "The TomaETest exam is currently in progress, therefor it cannot be edited.";
-            if ($isclosed){
+            if ($isclosed) {
                 $text = "The TomaETest exam is closed, therefor it cannot be edited.";
             }
             $mform->addElement(
@@ -128,7 +128,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $lockedatts
         );
 
-        $lockComputer = $mform->addElement('select', 'tomaetest_lockComputer', "Lock type", quizaccess_tomaetest_utils::$lockcomputerenums, $lockedatts);
+        $lockcomputer = $mform->addElement('select', 'tomaetest_lockComputer', "Lock type", quizaccess_tomaetest_utils::$lockcomputerenums, $lockedatts);
 
         $verificationtimings = $mform->addElement('select', 'tomaetest_verificationTiming', "Verification timing", quizaccess_tomaetest_utils::$verificationtimings, $lockedatts);
 
@@ -142,7 +142,6 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         $mform->addElement('checkbox', 'tomaetest_showParticipant', 'Show Participant on screen', ' ', $lockedatts);
         $mform->addElement('checkbox', 'tomaetest_blockThirdParty', 'Block Third Party', ' ', $lockedatts);
         $mform->addElement('checkbox', 'tomaetest_requireReLogin', 'Require Re-Login Process', ' ', $lockedatts);
-
 
         if ($config->tomagrade_sync_further === "1") {
 
@@ -450,7 +449,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $mform->setDefault('tomaetest_allow', true);
                 $extradata = $record->extradata;
                 if (isset($extradata["LockComputer"])) {
-                    $lockComputer->setSelected($extradata["LockComputer"]);
+                    $lockcomputer->setSelected($extradata["LockComputer"]);
                 }
                 if (isset($extradata["VerificationType"])) {
                     $verificationType->setSelected($extradata["VerificationType"]);
@@ -500,7 +499,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
                 $mform->setDefault('tomaetest_allow', $config->tomaetest_allow);
 
-                $lockComputer->setSelected($config->tomaetest_lockComputer);
+                $lockcomputer->setSelected($config->tomaetest_lockComputer);
 
                 $verificationType->setSelected($config->tomaetest_verificationType);
 
@@ -541,7 +540,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         }
         if (isset($quiz->tomaetest_allow) && ($quiz->tomaetest_allow == true)) {
 
-            $lockComputer = isset($quiz->tomaetest_lockComputer) ? $quiz->tomaetest_lockComputer : "no";
+            $lockcomputer = isset($quiz->tomaetest_lockComputer) ? $quiz->tomaetest_lockComputer : "no";
             $verificationType = isset($quiz->tomaetest_verificationType) ? $quiz->tomaetest_verificationType : null;
             $verificationTiming = isset($quiz->tomaetest_verificationTiming) ? $quiz->tomaetest_verificationTiming : null;
 
@@ -586,7 +585,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $record->extradata["IDMatch"] = true;
                 $record->extradata["TETExternalID"] = $quiz->tomaetest_idmatchontg;
             }
-            $record->extradata["LockComputer"] = $lockComputer;
+            $record->extradata["LockComputer"] = $lockcomputer;
             $record->extradata["VerificationType"] = $verificationType;
             $record->extradata["VerificationTiming"] = $verificationTiming;
             $record->extradata["ProctoringType"] = $proctoringType;
