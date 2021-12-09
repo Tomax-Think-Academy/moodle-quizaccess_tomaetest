@@ -216,7 +216,7 @@ class quizaccess_tomaetest_utils
         return ($record != false) ? $record->id : null;
     }
 
-    public static function getQuizStudents($quizid) {
+    public static function get_quiz_students($quizid) {
         global $DB;
 
         $CMID = static::get_cmid($quizid);

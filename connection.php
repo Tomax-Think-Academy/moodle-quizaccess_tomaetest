@@ -257,7 +257,7 @@ class tomaetest_connection
             // ]);
         }
         $data["examParticipants"] = [];
-        $students = quizaccess_tomaetest_utils::getQuizStudents($quizid);
+        $students = quizaccess_tomaetest_utils::get_quiz_students($quizid);
         foreach ($students as $student) {
             array_push(
                 $data["examParticipants"],
