@@ -296,7 +296,7 @@ class quizaccess_tomaetest_utils
        return get_users_by_capability($context, "mod/quizaccess_tomaetest:viewTomaETestMonitor");
     }
 
-    public static function getMoodleAllowedIntegrityManagement($userid = null) {
+    public static function get_moodle_allowed_integrity_management($userid = null) {
         global $DB;
         $systemcontext = context_system::instance();
         $teachers = [];
