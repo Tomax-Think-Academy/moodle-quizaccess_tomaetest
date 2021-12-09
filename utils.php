@@ -249,11 +249,11 @@ class quizaccess_tomaetest_utils
         global $DB;
 
         $users = static::getMoodleTeachers($quizid);
-        $users = static::MoodleUsersToTETUsers($users);
+        $users = static::moodle_users_to_tet_users($users);
         return $users;
     }
 
-    public static function MoodleUsersToTETUsers($moodlearray) {
+    public static function moodle_users_to_tet_users($moodlearray) {
         return array_map(function ($user) {
             $newUser = new stdClass();
 
@@ -310,7 +310,7 @@ class quizaccess_tomaetest_utils
         global $DB;
 
         $user = $DB->get_record("user", array("id" => $id));
-        $user = static::MoodleUsersToTETUsers([$user])[0];
+        $user = static::moodle_users_to_tet_users([$user])[0];
 
         $TETUserResponse = tomaetest_connection::post_request("user/getByExternalID/view", ["ExternalID" => $user->TETExternalID]);
 
