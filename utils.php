@@ -306,7 +306,7 @@ class quizaccess_tomaetest_utils
         return $teachers;
     }
 
-    public static function createSystemUser($id) {
+    public static function create_system_user($id) {
         global $DB;
 
         $user = $DB->get_record("user", array("id" => $id));
