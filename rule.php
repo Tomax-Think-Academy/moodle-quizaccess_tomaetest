@@ -212,11 +212,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                     if ($value == strtolower($USER->email)) {
                         $isloggeduserexistsintm = false;
                     }
-                    // if (false) {
-                    //     $select->addOption($label . " - " . get_string('user_does_not_exists_in_tomagrade', 'plagiarism_tomagrade'), $value, array('disabled' => 'disabled'));
-                    // } else {
                     $select->addOption($label, $value);
-                    // }
                 } else {
                     $$teachersthatexistsintm[$value] = $label;
                     $select->addOption($label, $value);
@@ -555,9 +551,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 array_push($proctoringType, "second_cam_proctoring");
             }
             $realtedUser = null;
-            if (isset($quiz->tomaetest_realted_user) && !empty($quiz->tomaetest_realted_user)){
+            if (isset($quiz->tomaetest_realted_user) && !empty($quiz->tomaetest_realted_user)) {
                 $user = $DB->get_record('user', array('id' => $quiz->tomaetest_realted_user));
-                if ($user !== false){
+                if ($user !== false) {
                     $record->extradata["TeacherID"] = $user->id;
                 }
 
