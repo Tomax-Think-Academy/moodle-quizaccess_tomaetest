@@ -158,9 +158,9 @@ class quizaccess_tomaetest_utils
         return false;
     }
 
-    public static function get_teacher_id($userID) {
+    public static function get_teacher_id($userid) {
         global $DB;
-        $user = $DB->get_record('user', array('id' => $userID));
+        $user = $DB->get_record('user', array('id' => $userid));
         return quizaccess_tomaetest_utils::get_external_id_for_teacher($user);
     }
 
@@ -269,22 +269,22 @@ class quizaccess_tomaetest_utils
         }, $moodleArray);
     }
 
-    public static function getMoodleTeachers($quizID = null, $userID = null) {
+    public static function getMoodleTeachers($quizID = null, $userid = null) {
         global $DB;
         if ($quizID === null) {
             $systemcontext = context_system::instance();
             $teachers = [];
-            if (has_capability("mod/quizaccess_tomaetest:viewTomaETestMonitor", $systemcontext, $userID)) {
-                array_push($teachers, $DB->get_record('user', array("id" => $userID)));
+            if (has_capability("mod/quizaccess_tomaetest:viewTomaETestMonitor", $systemcontext, $userid)) {
+                array_push($teachers, $DB->get_record('user', array("id" => $userid)));
             }
             return $teachers;
         }
         $CMID = static::getCMID($quizID);
         $context = context_module::instance($CMID);
         $teachers = get_users_by_capability($context, "mod/quizaccess_tomaetest:viewTomaETestMonitor");
-        if ($userID !== null) {
-            $teachers = array_filter($teachers, function ($user) use ($userID) {
-                return $user->id === $userID;
+        if ($userid !== null) {
+            $teachers = array_filter($teachers, function ($user) use ($userid) {
+                return $user->id === $userid;
             });
         }
 
@@ -296,12 +296,12 @@ class quizaccess_tomaetest_utils
        return get_users_by_capability($context, "mod/quizaccess_tomaetest:viewTomaETestMonitor");
     }
 
-    public static function getMoodleAllowedIntegrityManagement($userID = null) {
+    public static function getMoodleAllowedIntegrityManagement($userid = null) {
         global $DB;
         $systemcontext = context_system::instance();
         $teachers = [];
-        if (has_capability("mod/quizaccess_tomaetest:viewTomaETestAIR", $systemcontext, $userID)) {
-            array_push($teachers, $DB->get_record('user', array("id" => $userID)));
+        if (has_capability("mod/quizaccess_tomaetest:viewTomaETestAIR", $systemcontext, $userid)) {
+            array_push($teachers, $DB->get_record('user', array("id" => $userid)));
         }
         return $teachers;
     }
