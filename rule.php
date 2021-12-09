@@ -98,8 +98,8 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $record = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
             if ($record != false) {
                 $isduring = quizaccess_tomaetest_utils::is_on_going($record->extradata["TETID"]);
-                $isClosed = (isset($record->extradata["isClosed"])) ? $record->extradata["isClosed"] : false;
-                $isalldisabled = $isduring || $isClosed;
+                $isclosed = (isset($record->extradata["isClosed"])) ? $record->extradata["isClosed"] : false;
+                $isalldisabled = $isduring || $isclosed;
             }
         }
 
@@ -107,7 +107,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         if ($isalldisabled) {
             $lockedAtts =  ["disabled"];
             $text = "The TomaETest exam is currently in progress, therefor it cannot be edited.";
-            if ($isClosed){
+            if ($isclosed){
                 $text = "The TomaETest exam is closed, therefor it cannot be edited.";
             }
             $mform->addElement(
@@ -533,9 +533,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $record->extradata["TETExternalID"] = $externalID;
         } else {
             $externalID = $record->extradata["TETExternalID"];
-            $isClosed = (isset($record->extradata["isClosed"])) ? $record->extradata["isClosed"] : false;
+            $isclosed = (isset($record->extradata["isClosed"])) ? $record->extradata["isClosed"] : false;
             $isduring = quizaccess_tomaetest_utils::is_on_going($record->extradata["TETID"]);
-            if ($isClosed || $isduring) {
+            if ($isclosed || $isduring) {
                 return;
             };
         }
