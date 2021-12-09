@@ -248,7 +248,7 @@ class quizaccess_tomaetest_utils
     public static function get_quiz_teachers($quizid) {
         global $DB;
 
-        $users = static::getMoodleTeachers($quizid);
+        $users = static::get_moodle_teachers($quizid);
         $users = static::moodle_users_to_tet_users($users);
         return $users;
     }
@@ -269,7 +269,7 @@ class quizaccess_tomaetest_utils
         }, $moodlearray);
     }
 
-    public static function getMoodleTeachers($quizid = null, $userid = null) {
+    public static function get_moodle_teachers($quizid = null, $userid = null) {
         global $DB;
         if ($quizid === null) {
             $systemcontext = context_system::instance();
