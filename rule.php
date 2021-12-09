@@ -155,7 +155,6 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             // teachers list
             $teachers = array();
             $teachersids = array();
-            $teacherCodeToEmail = array();
             $idInMoodleToEmail = array();
             $teachersEmailsArray = array();
             $teachersIDsArray = array();
