@@ -223,12 +223,12 @@ class quizaccess_tomaetest_utils
         $context = context_module::instance($cmid);
 
         $students = get_users_by_capability($context, "mod/quiz:attempt");
-        $students = static::MoodleParticipantsToTETParticipants($students);
+        $students = static::moodle_participants_to_tet_participants($students);
 
         return $students;
     }
 
-    public static function MoodleParticipantsToTETParticipants($moodlearray) {
+    public static function moodle_participants_to_tet_participants($moodlearray) {
         return
             array_map(function ($student) {
                 $newstudent = new stdClass();
