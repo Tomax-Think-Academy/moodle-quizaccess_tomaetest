@@ -154,7 +154,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             );
             // teachers list
             $teachers = array();
-            $teachersIDs = array();
+            $teachersids = array();
             $teacherCodeToEmail = array();
             $idInMoodleToEmail = array();
             $teachersEmailsArray = array();
@@ -172,7 +172,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
                 $externalID = quizaccess_tomaetest_utils::get_external_id_for_teacher($teacher);
                 $teachers[$teacher->id] = $teacher->firstname . " " . $teacher->lastname;
-                $teachersIDs[$teacher->id] = $externalID; // email to id map
+                $teachersids[$teacher->id] = $externalID; // email to id map
                 $teacherCodeToID[$externalID] = $teacher->id; // id to email map
                 $idInMoodleToEmail[$teacher->id] = $teacher->email;
 
@@ -209,7 +209,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $select->addOption("No Teacher Selected", -1);
 
             foreach ($teachers as $value => $label) {
-                $teacherCode = $teachersIDs[$value];
+                $teacherCode = $teachersids[$value];
                 if (($identifyByEmail == true && isset($emailTeacherCodeMap[$value]) == false)
                     || ($identifyByEmail == false && isset($teacherCodeExists[$teacherCode]) == false)
                 ) {
