@@ -194,13 +194,13 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $arrayteachersemailsandteachercode = $response['Message'];
 
             $emailteachercodemap = array();
-            $teacherCodeExists = array();
+            $teachercodeexists = array();
             $teachersThatExistsInTM = array();
 
 
             foreach ($arrayteachersemailsandteachercode as $teacher) {
                 $emailteachercodemap[strtolower($teacher['Email'])] = $teacher['ExternalTeacherID'];
-                $teacherCodeExists[$teacher['ExternalTeacherID']] = true;
+                $teachercodeexists[$teacher['ExternalTeacherID']] = true;
             }
 
             $select = $mform->createElement('select', 'tomaetest_realted_user', 'Related TomaETest User (Required for scanning module)', '',$lockedatts);
@@ -210,7 +210,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             foreach ($teachers as $value => $label) {
                 $teacherCode = $teachersids[$value];
                 if (($identifybyemail == true && isset($emailteachercodemap[$value]) == false)
-                    || ($identifybyemail == false && isset($teacherCodeExists[$teacherCode]) == false)
+                    || ($identifybyemail == false && isset($teachercodeexists[$teacherCode]) == false)
                 ) {
                     if ($value == strtolower($USER->email)) {
                         $isLoggedUserExistsInTM = false;
