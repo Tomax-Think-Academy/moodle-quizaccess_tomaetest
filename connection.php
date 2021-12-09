@@ -30,7 +30,7 @@ class tomaetest_connection
     {
         $record = quizaccess_tomaetest_utils::get_etest_quiz($quizID);
         $id = $record->extradata["TETID"];
-        $externalID = quizaccess_tomaetest_utils::getTeacherID($userID);
+        $externalID = quizaccess_tomaetest_utils::get_teacher_id($userID);
         $examid = $record->extradata["TETExternalID"];
         $data = ["userExternalID" => $externalID, "examExternalID" => $examid];
         if ($parID !== null) {
@@ -45,7 +45,7 @@ class tomaetest_connection
 
     static function ssoIntegrityManagement($userID)
     {
-        $externalID = quizaccess_tomaetest_utils::getTeacherID($userID);
+        $externalID = quizaccess_tomaetest_utils::get_teacher_id($userID);
         $data = ["userExternalID" => $externalID, "externalLocation" => "air"];
         $result = static::post_request("auth/login/SafeGenerateToken", $data);
         if ($result["success"] == true) {

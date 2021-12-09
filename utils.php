@@ -158,7 +158,7 @@ class quizaccess_tomaetest_utils
         return false;
     }
 
-    public static function getTeacherID($userID) {
+    public static function get_teacher_id($userID) {
         global $DB;
         $user = $DB->get_record('user', array('id' => $userID));
         return quizaccess_tomaetest_utils::get_external_id_for_teacher($user);
