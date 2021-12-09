@@ -34,15 +34,15 @@ require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/tomagradeConnection
 class quizaccess_tomaetest extends quiz_access_rule_base
 {
 
-    protected $extraData;
+    protected $extradata;
 
     public function __construct($quizobj, $timenow) {
         parent::__construct($quizobj, $timenow);
 
         if ($this->quiz->tomaetest_extradata) {
-            $this->extraData = json_decode($this->quiz->tomaetest_extradata, true);
+            $this->extradata = json_decode($this->quiz->tomaetest_extradata, true);
         } else {
-            $this->extraData = [];
+            $this->extradata = [];
         }
     }
 
@@ -67,7 +67,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
     }
 
     public function prevent_access() {
-        if (!quizaccess_tomaetest_utils::check_access($this->extraData["TETSebHeader"], $this->extraData)) {
+        if (!quizaccess_tomaetest_utils::check_access($this->extradata["TETSebHeader"], $this->extradata)) {
             return self::get_blocked_message(quizaccess_tomaetest_utils::is_from_etest());
         } else {
             return false;
@@ -629,7 +629,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         if ($fromETEST) {
             return '<b>Please make sure you choose the right quiz.</b>';
         } else {
-            if (quizaccess_tomaetest_utils::is_on_going($this->extraData["TETID"])) {
+            if (quizaccess_tomaetest_utils::is_on_going($this->extradata["TETID"])) {
                 $vixURL = new moodle_url('/mod/quiz/accessrule/tomaetest/openVIX.php', array('quizID' => $this->quiz->id));
                 return "<br>
                     <p> Make sure to install TomaETest first by <a target='_blank' href='https://setup.tomaetest.com/TomaETest/setup.html'>clicking here</a>.</p>
