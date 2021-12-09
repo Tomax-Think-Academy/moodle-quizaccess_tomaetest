@@ -78,19 +78,9 @@ class quizaccess_tomaetest_utils
         $output = null;
         if (tomaetest_connection::$config->tomaetest_teacherID == self::IDENTIFIER_BY_EMAIL) {
             $output = $user->email;
-        } else if (tomaetest_connection::$config->tomaetest_teacherID== self::IDENTIFIER_BY_ID) {
+        } else if (tomaetest_connection::$config->tomaetest_teacherID == self::IDENTIFIER_BY_ID) {
             $output = $user->idnumber;
 
-            // if (isset($config->tomagrade_zeroCompleteTeacher)) {
-            //     if (is_numeric($config->tomagrade_zeroCompleteTeacher)) {
-            //         $zeros = intval($config->tomagrade_zeroCompleteTeacher);
-            //         if ($zeros > 0) {
-            //             $newObject->data = plagiarism_plugin_tomagrade::completeZeroes($user->idnumber . "", $zeros);
-            //         }
-            //     }
-            // }
-
-            // return $newObject;
         } else if (tomaetest_connection::$config->tomaetest_teacherID == self::IDENTIFIER_BY_HUJIID) {
             $output = $user->idnumber;
 
