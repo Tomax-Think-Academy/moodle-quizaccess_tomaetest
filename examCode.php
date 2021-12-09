@@ -27,7 +27,7 @@ require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/rule.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/rule.php");
     $code = $_GET["code"];
-    $result = quizaccess_tomaetest_utils::get_quiz_by_examCode($code);
+    $result = quizaccess_tomaetest_utils::get_quiz_by_exam_code($code);
     if ($result === false) {
         echo json_encode(["result" => false]);
     } else {

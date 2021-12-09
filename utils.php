@@ -138,7 +138,7 @@ class quizaccess_tomaetest_utils
         return $record;
     }
 
-    public static function get_quiz_by_examCode($code) {
+    public static function get_quiz_by_exam_code($code) {
         global $DB;
         $record = $DB->get_record_sql(
             "select * from {quizaccess_tomaetest_main} where extradata like ?",
