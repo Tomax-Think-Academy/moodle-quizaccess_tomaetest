@@ -152,17 +152,12 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 ' ',
                 $lockedatts
             );
-            // teachers list
+            // Teachers list.
             $teachers = array();
             $teachersids = array();
             $idinmoodletoemail = array();
             $teachersemailsarray = array();
             $teachersidsarray = array();
-
-            // $isCurrentOwnerExistsInTeachersList = false;
-            // $isLoggedUserExistsInTeachersList = false;
-
-            // $loggedUserIdNumber = $USER->idnumber;
 
             $teachersarr = quizaccess_tomaetest_utils::get_moodle_teachers_by_course($quiz->course);
             $connection = new tet_plugin_tomagrade_connection();
@@ -243,12 +238,6 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
                 foreach ($response['Exams'] as $exam) {
                     $stringForExam = $exam['ExamID'];
-
-                    // if (isset($data->idmatchontg)) {
-                    // if ($exam['ExamID'] == $data->idmatchontg) {
-                    // $isChoosenExamInList = true;
-                    // }
-                    // }
 
                     if (isset($existingExamsMap[$stringForExam]) == false) {
                         if (isset($exam['CourseID'])) {
@@ -415,7 +404,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                     </script>");
             }
         }
-        //IF tomaetest_allow disabled..
+        // IF tomaetest_allow disabled..
         $mform->disabledIf("tomaetest_proctoringType_computer", "tomaetest_allow");
         $mform->disabledIf("tomaetest_proctoringType_monitor", "tomaetest_allow");
         $mform->disabledIf("tomaetest_proctoringType_second", "tomaetest_allow");
@@ -513,7 +502,6 @@ class quizaccess_tomaetest extends quiz_access_rule_base
     public static function save_settings($quiz) {
         global $DB;
         $record = quizaccess_tomaetest_utils::get_etest_quiz($quiz->id);
-        // var_dump($quiz);
         if ($record == false) {
             $record = new stdClass();
             $record->quizid = $quiz->id;
@@ -624,7 +612,6 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 }
 
 function etest_log($item) {
-//    echo $item . "<br>----------------------------------------------------------------------------<br>";
 }
 
 function attempt_submitted($eventdata) {
@@ -640,8 +627,6 @@ function attempt_submitted($eventdata) {
         $user = $DB->get_record('user', array('id' => $userID));
         $externalid = quizaccess_tomaetest_utils::get_external_id_for_participant($user);
         $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalid]);
-        // var_dump($user->username);
-        // var_dump($participant);
         if ($participant !== false) {
             $parid = $participant["data"];
             $result = tomaetest_connection::post_request("exam/participant/setSubmissionRequest/insert", ["parID" => $parid, "examID" => $TETID]);
