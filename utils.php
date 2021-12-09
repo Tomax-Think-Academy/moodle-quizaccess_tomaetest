@@ -312,22 +312,22 @@ class quizaccess_tomaetest_utils
         $user = $DB->get_record("user", array("id" => $id));
         $user = static::moodle_users_to_tet_users([$user])[0];
 
-        $TETUserResponse = tomaetest_connection::post_request("user/getByExternalID/view", ["ExternalID" => $user->TETExternalID]);
+        $tetuserresponse = tomaetest_connection::post_request("user/getByExternalID/view", ["ExternalID" => $user->TETExternalID]);
 
-        if (!$TETUserResponse["success"]) {
+        if (!$tetuserresponse["success"]) {
             $sendingObject = [
                 "UserName" => $user->UserName,
                 "Attributes" => $user
             ];
             unset($sendingObject["Attributes"]->UserName);
             unset($sendingObject["Attributes"]->Role);
-            $TETUserResponse = tomaetest_connection::post_request("user/insert", $sendingObject);
-            if (!$TETUserResponse['success']) {
+            $tetuserresponse = tomaetest_connection::post_request("user/insert", $sendingObject);
+            if (!$tetuserresponse['success']) {
                 return "Duplicate ExternalID/UserName - " . $sendingObject["UserName"] . " Please check for duplicate data.";
             }
-            $TETUserID = $TETUserResponse["data"];
+            $TETUserID = $tetuserresponse["data"];
         } else {
-            $TETUserID = $TETUserResponse["data"]["Entity"];
+            $TETUserID = $tetuserresponse["data"]["Entity"];
         }
         $TETRoleResponse = tomaetest_connection::post_request("role/getByName/view", ["Name" => "ROLE_MOODLE"]);
 
