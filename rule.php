@@ -205,12 +205,12 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $select->addOption("No Teacher Selected", -1);
 
             foreach ($teachers as $value => $label) {
-                $teacherCode = $teachersids[$value];
+                $teachercode = $teachersids[$value];
                 if (($identifybyemail == true && isset($emailteachercodemap[$value]) == false)
-                    || ($identifybyemail == false && isset($teachercodeexists[$teacherCode]) == false)
+                    || ($identifybyemail == false && isset($teachercodeexists[$teachercode]) == false)
                 ) {
                     if ($value == strtolower($USER->email)) {
-                        $isLoggedUserExistsInTM = false;
+                        $isloggeduserexistsintm = false;
                     }
                     // if (false) {
                     //     $select->addOption($label . " - " . get_string('user_does_not_exists_in_tomagrade', 'plagiarism_tomagrade'), $value, array('disabled' => 'disabled'));
