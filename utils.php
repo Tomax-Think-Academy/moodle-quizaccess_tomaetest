@@ -336,7 +336,7 @@ class quizaccess_tomaetest_utils
             return "Please try and sync one quiz with a user attached to it first.";
         }
         $roleid = $tetroleresponse["data"]["Entity"]["ID"];
-        $responseConnect = tomaetest_connection::post_request("user/edit?ID=" . $tetuserid, [
+        $responseconnect = tomaetest_connection::post_request("user/edit?ID=" . $tetuserid, [
             "ID" => $tetuserid,
             "Attributes" => new stdClass(),
             "Roles" => ["Delete" => [], "Insert" => [$roleid]]
