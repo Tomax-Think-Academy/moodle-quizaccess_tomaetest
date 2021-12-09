@@ -59,8 +59,7 @@ class quizaccess_tomaetest_utils
         "atExam" => "During Exam"
     ];
 
-    public static function check_access($tetsebheader, $extradata)
-    {
+    public static function check_access($tetsebheader, $extradata) {
         if (
             ((array_key_exists('HTTP_USER_AGENT', $_SERVER)
                 && substr($_SERVER["HTTP_USER_AGENT"], 0, strlen($tetsebheader)) === $tetsebheader))
@@ -73,7 +72,7 @@ class quizaccess_tomaetest_utils
         return false;
     }
 
-    public static function getExternalIDForTeacher($user){
+    public static function get_external_id_for_teacher($user) {
 
         global $DB;
         $output = null;
@@ -178,7 +177,7 @@ class quizaccess_tomaetest_utils
     {
         global $DB;
         $user = $DB->get_record('user', array('id' => $userID));
-        return quizaccess_tomaetest_utils::getExternalIDForTeacher($user);
+        return quizaccess_tomaetest_utils::get_external_id_for_teacher($user);
     }
 
     public static function createGuideLineValue($name, $type, $value)
@@ -286,8 +285,8 @@ class quizaccess_tomaetest_utils
             $newUser = new stdClass();
 
             $newUser->Role = "ROLE_MOODLE";
-            $newUser->TETExternalID = static::getExternalIDForTeacher($user);
-            $newUser->UserName = static::getExternalIDForTeacher($user);
+            $newUser->TETExternalID = static::get_external_id_for_teacher($user);
+            $newUser->UserName = static::get_external_id_for_teacher($user);
             $newUser->TETUserLastName = $user->lastname;
             $newUser->TETUserEmail = $user->email;
             $newUser->TETUserFirstName = $user->firstname;

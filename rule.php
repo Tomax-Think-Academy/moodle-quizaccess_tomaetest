@@ -174,7 +174,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
             foreach ($teachersArr as $teacher) {
 
-                $externalID = quizaccess_tomaetest_utils::getExternalIDForTeacher($teacher);
+                $externalID = quizaccess_tomaetest_utils::get_external_id_for_teacher($teacher);
                 $teachers[$teacher->id] = $teacher->firstname . " " . $teacher->lastname;
                 $teachersIDs[$teacher->id] = $externalID; // email to id map
                 $teacherCodeToID[$externalID] = $teacher->id; // id to email map

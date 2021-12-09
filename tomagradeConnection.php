@@ -103,7 +103,7 @@ class tet_plugin_tomagrade_connection
         if (tomaetest_connection::$config->tomaetest_teacherID == quizaccess_tomaetest_utils::IDENTIFIER_BY_EMAIL) {
             $type = "Email";
         }
-        $information = quizaccess_tomaetest_utils::getExternalIDForTeacher($USER);
+        $information = quizaccess_tomaetest_utils::get_external_id_for_teacher($USER);
         $postdata = "{\"$type\":\"$information\"}";
 
         $responsepost = $this->post_request("DoLogin", $postdata);

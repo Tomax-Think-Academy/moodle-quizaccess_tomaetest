@@ -123,7 +123,7 @@ class tomaetest_connection
         $teacherID = null;
         if (isset($TETQuiz->extradata["TeacherID"])) {
             $user = $DB->get_record("user", array("id" => $TETQuiz->extradata["TeacherID"]));
-            $teacherID = quizaccess_tomaetest_utils::getExternalIDForTeacher($user);
+            $teacherID = quizaccess_tomaetest_utils::get_external_id_for_teacher($user);
         }
 
         $cmURL = new moodle_url('/mod/quiz/view.php', array('id' => $CMID));
