@@ -59,14 +59,14 @@ class quizaccess_tomaetest_utils
         "atExam" => "During Exam"
     ];
 
-    public static function check_access($tetsebheader, $extraData)
+    public static function check_access($tetsebheader, $extradata)
     {
         if (
             ((array_key_exists('HTTP_USER_AGENT', $_SERVER)
                 && substr($_SERVER["HTTP_USER_AGENT"], 0, strlen($tetsebheader)) === $tetsebheader))
             ||
             ((array_key_exists('HTTP_USER_AGENT', $_SERVER) &&
-                $extraData["LockComputer"] === "no" && strpos($_SERVER["HTTP_USER_AGENT"], "-tomaetest") > -1))
+                $extradata["LockComputer"] === "no" && strpos($_SERVER["HTTP_USER_AGENT"], "-tomaetest") > -1))
         ) {
             return true;
         }
