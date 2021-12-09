@@ -188,7 +188,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
             $emailteachercodemap = array();
             $teachercodeexists = array();
-            $$teachersthatexistsintm = array();
+            $teachersthatexistsintm = array();
 
             foreach ($arrayteachersemailsandteachercode as $teacher) {
                 $emailteachercodemap[strtolower($teacher['Email'])] = $teacher['ExternalTeacherID'];
@@ -209,14 +209,14 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                     }
                     $select->addOption($label, $value);
                 } else {
-                    $$teachersthatexistsintm[$value] = $label;
+                    $teachersthatexistsintm[$value] = $label;
                     $select->addOption($label, $value);
                 }
             }
             $mform->addElement($select);
 
             $teachersemailsarray = array();
-            foreach ($$teachersthatexistsintm as $email => $name) {
+            foreach ($teachersthatexistsintm as $email => $name) {
                 array_push($teachersemailsarray, $email);
             }
 
