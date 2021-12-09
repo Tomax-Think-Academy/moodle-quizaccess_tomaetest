@@ -291,7 +291,7 @@ class quizaccess_tomaetest_utils
         return $teachers;
     }
 
-    public static function getMoodleTeachersByCourse($courseid) {
+    public static function get_moodle_teachers_by_course($courseid) {
         $context = context_course::instance($courseid);
        return get_users_by_capability($context, "mod/quizaccess_tomaetest:viewTomaETestMonitor");
     }

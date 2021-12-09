@@ -169,7 +169,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
             // $loggedUserIdNumber = $USER->idnumber;
 
-            $teachersArr = quizaccess_tomaetest_utils::getMoodleTeachersByCourse($quiz->course);
+            $teachersArr = quizaccess_tomaetest_utils::get_moodle_teachers_by_course($quiz->course);
             $connection = new tet_plugin_tomagrade_connection();
 
             foreach ($teachersArr as $teacher) {
