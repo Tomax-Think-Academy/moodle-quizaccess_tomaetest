@@ -200,7 +200,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $teachercodeexists[$teacher['ExternalTeacherID']] = true;
             }
 
-            $select = $mform->createElement('select', 'tomaetest_realted_user', 'Related TomaETest User (Required for scanning module)', '',$lockedatts);
+            $select = $mform->createElement('select', 'tomaetest_realted_user', 'Related TomaETest User (Required for scanning module)', '', $lockedatts);
 
             $select->addOption("No Teacher Selected", -1);
 
@@ -242,7 +242,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $isChoosenExamInList = false;
             $examsByTeachersMap = array();
 
-            $courses = array("0" =>  'Irrelevant - regular quiz (without scan)',);
+            $courses = array("0" =>  'Irrelevant - regular quiz (without scan)', );
             if (isset($response['Exams'])) {
 
                 foreach ($response['Exams'] as $exam) {
@@ -296,11 +296,11 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                         }
                     }
                 }
-                $mform->addElement('select', 'tomaetest_idmatchontg','ID Match On TomaETest',$courses, $lockedatts);
+                $mform->addElement('select', 'tomaetest_idmatchontg', 'ID Match On TomaETest', $courses, $lockedatts);
 
-                $mform->addElement('text', 'tomaetest_scanningTime','Student scanning time',$lockedatts);
-                $mform->setType('tomaetest_scanningTime',PARAM_INT);
-                $mform->addRule('tomaetest_scanningTime', 'Numeric','numeric',null,'client');
+                $mform->addElement('text', 'tomaetest_scanningTime', 'Student scanning time', $lockedatts);
+                $mform->setType('tomaetest_scanningTime', PARAM_INT);
+                $mform->addRule('tomaetest_scanningTime', 'Numeric', 'numeric', null, 'client');
 
                 $buildJSTeachersMap = "var teachersmap = {}; ";
                 foreach ($examsByTeachersMap as $teacher => $value) {
@@ -434,8 +434,8 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         $mform->disabledIf("tomaetest_blockThirdParty", "tomaetest_allow");
         $mform->disabledIf("tomaetest_requireReLogin", "tomaetest_allow");
         $mform->disabledIf("tomaetest_scanningTime", "tomaetest_allow");
-        //If no verification timing, no verification type.
-        $mform->disabledIf("tomaetest_verificationType", "tomaetest_verificationTiming","eq", "noVerification");
+        // If no verification timing, no verification type.
+        $mform->disabledIf("tomaetest_verificationType", "tomaetest_verificationTiming", "eq", "noVerification");
         // Show Participant on  screen only if computer camera is enabled.
         $mform->disabledIf("tomaetest_showParticipant", "tomaetest_proctoringType_computer");
 
