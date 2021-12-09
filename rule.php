@@ -61,7 +61,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 break;
             }
         }
-        if (empty($quizobj->get_quiz()->tomaetest_innerid) || !quizaccess_tomaetest_utils::isETestPluginEnabled() || !$allow) {
+        if (empty($quizobj->get_quiz()->tomaetest_innerid) || !quizaccess_tomaetest_utils::is_etest_plugin_enabled() || !$allow) {
             return null;
         }
 
@@ -89,7 +89,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
     ) {
         global $DB, $USER;
 
-        if (!quizaccess_tomaetest_utils::isETestPluginEnabled())
+        if (!quizaccess_tomaetest_utils::is_etest_plugin_enabled())
             return;
         $config = tomaetest_connection::$config;
         $record = null;

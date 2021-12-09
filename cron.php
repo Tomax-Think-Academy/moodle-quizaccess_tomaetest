@@ -36,7 +36,7 @@ function log_and_print($msg, &$log = null) {
     $log .= "\n" . $msg;
 }
 
-if (quizaccess_tomaetest_utils::isETestPluginEnabled()) {
+if (quizaccess_tomaetest_utils::is_etest_plugin_enabled()) {
     log_and_print("ETest plugin enabled!");
     log_and_print("Starting - check_all_exams_if_closed");
     check_all_exams_if_closed();

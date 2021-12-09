@@ -240,7 +240,7 @@ class quizaccess_tomaetest_utils
             }, $moodlearray);
     }
 
-    public static function isETestPluginEnabled() {
+    public static function is_etest_plugin_enabled() {
         return (tomaetest_connection::$config->allow === "1");
     }
 
