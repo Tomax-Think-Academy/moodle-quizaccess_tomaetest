@@ -92,10 +92,10 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         $record = null;
         $quiz = $quizform->get_current();
         $isalldisabled = false;
-        $quizId = "";
+        $quizid = "";
         if ($quiz !== null) {
-            $quizId = $quiz->id;
-            $record = quizaccess_tomaetest_utils::get_etest_quiz($quizId);
+            $quizid = $quiz->id;
+            $record = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
             if ($record != false) {
                 $isDuring = quizaccess_tomaetest_utils::is_on_going($record->extradata["TETID"]);
                 $isClosed = (isset($record->extradata["isClosed"])) ? $record->extradata["isClosed"] : false;
@@ -496,7 +496,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                         }
                     }
                 }
-            } else if ($quizId == "") {
+            } else if ($quizid == "") {
 
                 $mform->setDefault('tomaetest_allow', $config->tomaetest_allow);
 
