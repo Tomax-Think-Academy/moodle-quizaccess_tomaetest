@@ -155,8 +155,8 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             // teachers list
             $teachers = array();
             $teachersids = array();
-            $idInMoodleToEmail = array();
-            $teachersEmailsArray = array();
+            $idinmoodletoemail = array();
+            $teachersemailsarray = array();
             $teachersIDsArray = array();
 
             // $isCurrentOwnerExistsInTeachersList = false;
@@ -173,9 +173,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $teachers[$teacher->id] = $teacher->firstname . " " . $teacher->lastname;
                 $teachersids[$teacher->id] = $externalID; // email to id map
                 $teacherCodeToID[$externalID] = $teacher->id; // id to email map
-                $idInMoodleToEmail[$teacher->id] = $teacher->email;
+                $idinmoodletoemail[$teacher->id] = $teacher->email;
 
-                array_push($teachersEmailsArray, $teacher->email);
+                array_push($teachersemailsarray, $teacher->email);
                 array_push($teachersIDsArray, $externalID);
             }
 
@@ -183,7 +183,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $identifyByEmail = false;
             $postdata = array();
             if ($identifyByEmail) {
-                $postdata['emails'] = $teachersEmailsArray;
+                $postdata['emails'] = $teachersemailsarray;
             } else {
                 $postdata['teacherCodes'] = $teachersIDsArray;
             }
@@ -227,15 +227,15 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             }
             $mform->addElement($select);
 
-            $teachersEmailsArray = array();
+            $teachersemailsarray = array();
             foreach ($teachersThatExistsInTM as $email => $name) {
-                array_push($teachersEmailsArray, $email);
+                array_push($teachersemailsarray, $email);
             }
 
             $postdata = array();
 
             if ($identifyByEmail) {
-                $postdata['emails'] = $teachersEmailsArray;
+                $postdata['emails'] = $teachersemailsarray;
             } else {
                 $postdata['teacherCodes'] = $teachersIDsArray;
             }
