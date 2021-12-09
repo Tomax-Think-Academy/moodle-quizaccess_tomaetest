@@ -315,15 +315,15 @@ class quizaccess_tomaetest_utils
         $tetuserresponse = tomaetest_connection::post_request("user/getByExternalID/view", ["ExternalID" => $user->TETExternalID]);
 
         if (!$tetuserresponse["success"]) {
-            $sendingObject = [
+            $sendingobject = [
                 "UserName" => $user->UserName,
                 "Attributes" => $user
             ];
-            unset($sendingObject["Attributes"]->UserName);
-            unset($sendingObject["Attributes"]->Role);
-            $tetuserresponse = tomaetest_connection::post_request("user/insert", $sendingObject);
+            unset($sendingobject["Attributes"]->UserName);
+            unset($sendingobject["Attributes"]->Role);
+            $tetuserresponse = tomaetest_connection::post_request("user/insert", $sendingobject);
             if (!$tetuserresponse['success']) {
-                return "Duplicate ExternalID/UserName - " . $sendingObject["UserName"] . " Please check for duplicate data.";
+                return "Duplicate ExternalID/UserName - " . $sendingobject["UserName"] . " Please check for duplicate data.";
             }
             $TETUserID = $tetuserresponse["data"];
         } else {
