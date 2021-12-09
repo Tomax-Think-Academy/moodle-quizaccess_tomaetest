@@ -180,10 +180,10 @@ class quizaccess_tomaetest_utils
         return $DB->update_record('quizaccess_tomaetest_main', $record);
     }
 
-    public static function get_etest_quiz($quizID) {
+    public static function get_etest_quiz($quizid) {
         global $DB;
         try {
-            $record = $DB->get_record('quizaccess_tomaetest_main', array('quizid' => $quizID));
+            $record = $DB->get_record('quizaccess_tomaetest_main', array('quizid' => $quizid));
         } catch (Exception $e) {
             return false;
         }
@@ -207,19 +207,19 @@ class quizaccess_tomaetest_utils
         return $DB->get_record('course', array('id' => $courseid));
     }
 
-    public static function getCMID($quizID) {
+    public static function getCMID($quizid) {
         global $DB;
         $record = $DB->get_record_sql("SELECT {course_modules}.ID from {course_modules}
         join {modules} on module = {modules}.id
-        where {modules}.name = 'quiz' and {course_modules}.instance = ?", [$quizID]);
+        where {modules}.name = 'quiz' and {course_modules}.instance = ?", [$quizid]);
 
         return ($record != false) ? $record->id : null;
     }
 
-    public static function getQuizStudents($quizID) {
+    public static function getQuizStudents($quizid) {
         global $DB;
 
-        $CMID = static::getCMID($quizID);
+        $CMID = static::getCMID($quizid);
         $context = context_module::instance($CMID);
 
         $students = get_users_by_capability($context, "mod/quiz:attempt");
@@ -245,10 +245,10 @@ class quizaccess_tomaetest_utils
     }
 
 
-    public static function getQuizTeachers($quizID) {
+    public static function getQuizTeachers($quizid) {
         global $DB;
 
-        $users = static::getMoodleTeachers($quizID);
+        $users = static::getMoodleTeachers($quizid);
         $users = static::MoodleUsersToTETUsers($users);
         return $users;
     }
@@ -269,9 +269,9 @@ class quizaccess_tomaetest_utils
         }, $moodleArray);
     }
 
-    public static function getMoodleTeachers($quizID = null, $userid = null) {
+    public static function getMoodleTeachers($quizid = null, $userid = null) {
         global $DB;
-        if ($quizID === null) {
+        if ($quizid === null) {
             $systemcontext = context_system::instance();
             $teachers = [];
             if (has_capability("mod/quizaccess_tomaetest:viewTomaETestMonitor", $systemcontext, $userid)) {
@@ -279,7 +279,7 @@ class quizaccess_tomaetest_utils
             }
             return $teachers;
         }
-        $CMID = static::getCMID($quizID);
+        $CMID = static::getCMID($quizid);
         $context = context_module::instance($CMID);
         $teachers = get_users_by_capability($context, "mod/quizaccess_tomaetest:viewTomaETestMonitor");
         if ($userid !== null) {
