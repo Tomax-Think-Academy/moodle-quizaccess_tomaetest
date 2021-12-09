@@ -231,12 +231,12 @@ class quizaccess_tomaetest_utils
     public static function MoodleParticipantsToTETParticipants($moodlearray) {
         return
             array_map(function ($student) {
-                $newStudent = new stdClass();
-                $newStudent->TETParticipantFirstName = $student->firstname;
-                $newStudent->TETParticipantLastName = $student->lastname;
-                $newStudent->TETParticipantPhone = $student->phone1;
-                $newStudent->TETParticipantIdentity = quizaccess_tomaetest_utils::get_external_id_for_participant($student);
-                return $newStudent;
+                $newstudent = new stdClass();
+                $newstudent->TETParticipantFirstName = $student->firstname;
+                $newstudent->TETParticipantLastName = $student->lastname;
+                $newstudent->TETParticipantPhone = $student->phone1;
+                $newstudent->TETParticipantIdentity = quizaccess_tomaetest_utils::get_external_id_for_participant($student);
+                return $newstudent;
             }, $moodlearray);
     }
 
