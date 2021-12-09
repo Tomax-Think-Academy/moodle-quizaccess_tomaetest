@@ -97,9 +97,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $quizid = $quiz->id;
             $record = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
             if ($record != false) {
-                $isDuring = quizaccess_tomaetest_utils::is_on_going($record->extradata["TETID"]);
+                $isduring = quizaccess_tomaetest_utils::is_on_going($record->extradata["TETID"]);
                 $isClosed = (isset($record->extradata["isClosed"])) ? $record->extradata["isClosed"] : false;
-                $isalldisabled = $isDuring || $isClosed;
+                $isalldisabled = $isduring || $isClosed;
             }
         }
 
@@ -534,8 +534,8 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         } else {
             $externalID = $record->extradata["TETExternalID"];
             $isClosed = (isset($record->extradata["isClosed"])) ? $record->extradata["isClosed"] : false;
-            $isDuring = quizaccess_tomaetest_utils::is_on_going($record->extradata["TETID"]);
-            if ($isClosed || $isDuring) {
+            $isduring = quizaccess_tomaetest_utils::is_on_going($record->extradata["TETID"]);
+            if ($isClosed || $isduring) {
                 return;
             };
         }
