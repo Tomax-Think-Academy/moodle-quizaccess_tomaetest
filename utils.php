@@ -115,22 +115,19 @@ class quizaccess_tomaetest_utils
         return $output;
     }
 
-    public static function get_quiz($quizid)
-    {
+    public static function get_quiz($quizid) {
         global $DB;
         $record = $DB->get_record('quiz', array('id' => $quizid));
         return $record;
     }
 
-    public static function get_coursemodule($cmid)
-    {
+    public static function get_coursemodule($cmid) {
         global $DB;
         $record = $DB->get_record('course_modules', array('id' => $cmid));
         return $record;
     }
 
-    public static function get_course($cmid)
-    {
+    public static function get_course($cmid) {
         global $DB;
         $record = $DB->get_record_sql(
             "select * from {course_modules}
@@ -141,8 +138,7 @@ class quizaccess_tomaetest_utils
         return $record;
     }
 
-    public static function get_quiz_by_examCode($code)
-    {
+    public static function get_quiz_by_examCode($code) {
         global $DB;
         $record = $DB->get_record_sql(
             "select * from {quizaccess_tomaetest_main} where extradata like ?",
@@ -151,8 +147,7 @@ class quizaccess_tomaetest_utils
         return $record;
     }
 
-    public static function is_from_etest()
-    {
+    public static function is_from_etest() {
 
         if (
             array_key_exists('HTTP_USER_AGENT', $_SERVER)
@@ -163,15 +158,13 @@ class quizaccess_tomaetest_utils
         return false;
     }
 
-    public static function getTeacherID($userID)
-    {
+    public static function getTeacherID($userID) {
         global $DB;
         $user = $DB->get_record('user', array('id' => $userID));
         return quizaccess_tomaetest_utils::get_external_id_for_teacher($user);
     }
 
-    public static function createGuideLineValue($name, $type, $value)
-    {
+    public static function createGuideLineValue($name, $type, $value) {
         return [
             "guidelineParameter" => [
                 "type" => $type,
@@ -181,15 +174,13 @@ class quizaccess_tomaetest_utils
         ];
     }
 
-    public static function update_record($record)
-    {
+    public static function update_record($record) {
         global $DB;
         $record->extradata = json_encode($record->extradata);
         return $DB->update_record('quizaccess_tomaetest_main', $record);
     }
 
-    public static function get_etest_quiz($quizID)
-    {
+    public static function get_etest_quiz($quizID) {
         global $DB;
         try {
             $record = $DB->get_record('quizaccess_tomaetest_main', array('quizid' => $quizID));
@@ -206,20 +197,17 @@ class quizaccess_tomaetest_utils
         return $record;
     }
 
-    static function isOnGoing($tetID)
-    {
+    static function isOnGoing($tetID) {
         $information = tomaetest_connection::getInformation($tetID);
         return (strtotime($information["data"]["dynamicAttributes"]["ExamPublishTime"]) < time());
     }
 
-    public static function get_course_information($courseid)
-    {
+    public static function get_course_information($courseid) {
         global $DB;
         return $DB->get_record('course', array('id' => $courseid));
     }
 
-    public static function getCMID($quizID)
-    {
+    public static function getCMID($quizID) {
         global $DB;
         $record = $DB->get_record_sql("SELECT {course_modules}.ID from {course_modules}
         join {modules} on module = {modules}.id
@@ -228,8 +216,7 @@ class quizaccess_tomaetest_utils
         return ($record != false) ? $record->id : null;
     }
 
-    public static function getQuizStudents($quizID)
-    {
+    public static function getQuizStudents($quizID) {
         global $DB;
 
         $CMID = static::getCMID($quizID);
@@ -241,8 +228,7 @@ class quizaccess_tomaetest_utils
         return $students;
     }
 
-    public static function MoodleParticipantsToTETParticipants($moodleArray)
-    {
+    public static function MoodleParticipantsToTETParticipants($moodleArray) {
         return
             array_map(function ($student) {
                 $newStudent = new stdClass();
@@ -254,14 +240,12 @@ class quizaccess_tomaetest_utils
             }, $moodleArray);
     }
 
-    public static function isETestPluginEnabled()
-    {
+    public static function isETestPluginEnabled() {
         return (tomaetest_connection::$config->allow === "1");
     }
 
 
-    public static function getQuizTeachers($quizID)
-    {
+    public static function getQuizTeachers($quizID) {
         global $DB;
 
         $users = static::getMoodleTeachers($quizID);
@@ -269,8 +253,7 @@ class quizaccess_tomaetest_utils
         return $users;
     }
 
-    public static function MoodleUsersToTETUsers($moodleArray)
-    {
+    public static function MoodleUsersToTETUsers($moodleArray) {
         return array_map(function ($user) {
             $newUser = new stdClass();
 
@@ -286,8 +269,7 @@ class quizaccess_tomaetest_utils
         }, $moodleArray);
     }
 
-    public static function getMoodleTeachers($quizID = null, $userID = null)
-    {
+    public static function getMoodleTeachers($quizID = null, $userID = null) {
         global $DB;
         if ($quizID === null) {
             $systemcontext = context_system::instance();
@@ -309,13 +291,12 @@ class quizaccess_tomaetest_utils
         return $teachers;
     }
 
-    public static function getMoodleTeachersByCourse($courseid){
+    public static function getMoodleTeachersByCourse($courseid) {
         $context = context_course::instance($courseid);
        return get_users_by_capability($context, "mod/quizaccess_tomaetest:viewTomaETestMonitor");
     }
 
-    public static function getMoodleAllowedIntegrityManagement($userID = null)
-    {
+    public static function getMoodleAllowedIntegrityManagement($userID = null) {
         global $DB;
         $systemcontext = context_system::instance();
         $teachers = [];
@@ -325,8 +306,7 @@ class quizaccess_tomaetest_utils
         return $teachers;
     }
 
-    public static function createSystemUser($id)
-    {
+    public static function createSystemUser($id) {
         global $DB;
 
         $user = $DB->get_record("user", array("id" => $id));
