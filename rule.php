@@ -289,9 +289,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $buildjsteachersmap = "var teachersmap = {}; ";
                 foreach ($examsbyteachersmap as $teacher => $value) {
                     $buildjsteachersmap = $buildjsteachersmap . " var examArr = {}; ";
-                    foreach ($value as $exam => $examString) {
-                        $examString = str_replace("'", "", $examString);
-                        $buildjsteachersmap = $buildjsteachersmap . "examArr['$exam'] = '$examString';";
+                    foreach ($value as $exam => $examstring) {
+                        $examstring = str_replace("'", "", $examstring);
+                        $buildjsteachersmap = $buildjsteachersmap . "examArr['$exam'] = '$examstring';";
                     }
                     $buildjsteachersmap = $buildjsteachersmap . " teachersmap['$teacher'] = examArr;";
                 }
