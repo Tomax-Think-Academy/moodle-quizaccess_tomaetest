@@ -97,7 +97,7 @@ class tomaetest_connection
         $verificationyype = $tetquiz->extradata["VerificationType"];
         $verificationTiming = $tetquiz->extradata["VerificationTiming"];
         $proctoringtype = $tetquiz->extradata["ProctoringType"];
-        $scanningModule = (isset($tetquiz->extradata["ScanningModule"])) ? $tetquiz->extradata["ScanningModule"] : false;
+        $scanningmodule = (isset($tetquiz->extradata["ScanningModule"])) ? $tetquiz->extradata["ScanningModule"] : false;
         $blockThirdParty = (isset($tetquiz->extradata["BlockThirdParty"])) ? $tetquiz->extradata["BlockThirdParty"] : false;
         $showParticipantOnScreen = (isset($tetquiz->extradata["ShowParticipant"])) ? $tetquiz->extradata["ShowParticipant"] : false;
         $reLogin = (isset($tetquiz->extradata["ReLogin"])) ? $tetquiz->extradata["ReLogin"] : false;
@@ -124,15 +124,15 @@ class tomaetest_connection
         $cmURL = new moodle_url('/mod/quiz/view.php', array('id' => $cmid));
         $thirdParty = [
             "QuizURL" => $cmURL->__toString(),
-            "PassToTG" => $scanningModule
+            "PassToTG" => $scanningmodule
         ];
 
-        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalid, $teacherID, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showParticipantOnScreen, $thirdParty, $scanningModule, $blockThirdParty, $reLogin, $scanningTime);
+        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalid, $teacherID, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showParticipantOnScreen, $thirdParty, $scanningmodule, $blockThirdParty, $reLogin, $scanningTime);
         return $result;
     }
 
 
-    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningModule, $blockThirdParty, $reLogin, $scanningTime) {
+    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningmodule, $blockThirdParty, $reLogin, $scanningTime) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
@@ -264,7 +264,7 @@ class tomaetest_connection
         }
         $users = quizaccess_tomaetest_utils::get_quiz_teachers($quizid);
         $data["Users"] = $users;
-        if ($scanningModule === true) {
+        if ($scanningmodule === true) {
             $data["bankExamDTO"] = array(
                 array(
                     "elements" => [[
