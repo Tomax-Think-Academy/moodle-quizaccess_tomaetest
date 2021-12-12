@@ -585,9 +585,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
     }
 
 
-    public function get_blocked_message($fromETEST) {
+    public function get_blocked_message($frometest) {
         global $CFG, $USER;
-        if ($fromETEST) {
+        if ($frometest) {
             return '<b>Please make sure you choose the right quiz.</b>';
         } else {
             if (quizaccess_tomaetest_utils::is_on_going($this->extradata["TETID"])) {
