@@ -114,11 +114,11 @@ class tomaetest_connection
 
         $quizname = $quiz->name;
         $coursename = $course->fullname;
-        // $teacherID = "204433";
-        $teacherID = null;
+        // $teacherid = "204433";
+        $teacherid = null;
         if (isset($tetquiz->extradata["TeacherID"])) {
             $user = $DB->get_record("user", array("id" => $tetquiz->extradata["TeacherID"]));
-            $teacherID = quizaccess_tomaetest_utils::get_external_id_for_teacher($user);
+            $teacherid = quizaccess_tomaetest_utils::get_external_id_for_teacher($user);
         }
 
         $cmURL = new moodle_url('/mod/quiz/view.php', array('id' => $cmid));
@@ -127,7 +127,7 @@ class tomaetest_connection
             "PassToTG" => $scanningmodule
         ];
 
-        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizname, $date, $coursename, $externalid, $teacherID, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $thirdParty, $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
+        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizname, $date, $coursename, $externalid, $teacherid, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $thirdParty, $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
         return $result;
     }
 
