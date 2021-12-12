@@ -109,13 +109,12 @@ class tomaetest_connection
             $date = date("d/m/Y", $quiz->timeopen);
             $time = date("H:i", $quiz->timeopen);
         } else {
-            $date = date("d/m/Y", strtotime("+1 month")); // default = in a month.
+            $date = date("d/m/Y", strtotime("+1 month")); // Default = in a month.
             $time = "00:00";
         }
 
         $quizname = $quiz->name;
         $coursename = $course->fullname;
-        // $teacherid = "204433";
         $teacherid = null;
         if (isset($tetquiz->extradata["TeacherID"])) {
             $user = $DB->get_record("user", array("id" => $tetquiz->extradata["TeacherID"]));
