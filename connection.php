@@ -113,7 +113,7 @@ class tomaetest_connection
         }
 
         $quizname = $quiz->name;
-        $courseName = $course->fullname;
+        $coursename = $course->fullname;
         // $teacherID = "204433";
         $teacherID = null;
         if (isset($tetquiz->extradata["TeacherID"])) {
@@ -127,7 +127,7 @@ class tomaetest_connection
             "PassToTG" => $scanningmodule
         ];
 
-        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizname, $date, $courseName, $externalid, $teacherID, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $thirdParty, $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
+        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizname, $date, $coursename, $externalid, $teacherID, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $thirdParty, $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
         return $result;
     }
 
