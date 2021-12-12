@@ -27,7 +27,7 @@ class tomaetest_connection
     public static $config;
 
 
-    static function sso($quizID, $userID, $parID = null)
+    public static function sso($quizID, $userID, $parID = null)
     {
         $record = quizaccess_tomaetest_utils::get_etest_quiz($quizID);
         $id = $record->extradata["TETID"];
