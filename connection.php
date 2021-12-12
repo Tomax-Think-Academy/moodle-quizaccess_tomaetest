@@ -122,12 +122,12 @@ class tomaetest_connection
         }
 
         $cmurl = new moodle_url('/mod/quiz/view.php', array('id' => $cmid));
-        $thirdParty = [
+        $thirdparty = [
             "QuizURL" => $cmurl->__toString(),
             "PassToTG" => $scanningmodule
         ];
 
-        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizname, $date, $coursename, $externalid, $teacherid, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $thirdParty, $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
+        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizname, $date, $coursename, $externalid, $teacherid, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $thirdparty, $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
         return $result;
     }
 
