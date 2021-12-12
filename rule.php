@@ -461,8 +461,8 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 }
 
                 if (isset($extradata["ProctoringType"])) {
-                    $proctoringType = $extradata["ProctoringType"];
-                    foreach ($proctoringType as $proctor) {
+                    $proctoringtype = $extradata["ProctoringType"];
+                    foreach ($proctoringtype as $proctor) {
                         if ($proctor === "computer_cam_proctoring") {
                             $mform->setDefault('tomaetest_proctoringType_computer', true);
                         }
@@ -525,17 +525,17 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             if (isset($quiz->tomaetest_showParticipant) && $quiz->tomaetest_showParticipant === "1") {
                 $record->extradata["ShowParticipant"] = true;
             }
-            $proctoringType = [];
+            $proctoringtype = [];
 
             if (isset($quiz->tomaetest_proctoringType_computer) && $quiz->tomaetest_proctoringType_computer === "1") {
-                array_push($proctoringType, "computer_cam_proctoring");
+                array_push($proctoringtype, "computer_cam_proctoring");
             }
             if (isset($quiz->tomaetest_proctoringType_monitor) && $quiz->tomaetest_proctoringType_monitor === "1") {
-                array_push($proctoringType, "monitor_recording_proctoring");
+                array_push($proctoringtype, "monitor_recording_proctoring");
             }
 
             if (isset($quiz->tomaetest_proctoringType_second) && $quiz->tomaetest_proctoringType_second  === "1") {
-                array_push($proctoringType, "second_cam_proctoring");
+                array_push($proctoringtype, "second_cam_proctoring");
             }
             $realtedUser = null;
             if (isset($quiz->tomaetest_realted_user) && !empty($quiz->tomaetest_realted_user)) {
@@ -566,7 +566,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $record->extradata["LockComputer"] = $lockcomputer;
             $record->extradata["VerificationType"] = $verificationtype;
             $record->extradata["VerificationTiming"] = $verificationTiming;
-            $record->extradata["ProctoringType"] = $proctoringType;
+            $record->extradata["ProctoringType"] = $proctoringtype;
 
             $result = tomaetest_connection::syncToTomaETestFromDatabase($quiz->id, $record);
             if (!$result["success"]) {
