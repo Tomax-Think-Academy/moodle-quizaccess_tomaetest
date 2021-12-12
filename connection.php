@@ -180,10 +180,10 @@ class tomaetest_connection
 
             foreach ($keys as $key) {
                 $name = str_replace("tomaetest_appstate_", "", $key);
-                //alert
+                // Alert...
                 if (self::$config->{$key} === "1") {
                     array_push($alertedapps, $name);
-                    //deny
+                    // Deny...
                 } else if (self::$config->{$key} === "2") {
                     array_push($deniedapps, $name);
                 }
@@ -191,7 +191,6 @@ class tomaetest_connection
 
             $data['examParameter']["TETExamAlertedApps"] = $alertedapps;
             $data['examParameter']["TETExamDeniedApps"] = $deniedapps;
-        } else {
         }
         $data["examParticipants"] = [];
         $students = quizaccess_tomaetest_utils::get_quiz_students($quizid);
