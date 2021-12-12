@@ -65,7 +65,7 @@ class tomaetest_connection
         return $result;
     }
 
-    static function get_participants_list($id, $amount = false) {
+    public static function get_participants_list($id, $amount = false) {
 
         $result = static::post_request(
             "exam/participant/view",
