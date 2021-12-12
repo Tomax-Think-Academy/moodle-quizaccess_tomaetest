@@ -27,8 +27,8 @@ class tomaetest_connection
     public static $config;
 
 
-    public static function sso($quizID, $userID, $parID = null) {
-        $record = quizaccess_tomaetest_utils::get_etest_quiz($quizID);
+    public static function sso($quizid, $userID, $parID = null) {
+        $record = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
         $id = $record->extradata["TETID"];
         $externalID = quizaccess_tomaetest_utils::get_teacher_id($userID);
         $examid = $record->extradata["TETExternalID"];
@@ -82,13 +82,13 @@ class tomaetest_connection
         return $result;
     }
 
-    static function syncToTomaETestFromDatabase($quizID, $TETQuiz = null) {
+    static function syncToTomaETestFromDatabase($quizid, $TETQuiz = null) {
         global $DB;
         if ($TETQuiz === null) {
-            $TETQuiz = quizaccess_tomaetest_utils::get_etest_quiz($quizID);
+            $TETQuiz = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
         }
-        $quiz = quizaccess_tomaetest_utils::get_quiz($quizID);
-        $CMID = quizaccess_tomaetest_utils::get_cmid($quizID);
+        $quiz = quizaccess_tomaetest_utils::get_quiz($quizid);
+        $CMID = quizaccess_tomaetest_utils::get_cmid($quizid);
         $cm = quizaccess_tomaetest_utils::get_coursemodule($CMID);
         $course = quizaccess_tomaetest_utils::get_course_information($quiz->course);
 
