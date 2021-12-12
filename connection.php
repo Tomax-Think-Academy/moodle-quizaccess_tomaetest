@@ -229,7 +229,7 @@ class tomaetest_connection
         return static::post_request("exam/tsimport/insert", $data);
     }
 
-    static function post_request($method, $postdata, $parameters = "") {
+    public static function post_request($method, $postdata, $parameters = "") {
         $config = static::$config;
         etest_log("================== post $method to :$config->domain ====================");
         $url = "https://$config->domain.tomaetest.com/TomaETest/api/dashboard/WS/$method$parameters";
