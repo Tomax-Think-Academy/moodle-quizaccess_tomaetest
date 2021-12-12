@@ -53,7 +53,7 @@ class tomaetest_connection
         return false;
     }
 
-    public static function getInformation($id) {
+    public static function get_information($id) {
         return static::getParticipantsList($id, 1);
     }
 
