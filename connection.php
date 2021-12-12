@@ -27,14 +27,14 @@ class tomaetest_connection
     public static $config;
 
 
-    public static function sso($quizid, $userid, $parID = null) {
+    public static function sso($quizid, $userid, $parid = null) {
         $record = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
         $id = $record->extradata["TETID"];
         $externalID = quizaccess_tomaetest_utils::get_teacher_id($userid);
         $examid = $record->extradata["TETExternalID"];
         $data = ["userExternalID" => $externalID, "examExternalID" => $examid];
-        if ($parID !== null) {
-            $data["externalLocation"] = "exams/$id/proctoring/$parID";
+        if ($parid !== null) {
+            $data["externalLocation"] = "exams/$id/proctoring/$parid";
         }
         $result = static::post_request("auth/login/SafeGenerateToken", $data);
         if ($result["success"] == true) {
