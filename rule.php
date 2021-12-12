@@ -230,7 +230,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $response = $connection->post_request("MoodleGetExamsList", json_encode($postdata), true);
 
             $response = json_decode($response, true);
-            $examsByTeachersMap = array();
+            $examsbyteachersmap = array();
 
             $courses = array("0" =>  'Irrelevant - regular quiz (without scan)', );
             if (isset($response['Exams'])) {
@@ -273,10 +273,10 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                         $teacherIDInMoodle = isset($teachercodetoid[$exam['TeacherCode']]) ? $teachercodetoid[$exam['TeacherCode']] : "";
 
                         if ($teacherIDInMoodle != "") {
-                            if (isset($examsByTeachersMap[$teacherIDInMoodle]) == false) {
-                                $examsByTeachersMap[$teacherIDInMoodle] = array();
+                            if (isset($examsbyteachersmap[$teacherIDInMoodle]) == false) {
+                                $examsbyteachersmap[$teacherIDInMoodle] = array();
                             }
-                            $examsByTeachersMap[$teacherIDInMoodle][$exam['ExamID']] = $stringForExam;
+                            $examsbyteachersmap[$teacherIDInMoodle][$exam['ExamID']] = $stringForExam;
                         }
                     }
                 }
@@ -287,7 +287,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $mform->addRule('tomaetest_scanningTime', 'Numeric', 'numeric', null, 'client');
 
                 $buildJSTeachersMap = "var teachersmap = {}; ";
-                foreach ($examsByTeachersMap as $teacher => $value) {
+                foreach ($examsbyteachersmap as $teacher => $value) {
                     $buildJSTeachersMap = $buildJSTeachersMap . " var examArr = {}; ";
                     foreach ($value as $exam => $examString) {
                         $examString = str_replace("'", "", $examString);
