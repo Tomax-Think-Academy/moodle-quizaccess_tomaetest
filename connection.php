@@ -132,7 +132,7 @@ class tomaetest_connection
     }
 
 
-    public static function sync_to_tomaetest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $exam3rdPartyConfig, $scanningmodule, $blockthirdparty, $relogin, $scanningtime) {
+    public static function sync_to_tomaetest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $exam3rdpartyconfig, $scanningmodule, $blockthirdparty, $relogin, $scanningtime) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
@@ -148,7 +148,7 @@ class tomaetest_connection
                 "Semester" => -1,
                 "TETExamQuestionNumberingType" => "1",
                 "TETExamQuestionAnswerNumberingType" => "a",
-                "TETExam3rdPartyConfig" => $exam3rdPartyConfig,
+                "TETExam3rdPartyConfig" => $exam3rdpartyconfig,
                 "TETExamRecordingParticipantView" => $showparticipantonscreen,
                 "TETExamUseUnlockParticipantPassword" => $relogin,
                 "TETExamDuration" => $duration,
