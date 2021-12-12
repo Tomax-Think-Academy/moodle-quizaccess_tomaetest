@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(dirname(dirname(__FILE__)) . '../../../../config.php');
+require_login();
 class tomaetest_connection
 {
     public static $config;
