@@ -236,39 +236,39 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             if (isset($response['Exams'])) {
 
                 foreach ($response['Exams'] as $exam) {
-                    $stringForExam = $exam['ExamID'];
+                    $stringforexam = $exam['ExamID'];
 
-                    if (isset($existingExamsMap[$stringForExam]) == false) {
+                    if (isset($existingExamsMap[$stringforexam]) == false) {
                         if (isset($exam['CourseID'])) {
-                            $stringForExam = $stringForExam . " , ";
-                            $stringForExam = $stringForExam . $exam['CourseID'];
+                            $stringforexam = $stringforexam . " , ";
+                            $stringforexam = $stringforexam . $exam['CourseID'];
                         }
                         if (isset($exam['ExamName'])) {
-                            $stringForExam = $stringForExam . " , ";
-                            $stringForExam = $stringForExam . $exam['ExamName'];
+                            $stringforexam = $stringforexam . " , ";
+                            $stringforexam = $stringforexam . $exam['ExamName'];
                         }
                         if (isset($exam['ExamDate'])) {
-                            $stringForExam = $stringForExam . " , ";
+                            $stringforexam = $stringforexam . " , ";
                             try {
                                 $date = date_create($exam['ExamDate']);
-                                $stringForExam = $stringForExam . date_format($date, " d/m/Y ");
+                                $stringforexam = $stringforexam . date_format($date, " d/m/Y ");
                             } catch (Exception $e) {
-                                $stringForExam = $stringForExam . $exam['ExamDate'];
+                                $stringforexam = $stringforexam . $exam['ExamDate'];
                             }
                         }
                         if (isset($exam['Year'])) {
-                            $stringForExam = $stringForExam . " , ";
-                            $stringForExam = $stringForExam . $exam['Year'];
+                            $stringforexam = $stringforexam . " , ";
+                            $stringforexam = $stringforexam . $exam['Year'];
                         }
                         if (isset($exam['SimesterID'])) {
-                            $stringForExam = $stringForExam . " , simester:";
-                            $stringForExam = $stringForExam . $exam['SimesterID'];
+                            $stringforexam = $stringforexam . " , simester:";
+                            $stringforexam = $stringforexam . $exam['SimesterID'];
                         }
                         if (isset($exam['MoadID'])) {
-                            $stringForExam = $stringForExam . " moed:";
-                            $stringForExam = $stringForExam . $exam['MoadID'];
+                            $stringforexam = $stringforexam . " moed:";
+                            $stringforexam = $stringforexam . $exam['MoadID'];
                         }
-                        $courses[$exam['ExamID']] = $stringForExam;
+                        $courses[$exam['ExamID']] = $stringforexam;
 
                         $teacherIDInMoodle = isset($teachercodetoid[$exam['TeacherCode']]) ? $teachercodetoid[$exam['TeacherCode']] : "";
 
@@ -276,7 +276,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                             if (isset($examsbyteachersmap[$teacherIDInMoodle]) == false) {
                                 $examsbyteachersmap[$teacherIDInMoodle] = array();
                             }
-                            $examsbyteachersmap[$teacherIDInMoodle][$exam['ExamID']] = $stringForExam;
+                            $examsbyteachersmap[$teacherIDInMoodle][$exam['ExamID']] = $stringforexam;
                         }
                     }
                 }
