@@ -617,13 +617,13 @@ function attempt_submitted($eventdata) {
     global $DB;
     $eventdata = $eventdata->get_data();
     $quizid = $eventdata["other"]["quizid"];
-    $userID = $eventdata["userid"];
+    $userid = $eventdata["userid"];
 
     $record = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
     if ($record !== false) {
         $tetid = $record->extradata["TETID"];
 
-        $user = $DB->get_record('user', array('id' => $userID));
+        $user = $DB->get_record('user', array('id' => $userid));
         $externalid = quizaccess_tomaetest_utils::get_external_id_for_participant($user);
         $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalid]);
         if ($participant !== false) {
