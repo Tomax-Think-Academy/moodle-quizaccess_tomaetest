@@ -169,7 +169,7 @@ class tomaetest_connection
         }
         if ($blockthirdparty) {
             $alertedapps = [];
-            $deniedAPPS = [];
+            $deniedapps = [];
 
             $keys = array_filter(array_keys((array)tomaetest_connection::$config), function ($item) {
                 if (strpos($item, "tomaetest_appstate_") > -1) {
@@ -185,12 +185,12 @@ class tomaetest_connection
                     array_push($alertedapps, $name);
                     //deny
                 } else if (tomaetest_connection::$config->{$key} === "2") {
-                    array_push($deniedAPPS, $name);
+                    array_push($deniedapps, $name);
                 }
             }
 
             $data['examParameter']["TETExamAlertedApps"] = $alertedapps;
-            $data['examParameter']["TETExamDeniedApps"] = $deniedAPPS;
+            $data['examParameter']["TETExamDeniedApps"] = $deniedapps;
         } else {
         }
         $data["examParticipants"] = [];
