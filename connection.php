@@ -127,7 +127,10 @@ class tomaetest_connection
             "PassToTG" => $scanningmodule
         ];
 
-        $result = self::sync_to_tomaetest($quiz->id, $quizname, $date, $coursename, $externalid, $teacherid, $time, $lockcomputer, $verificationyype, $verificationtiming, $proctoringtype, $showparticipantonscreen, $thirdparty, $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
+        $result = self::sync_to_tomaetest($quiz->id, $quizname, $date, $coursename,
+         $externalid, $teacherid, $time, $lockcomputer, $verificationyype,
+          $verificationtiming, $proctoringtype, $showparticipantonscreen, $thirdparty,
+           $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
         return $result;
     }
 
