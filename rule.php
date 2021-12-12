@@ -537,14 +537,14 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             if (isset($quiz->tomaetest_proctoringType_second) && $quiz->tomaetest_proctoringType_second  === "1") {
                 array_push($proctoringtype, "second_cam_proctoring");
             }
-            $realtedUser = null;
+            $relateduser = null;
             if (isset($quiz->tomaetest_realted_user) && !empty($quiz->tomaetest_realted_user)) {
                 $user = $DB->get_record('user', array('id' => $quiz->tomaetest_realted_user));
                 if ($user !== false) {
                     $record->extradata["TeacherID"] = $user->id;
                 }
 
-                $realtedUser = $user;
+                $relateduser = $user;
 
             }
             if (isset($quiz->tomaetest_scan_module) && !empty($quiz->tomaetest_scan_module)){
