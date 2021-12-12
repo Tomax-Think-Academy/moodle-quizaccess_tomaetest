@@ -616,10 +616,10 @@ function etest_log($item) {
 function attempt_submitted($eventdata) {
     global $DB;
     $eventdata = $eventdata->get_data();
-    $quizID = $eventdata["other"]["quizid"];
+    $quizid = $eventdata["other"]["quizid"];
     $userID = $eventdata["userid"];
 
-    $record = quizaccess_tomaetest_utils::get_etest_quiz($quizID);
+    $record = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
     if ($record !== false) {
         $TETID = $record->extradata["TETID"];
 
