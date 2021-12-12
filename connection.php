@@ -98,7 +98,7 @@ class tomaetest_connection
         $verificationTiming = $tetquiz->extradata["VerificationTiming"];
         $proctoringtype = $tetquiz->extradata["ProctoringType"];
         $scanningmodule = (isset($tetquiz->extradata["ScanningModule"])) ? $tetquiz->extradata["ScanningModule"] : false;
-        $blockThirdParty = (isset($tetquiz->extradata["BlockThirdParty"])) ? $tetquiz->extradata["BlockThirdParty"] : false;
+        $blockthirdparty = (isset($tetquiz->extradata["BlockThirdParty"])) ? $tetquiz->extradata["BlockThirdParty"] : false;
         $showParticipantOnScreen = (isset($tetquiz->extradata["ShowParticipant"])) ? $tetquiz->extradata["ShowParticipant"] : false;
         $reLogin = (isset($tetquiz->extradata["ReLogin"])) ? $tetquiz->extradata["ReLogin"] : false;
         $scanningTime = (isset($tetquiz->extradata["ScanningTime"])) ? $tetquiz->extradata["ScanningTime"] : 0;
@@ -127,12 +127,12 @@ class tomaetest_connection
             "PassToTG" => $scanningmodule
         ];
 
-        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalid, $teacherID, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showParticipantOnScreen, $thirdParty, $scanningmodule, $blockThirdParty, $reLogin, $scanningTime);
+        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalid, $teacherID, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showParticipantOnScreen, $thirdParty, $scanningmodule, $blockthirdparty, $reLogin, $scanningTime);
         return $result;
     }
 
 
-    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningmodule, $blockThirdParty, $reLogin, $scanningTime) {
+    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningmodule, $blockthirdparty, $reLogin, $scanningTime) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
@@ -196,7 +196,7 @@ class tomaetest_connection
             //     ]);
             $data['examParameter']["TETExamVerificationType"] = [["key" => $verificationyype]];
         }
-        if ($blockThirdParty) {
+        if ($blockthirdparty) {
             $alertedAPPS = [];
             $deniedAPPS = [];
 
