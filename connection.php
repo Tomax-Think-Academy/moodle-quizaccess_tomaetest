@@ -82,26 +82,26 @@ class tomaetest_connection
         return $result;
     }
 
-    public static function sync_to_toma_etest_from_database($quizid, $TETQuiz = null) {
+    public static function sync_to_toma_etest_from_database($quizid, $tetquiz = null) {
         global $DB;
-        if ($TETQuiz === null) {
-            $TETQuiz = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
+        if ($tetquiz === null) {
+            $tetquiz = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
         }
         $quiz = quizaccess_tomaetest_utils::get_quiz($quizid);
         $CMID = quizaccess_tomaetest_utils::get_cmid($quizid);
         $cm = quizaccess_tomaetest_utils::get_coursemodule($CMID);
         $course = quizaccess_tomaetest_utils::get_course_information($quiz->course);
 
-        $externalid = $TETQuiz->extradata["TETExternalID"];
-        $lockComputer = $TETQuiz->extradata["LockComputer"];
-        $verificationType = $TETQuiz->extradata["VerificationType"];
-        $verificationTiming = $TETQuiz->extradata["VerificationTiming"];
-        $proctoringType = $TETQuiz->extradata["ProctoringType"];
-        $scanningModule = (isset($TETQuiz->extradata["ScanningModule"])) ? $TETQuiz->extradata["ScanningModule"] : false;
-        $blockThirdParty = (isset($TETQuiz->extradata["BlockThirdParty"])) ? $TETQuiz->extradata["BlockThirdParty"] : false;
-        $showParticipantOnScreen = (isset($TETQuiz->extradata["ShowParticipant"])) ? $TETQuiz->extradata["ShowParticipant"] : false;
-        $reLogin = (isset($TETQuiz->extradata["ReLogin"])) ? $TETQuiz->extradata["ReLogin"] : false;
-        $scanningTime = (isset($TETQuiz->extradata["ScanningTime"])) ? $TETQuiz->extradata["ScanningTime"] : 0;
+        $externalid = $tetquiz->extradata["TETExternalID"];
+        $lockComputer = $tetquiz->extradata["LockComputer"];
+        $verificationType = $tetquiz->extradata["VerificationType"];
+        $verificationTiming = $tetquiz->extradata["VerificationTiming"];
+        $proctoringType = $tetquiz->extradata["ProctoringType"];
+        $scanningModule = (isset($tetquiz->extradata["ScanningModule"])) ? $tetquiz->extradata["ScanningModule"] : false;
+        $blockThirdParty = (isset($tetquiz->extradata["BlockThirdParty"])) ? $tetquiz->extradata["BlockThirdParty"] : false;
+        $showParticipantOnScreen = (isset($tetquiz->extradata["ShowParticipant"])) ? $tetquiz->extradata["ShowParticipant"] : false;
+        $reLogin = (isset($tetquiz->extradata["ReLogin"])) ? $tetquiz->extradata["ReLogin"] : false;
+        $scanningTime = (isset($tetquiz->extradata["ScanningTime"])) ? $tetquiz->extradata["ScanningTime"] : 0;
 
         date_default_timezone_set('UTC');
         if (isset($quiz->timeopen) && $quiz->timeopen != 0) {
@@ -116,8 +116,8 @@ class tomaetest_connection
         $courseName = $course->fullname;
         // $teacherID = "204433";
         $teacherID = null;
-        if (isset($TETQuiz->extradata["TeacherID"])) {
-            $user = $DB->get_record("user", array("id" => $TETQuiz->extradata["TeacherID"]));
+        if (isset($tetquiz->extradata["TeacherID"])) {
+            $user = $DB->get_record("user", array("id" => $tetquiz->extradata["TeacherID"]));
             $teacherID = quizaccess_tomaetest_utils::get_external_id_for_teacher($user);
         }
 
