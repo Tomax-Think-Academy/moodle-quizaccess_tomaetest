@@ -101,7 +101,7 @@ class tomaetest_connection
         $blockthirdparty = (isset($tetquiz->extradata["BlockThirdParty"])) ? $tetquiz->extradata["BlockThirdParty"] : false;
         $showparticipantonscreen = (isset($tetquiz->extradata["ShowParticipant"])) ? $tetquiz->extradata["ShowParticipant"] : false;
         $relogin = (isset($tetquiz->extradata["ReLogin"])) ? $tetquiz->extradata["ReLogin"] : false;
-        $scanningTime = (isset($tetquiz->extradata["ScanningTime"])) ? $tetquiz->extradata["ScanningTime"] : 0;
+        $scanningtime = (isset($tetquiz->extradata["ScanningTime"])) ? $tetquiz->extradata["ScanningTime"] : 0;
 
         date_default_timezone_set('UTC');
         if (isset($quiz->timeopen) && $quiz->timeopen != 0) {
@@ -127,12 +127,12 @@ class tomaetest_connection
             "PassToTG" => $scanningmodule
         ];
 
-        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalid, $teacherID, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $thirdParty, $scanningmodule, $blockthirdparty, $relogin, $scanningTime);
+        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalid, $teacherID, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $thirdParty, $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
         return $result;
     }
 
 
-    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $exam3rdPartyConfig, $scanningmodule, $blockthirdparty, $relogin, $scanningTime) {
+    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $exam3rdPartyConfig, $scanningmodule, $blockthirdparty, $relogin, $scanningtime) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
@@ -157,7 +157,7 @@ class tomaetest_connection
                 "TETExamStartTime" => $startTime,
                 "TETExamAuthorizationType" => ["key" => "saml"],
                 "TETExamPasswordTrustNeeded" => ['key' => $verificationTiming],
-                "TETExamEndDelay" => $scanningTime,
+                "TETExamEndDelay" => $scanningtime,
                 "TETExamProctoringType" => array_map(function($proctoringtype){
                     return ["key" => $proctoringtype];
                 }, $proctoringtype)
@@ -172,7 +172,7 @@ class tomaetest_connection
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamStartTime", "time", $startTime),
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamAuthorizationType", "list", 'saml'),
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamPasswordTrustNeeded", "list", $verificationTiming),
-        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamEndDelay", "number", $scanningTime)
+        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamEndDelay", "number", $scanningtime)
         // ];
 
         // $data["guidelineValue"] = $guidelineValues;
