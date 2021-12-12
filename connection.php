@@ -57,7 +57,7 @@ class tomaetest_connection
         return static::getParticipantsList($id, 1);
     }
 
-    public static function getExamSpecificInformation($id) {
+    public static function get_exam_specific_information($id) {
         return $result = static::post_request(
             "exam/view?ID=$id",
             []

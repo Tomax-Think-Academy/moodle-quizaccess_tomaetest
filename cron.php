@@ -134,7 +134,7 @@ function check_all_exams_if_closed() {
             return;
         }
 
-        $etest = tomaetest_connection::getExamSpecificInformation($tetid);
+        $etest = tomaetest_connection::get_exam_specific_information($tetid);
         if (isset($etest["data"]["Entity"]["Attributes"]["TETExamWFStatus"]["key"]) &&
          $etest["data"]["Entity"]["Attributes"]["TETExamWFStatus"]["key"] !== "imported") {
             log_and_print("CLOSING.. $tetid");
