@@ -520,7 +520,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
             $lockcomputer = isset($quiz->tomaetest_lockComputer) ? $quiz->tomaetest_lockComputer : "no";
             $verificationtype = isset($quiz->tomaetest_verificationType) ? $quiz->tomaetest_verificationType : null;
-            $verificationTiming = isset($quiz->tomaetest_verificationTiming) ? $quiz->tomaetest_verificationTiming : null;
+            $verificationtiming = isset($quiz->tomaetest_verificationTiming) ? $quiz->tomaetest_verificationTiming : null;
 
             if (isset($quiz->tomaetest_showParticipant) && $quiz->tomaetest_showParticipant === "1") {
                 $record->extradata["ShowParticipant"] = true;
@@ -565,7 +565,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             }
             $record->extradata["LockComputer"] = $lockcomputer;
             $record->extradata["VerificationType"] = $verificationtype;
-            $record->extradata["VerificationTiming"] = $verificationTiming;
+            $record->extradata["VerificationTiming"] = $verificationtiming;
             $record->extradata["ProctoringType"] = $proctoringtype;
 
             $result = tomaetest_connection::syncToTomaETestFromDatabase($quiz->id, $record);
