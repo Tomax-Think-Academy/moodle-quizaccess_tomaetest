@@ -298,7 +298,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $defaultoptionexam = "''";
                 if ($record !== null && $record) {
                     $extradata = $record->extradata;
-                    if (isset($extradata["IDMatch"]) && $extradata["IDMatch"] === true && isset($extradata["TETExternalID"]) && !empty($extradata["TETExternalID"])) {
+                    if (isset($extradata["IDMatch"]) &&
+                     $extradata["IDMatch"] === true &&
+                      isset($extradata["TETExternalID"]) && !empty($extradata["TETExternalID"])) {
                         $defaultoptionexam = "'".$extradata["TETExternalID"]."'";
                     }
                 }
