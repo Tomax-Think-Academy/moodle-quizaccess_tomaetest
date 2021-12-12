@@ -88,8 +88,8 @@ class tomaetest_connection
             $tetquiz = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
         }
         $quiz = quizaccess_tomaetest_utils::get_quiz($quizid);
-        $CMID = quizaccess_tomaetest_utils::get_cmid($quizid);
-        $cm = quizaccess_tomaetest_utils::get_coursemodule($CMID);
+        $cmid = quizaccess_tomaetest_utils::get_cmid($quizid);
+        $cm = quizaccess_tomaetest_utils::get_coursemodule($cmid);
         $course = quizaccess_tomaetest_utils::get_course_information($quiz->course);
 
         $externalid = $tetquiz->extradata["TETExternalID"];
@@ -121,7 +121,7 @@ class tomaetest_connection
             $teacherID = quizaccess_tomaetest_utils::get_external_id_for_teacher($user);
         }
 
-        $cmURL = new moodle_url('/mod/quiz/view.php', array('id' => $CMID));
+        $cmURL = new moodle_url('/mod/quiz/view.php', array('id' => $cmid));
         $thirdParty = [
             "QuizURL" => $cmURL->__toString(),
             "PassToTG" => $scanningModule
