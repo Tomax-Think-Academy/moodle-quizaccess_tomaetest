@@ -132,7 +132,7 @@ class tomaetest_connection
     }
 
 
-    static function sync_to_tomaetest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $exam3rdPartyConfig, $scanningmodule, $blockthirdparty, $relogin, $scanningtime) {
+    public static function sync_to_tomaetest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $exam3rdPartyConfig, $scanningmodule, $blockthirdparty, $relogin, $scanningtime) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
