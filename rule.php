@@ -270,13 +270,13 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                         }
                         $courses[$exam['ExamID']] = $stringforexam;
 
-                        $teacherIDInMoodle = isset($teachercodetoid[$exam['TeacherCode']]) ? $teachercodetoid[$exam['TeacherCode']] : "";
+                        $teacheridimoodle = isset($teachercodetoid[$exam['TeacherCode']]) ? $teachercodetoid[$exam['TeacherCode']] : "";
 
-                        if ($teacherIDInMoodle != "") {
-                            if (isset($examsbyteachersmap[$teacherIDInMoodle]) == false) {
-                                $examsbyteachersmap[$teacherIDInMoodle] = array();
+                        if ($teacheridimoodle != "") {
+                            if (isset($examsbyteachersmap[$teacheridimoodle]) == false) {
+                                $examsbyteachersmap[$teacheridimoodle] = array();
                             }
-                            $examsbyteachersmap[$teacherIDInMoodle][$exam['ExamID']] = $stringforexam;
+                            $examsbyteachersmap[$teacheridimoodle][$exam['ExamID']] = $stringforexam;
                         }
                     }
                 }
