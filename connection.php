@@ -171,7 +171,7 @@ class tomaetest_connection
             $alertedapps = [];
             $deniedapps = [];
 
-            $keys = array_filter(array_keys((array)tomaetest_connection::$config), function ($item) {
+            $keys = array_filter(array_keys((array)self::$config), function ($item) {
                 if (strpos($item, "tomaetest_appstate_") > -1) {
                     return true;
                 }
