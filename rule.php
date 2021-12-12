@@ -591,10 +591,10 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             return '<b>Please make sure you choose the right quiz.</b>';
         } else {
             if (quizaccess_tomaetest_utils::is_on_going($this->extradata["TETID"])) {
-                $vixURL = new moodle_url('/mod/quiz/accessrule/tomaetest/openVIX.php', array('quizID' => $this->quiz->id));
+                $vixurl = new moodle_url('/mod/quiz/accessrule/tomaetest/openVIX.php', array('quizID' => $this->quiz->id));
                 return "<br>
                     <p> Make sure to install TomaETest first by <a target='_blank' href='https://setup.tomaetest.com/TomaETest/setup.html'>clicking here</a>.</p>
-                    After installation, please <a target='_blank' href='$vixURL'>Click here </a>to launch TomaETest client";
+                    After installation, please <a target='_blank' href='$vixurl'>Click here </a>to launch TomaETest client";
             } else {
                 return "Please come back in 30 minutes before the exam start date";
             }
