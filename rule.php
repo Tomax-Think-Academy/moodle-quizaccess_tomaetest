@@ -295,16 +295,16 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                     }
                     $buildjsteachersmap = $buildjsteachersmap . " teachersmap['$teacher'] = examArr;";
                 }
-                $defaultOptionExam = "''";
+                $defaultoptionexam = "''";
                 if ($record !== null && $record){
                     $extradata = $record->extradata;
                     if (isset($extradata["IDMatch"]) && $extradata["IDMatch"] === true && isset($extradata["TETExternalID"]) && !empty($extradata["TETExternalID"])){
-                        $defaultOptionExam = "'".$extradata["TETExternalID"]."'";
+                        $defaultoptionexam = "'".$extradata["TETExternalID"]."'";
                     }
                 }
                 echo ("<script>
                     var teachersHashMap = {};
-                    var defaultOptionExam = $defaultOptionExam;
+                    var defaultOptionExam = $defaultoptionexam;
 
 
                      var x = 0;
