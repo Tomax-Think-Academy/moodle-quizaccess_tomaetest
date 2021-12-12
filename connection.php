@@ -164,36 +164,7 @@ class tomaetest_connection
 
             ]
         ];
-        // $proctoringtype = str_replace("\"", "'", json_encode($proctoringtype));
-        // $guidelineValues = [
-        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamDuration", "number", $duration),
-        //     quizaccess_tomaetest_utils::create_guide_line_value("TETOverallExamOverTime", "number", 0),
-        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamLockComputer", "list", $lockcomputer),
-        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamStartTime", "time", $starttime),
-        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamAuthorizationType", "list", 'saml'),
-        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamPasswordTrustNeeded", "list", $verificationtiming),
-        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamEndDelay", "number", $scanningtime)
-        // ];
-
-        // $data["guidelineValue"] = $guidelineValues;
-        // $data["extraFieldValue"] = [
-        //     [
-        //         "objectExtraFieldDefinition" => [
-        //             "name" => "TETExamProctoringType",
-        //             "fieldType" => "multipleSelect",
-        //         ],
-        //         "value" => $proctoringtype
-        //     ]
-        // ];
         if (isset($verificationyype) && $verificationyype != null) {
-            // array_push($data["extraFieldValue"],
-            //     [
-            //         "objectExtraFieldDefinition" => [
-            //             "name" => "TETExamVerificationType",
-            //             "fieldType" => "multipleSelect",
-            //         ],
-            //         "value" => str_replace("\"", "'", json_encode([$verificationyype]))
-            //     ]);
             $data['examParameter']["TETExamVerificationType"] = [["key" => $verificationyype]];
         }
         if ($blockthirdparty) {
@@ -218,37 +189,9 @@ class tomaetest_connection
                 }
             }
 
-            // $tETExamAlertedApps = str_replace("\"", "'", json_encode($alertedAPPS));
-            // $tETExamDeniedApps = str_replace("\"", "'", json_encode($deniedAPPS));
             $data['examParameter']["TETExamAlertedApps"] = $alertedAPPS;
             $data['examParameter']["TETExamDeniedApps"] = $deniedAPPS;
-            // array_push($data["extraFieldValue"], [
-            //     "objectExtraFieldDefinition" => [
-            //         "name" => "TETExamAlertedApps",
-            //         "fieldType" => "multipleSelect",
-            //     ],
-            //     "value" => $tETExamAlertedApps
-            // ], [
-            //     "objectExtraFieldDefinition" => [
-            //         "name" => "TETExamDeniedApps",
-            //         "fieldType" => "multipleSelect",
-            //     ],
-            //     "value" => $tETExamDeniedApps
-            // ]);
         } else {
-            // array_push($data["extraFieldValue"], [
-            //     "objectExtraFieldDefinition" => [
-            //         "name" => "TETExamAlertedApps",
-            //         "fieldType" => "multipleSelect",
-            //     ],
-            //     "value" => []
-            // ], [
-            //     "objectExtraFieldDefinition" => [
-            //         "name" => "TETExamDeniedApps",
-            //         "fieldType" => "multipleSelect",
-            //     ],
-            //     "value" => []
-            // ]);
         }
         $data["examParticipants"] = [];
         $students = quizaccess_tomaetest_utils::get_quiz_students($quizid);
@@ -320,10 +263,6 @@ class tomaetest_connection
         etest_log("response : " . $response);
 
         etest_log("================== end post $method to $config->domain ====================");
-
-        // if ($dontDecode) {
-        //     return $response;
-        // }
 
         return json_decode($response, true);
     }
