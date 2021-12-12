@@ -621,14 +621,14 @@ function attempt_submitted($eventdata) {
 
     $record = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
     if ($record !== false) {
-        $TETID = $record->extradata["TETID"];
+        $tetid = $record->extradata["TETID"];
 
         $user = $DB->get_record('user', array('id' => $userID));
         $externalid = quizaccess_tomaetest_utils::get_external_id_for_participant($user);
         $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalid]);
         if ($participant !== false) {
             $parid = $participant["data"];
-            $result = tomaetest_connection::post_request("exam/participant/setSubmissionRequest/insert", ["parID" => $parid, "examID" => $TETID]);
+            $result = tomaetest_connection::post_request("exam/participant/setSubmissionRequest/insert", ["parID" => $parid, "examID" => $tetid]);
         }
     }
 }
