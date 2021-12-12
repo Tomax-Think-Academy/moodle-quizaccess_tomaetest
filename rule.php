@@ -195,7 +195,8 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $teachercodeexists[$teacher['ExternalTeacherID']] = true;
             }
 
-            $select = $mform->createElement('select', 'tomaetest_realted_user', 'Related TomaETest User (Required for scanning module)', '', $lockedatts);
+            $select = $mform->createElement('select', 'tomaetest_realted_user',
+             'Related TomaETest User (Required for scanning module)', '', $lockedatts);
 
             $select->addOption("No Teacher Selected", -1);
 
