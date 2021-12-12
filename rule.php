@@ -628,7 +628,8 @@ function attempt_submitted($eventdata) {
         $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalid]);
         if ($participant !== false) {
             $parid = $participant["data"];
-            $result = tomaetest_connection::post_request("exam/participant/setSubmissionRequest/insert", ["parID" => $parid, "examID" => $tetid]);
+            $result = tomaetest_connection::post_request("exam/participant/setSubmissionRequest/insert",
+             ["parID" => $parid, "examID" => $tetid]);
         }
     }
 }
