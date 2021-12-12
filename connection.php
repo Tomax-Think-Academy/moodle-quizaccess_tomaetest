@@ -27,8 +27,7 @@ class tomaetest_connection
     public static $config;
 
 
-    public static function sso($quizID, $userID, $parID = null)
-    {
+    public static function sso($quizID, $userID, $parID = null) {
         $record = quizaccess_tomaetest_utils::get_etest_quiz($quizID);
         $id = $record->extradata["TETID"];
         $externalID = quizaccess_tomaetest_utils::get_teacher_id($userID);
@@ -44,8 +43,7 @@ class tomaetest_connection
         return false;
     }
 
-    static function ssoIntegrityManagement($userID)
-    {
+    static function ssoIntegrityManagement($userID) {
         $externalID = quizaccess_tomaetest_utils::get_teacher_id($userID);
         $data = ["userExternalID" => $externalID, "externalLocation" => "air"];
         $result = static::post_request("auth/login/SafeGenerateToken", $data);
@@ -55,13 +53,11 @@ class tomaetest_connection
         return false;
     }
 
-    static function getInformation($id)
-    {
+    static function getInformation($id) {
         return static::getParticipantsList($id, 1);
     }
 
-    static function getExamSpecificInformation($id)
-    {
+    static function getExamSpecificInformation($id) {
         return $result = static::post_request(
             "exam/view?ID=$id",
             []
@@ -69,8 +65,7 @@ class tomaetest_connection
         return $result;
     }
 
-    static function getParticipantsList($id, $amount = false)
-    {
+    static function getParticipantsList($id, $amount = false) {
 
         $result = static::post_request(
             "exam/participant/view",
@@ -87,8 +82,7 @@ class tomaetest_connection
         return $result;
     }
 
-    static function syncToTomaETestFromDatabase($quizID, $TETQuiz = null)
-    {
+    static function syncToTomaETestFromDatabase($quizID, $TETQuiz = null) {
         global $DB;
         if ($TETQuiz === null) {
             $TETQuiz = quizaccess_tomaetest_utils::get_etest_quiz($quizID);
@@ -138,8 +132,7 @@ class tomaetest_connection
     }
 
 
-    static function syncToTomaETest($quizid, $name, $date, $course, $externalID, $TeacherExternalID, $startTime, $lockComputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningModule, $blockThirdParty, $reLogin, $scanningTime)
-    {
+    static function syncToTomaETest($quizid, $name, $date, $course, $externalID, $TeacherExternalID, $startTime, $lockComputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningModule, $blockThirdParty, $reLogin, $scanningTime) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
@@ -293,8 +286,7 @@ class tomaetest_connection
         return static::post_request("exam/tsimport/insert", $data);
     }
 
-    static function post_request($method, $postdata, $parameters = "")
-    {
+    static function post_request($method, $postdata, $parameters = "") {
         $config = static::$config;
         etest_log("================== post $method to :$config->domain ====================");
         $url = "https://$config->domain.tomaetest.com/TomaETest/api/dashboard/WS/$method$parameters";
