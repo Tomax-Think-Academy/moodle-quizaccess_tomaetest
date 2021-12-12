@@ -230,7 +230,6 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $response = $connection->post_request("MoodleGetExamsList", json_encode($postdata), true);
 
             $response = json_decode($response, true);
-            $isChoosenExamInList = false;
             $examsByTeachersMap = array();
 
             $courses = array("0" =>  'Irrelevant - regular quiz (without scan)', );
