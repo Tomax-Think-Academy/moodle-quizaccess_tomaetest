@@ -93,7 +93,7 @@ class tomaetest_connection
         $course = quizaccess_tomaetest_utils::get_course_information($quiz->course);
 
         $externalid = $tetquiz->extradata["TETExternalID"];
-        $lockComputer = $tetquiz->extradata["LockComputer"];
+        $lockcomputer = $tetquiz->extradata["LockComputer"];
         $verificationType = $tetquiz->extradata["VerificationType"];
         $verificationTiming = $tetquiz->extradata["VerificationTiming"];
         $proctoringType = $tetquiz->extradata["ProctoringType"];
@@ -127,12 +127,12 @@ class tomaetest_connection
             "PassToTG" => $scanningModule
         ];
 
-        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalid, $teacherID, $time, $lockComputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $thirdParty, $scanningModule, $blockThirdParty, $reLogin, $scanningTime);
+        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalid, $teacherID, $time, $lockcomputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $thirdParty, $scanningModule, $blockThirdParty, $reLogin, $scanningTime);
         return $result;
     }
 
 
-    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockComputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningModule, $blockThirdParty, $reLogin, $scanningTime) {
+    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningModule, $blockThirdParty, $reLogin, $scanningTime) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
@@ -153,7 +153,7 @@ class tomaetest_connection
                 "TETExamUseUnlockParticipantPassword" => $reLogin,
                 "TETExamDuration" => $duration,
                 "TETOverallExamOverTime" => 0,
-                "TETExamLockComputer" => ["key" => $lockComputer],
+                "TETExamLockComputer" => ["key" => $lockcomputer],
                 "TETExamStartTime" => $startTime,
                 "TETExamAuthorizationType" => ["key" => "saml"],
                 "TETExamPasswordTrustNeeded" => ['key' => $verificationTiming],
@@ -168,7 +168,7 @@ class tomaetest_connection
         // $guidelineValues = [
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamDuration", "number", $duration),
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETOverallExamOverTime", "number", 0),
-        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamLockComputer", "list", $lockComputer),
+        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamLockComputer", "list", $lockcomputer),
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamStartTime", "time", $startTime),
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamAuthorizationType", "list", 'saml'),
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamPasswordTrustNeeded", "list", $verificationTiming),
