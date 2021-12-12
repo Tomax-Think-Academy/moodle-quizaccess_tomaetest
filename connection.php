@@ -43,7 +43,7 @@ class tomaetest_connection
         return false;
     }
 
-    static function sso_integrity_management($userid) {
+    public static function sso_integrity_management($userid) {
         $externalid = quizaccess_tomaetest_utils::get_teacher_id($userid);
         $data = ["userExternalID" => $externalid, "externalLocation" => "air"];
         $result = static::post_request("auth/login/SafeGenerateToken", $data);
@@ -53,11 +53,11 @@ class tomaetest_connection
         return false;
     }
 
-    static function getInformation($id) {
+    public static function getInformation($id) {
         return static::getParticipantsList($id, 1);
     }
 
-    static function getExamSpecificInformation($id) {
+    public static function getExamSpecificInformation($id) {
         return $result = static::post_request(
             "exam/view?ID=$id",
             []
@@ -82,7 +82,7 @@ class tomaetest_connection
         return $result;
     }
 
-    static function syncToTomaETestFromDatabase($quizid, $TETQuiz = null) {
+    public static function syncToTomaETestFromDatabase($quizid, $TETQuiz = null) {
         global $DB;
         if ($TETQuiz === null) {
             $TETQuiz = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
