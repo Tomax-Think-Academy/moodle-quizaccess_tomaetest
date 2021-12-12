@@ -232,7 +232,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $response = json_decode($response, true);
             $examsbyteachersmap = array();
 
-            $courses = array("0" =>  'Irrelevant - regular quiz (without scan)', );
+            $courses = array("0" => 'Irrelevant - regular quiz (without scan)', );
             if (isset($response['Exams'])) {
 
                 foreach ($response['Exams'] as $exam) {
@@ -296,9 +296,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                     $buildjsteachersmap = $buildjsteachersmap . " teachersmap['$teacher'] = examArr;";
                 }
                 $defaultoptionexam = "''";
-                if ($record !== null && $record){
+                if ($record !== null && $record) {
                     $extradata = $record->extradata;
-                    if (isset($extradata["IDMatch"]) && $extradata["IDMatch"] === true && isset($extradata["TETExternalID"]) && !empty($extradata["TETExternalID"])){
+                    if (isset($extradata["IDMatch"]) && $extradata["IDMatch"] === true && isset($extradata["TETExternalID"]) && !empty($extradata["TETExternalID"])) {
                         $defaultoptionexam = "'".$extradata["TETExternalID"]."'";
                     }
                 }
@@ -534,7 +534,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 array_push($proctoringtype, "monitor_recording_proctoring");
             }
 
-            if (isset($quiz->tomaetest_proctoringType_second) && $quiz->tomaetest_proctoringType_second  === "1") {
+            if (isset($quiz->tomaetest_proctoringType_second) && $quiz->tomaetest_proctoringType_second === "1") {
                 array_push($proctoringtype, "second_cam_proctoring");
             }
             $relateduser = null;
@@ -547,19 +547,19 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $relateduser = $user;
 
             }
-            if (isset($quiz->tomaetest_scan_module) && !empty($quiz->tomaetest_scan_module)){
+            if (isset($quiz->tomaetest_scan_module) && !empty($quiz->tomaetest_scan_module)) {
                 $record->extradata["ScanningModule"] = true;
             }
-            if (isset($quiz->tomaetest_scanningTime) && !empty($quiz->tomaetest_scanningTime)){
+            if (isset($quiz->tomaetest_scanningTime) && !empty($quiz->tomaetest_scanningTime)) {
                 $record->extradata["ScanningTime"] = $quiz->tomaetest_scanningTime;
             }
-            if (isset($quiz->tomaetest_requireReLogin) && !empty($quiz->tomaetest_requireReLogin)){
+            if (isset($quiz->tomaetest_requireReLogin) && !empty($quiz->tomaetest_requireReLogin)) {
                 $record->extradata["ReLogin"] = true;
             }
-            if (isset($quiz->tomaetest_blockThirdParty) && $quiz->tomaetest_blockThirdParty === "1"){
+            if (isset($quiz->tomaetest_blockThirdParty) && $quiz->tomaetest_blockThirdParty === "1") {
                 $record->extradata["BlockThirdParty"] = true;
             }
-            if (isset($quiz->tomaetest_idmatchontg) && !empty($quiz->tomaetest_idmatchontg)){
+            if (isset($quiz->tomaetest_idmatchontg) && !empty($quiz->tomaetest_idmatchontg)) {
                 $record->extradata["IDMatch"] = true;
                 $record->extradata["TETExternalID"] = $quiz->tomaetest_idmatchontg;
             }
