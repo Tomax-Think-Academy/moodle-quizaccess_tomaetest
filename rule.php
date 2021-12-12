@@ -166,8 +166,8 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
                 $externalid = quizaccess_tomaetest_utils::get_external_id_for_teacher($teacher);
                 $teachers[$teacher->id] = $teacher->firstname . " " . $teacher->lastname;
-                $teachersids[$teacher->id] = $externalid; // email to id map
-                $teachercodetoid[$externalid] = $teacher->id; // id to email map
+                $teachersids[$teacher->id] = $externalid;
+                $teachercodetoid[$externalid] = $teacher->id;
                 $idinmoodletoemail[$teacher->id] = $teacher->email;
 
                 array_push($teachersemailsarray, $teacher->email);
