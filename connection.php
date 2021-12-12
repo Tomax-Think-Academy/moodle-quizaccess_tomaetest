@@ -30,9 +30,9 @@ class tomaetest_connection
     public static function sso($quizid, $userid, $parid = null) {
         $record = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
         $id = $record->extradata["TETID"];
-        $externalID = quizaccess_tomaetest_utils::get_teacher_id($userid);
+        $externalid = quizaccess_tomaetest_utils::get_teacher_id($userid);
         $examid = $record->extradata["TETExternalID"];
-        $data = ["userExternalID" => $externalID, "examExternalID" => $examid];
+        $data = ["userExternalID" => $externalid, "examExternalID" => $examid];
         if ($parid !== null) {
             $data["externalLocation"] = "exams/$id/proctoring/$parid";
         }
@@ -44,8 +44,8 @@ class tomaetest_connection
     }
 
     static function ssoIntegrityManagement($userid) {
-        $externalID = quizaccess_tomaetest_utils::get_teacher_id($userid);
-        $data = ["userExternalID" => $externalID, "externalLocation" => "air"];
+        $externalid = quizaccess_tomaetest_utils::get_teacher_id($userid);
+        $data = ["userExternalID" => $externalid, "externalLocation" => "air"];
         $result = static::post_request("auth/login/SafeGenerateToken", $data);
         if ($result["success"] == true) {
             return $result["data"]["url"];
@@ -92,7 +92,7 @@ class tomaetest_connection
         $cm = quizaccess_tomaetest_utils::get_coursemodule($CMID);
         $course = quizaccess_tomaetest_utils::get_course_information($quiz->course);
 
-        $externalID = $TETQuiz->extradata["TETExternalID"];
+        $externalid = $TETQuiz->extradata["TETExternalID"];
         $lockComputer = $TETQuiz->extradata["LockComputer"];
         $verificationType = $TETQuiz->extradata["VerificationType"];
         $verificationTiming = $TETQuiz->extradata["VerificationTiming"];
@@ -127,12 +127,12 @@ class tomaetest_connection
             "PassToTG" => $scanningModule
         ];
 
-        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalID, $teacherID, $time, $lockComputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $thirdParty, $scanningModule, $blockThirdParty, $reLogin, $scanningTime);
+        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalid, $teacherID, $time, $lockComputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $thirdParty, $scanningModule, $blockThirdParty, $reLogin, $scanningTime);
         return $result;
     }
 
 
-    static function syncToTomaETest($quizid, $name, $date, $course, $externalID, $TeacherExternalID, $startTime, $lockComputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningModule, $blockThirdParty, $reLogin, $scanningTime) {
+    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockComputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningModule, $blockThirdParty, $reLogin, $scanningTime) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
@@ -140,7 +140,7 @@ class tomaetest_connection
                 "TETExamDate" => $date,
                 "TETExamName" => $name,
                 "TETExamCourse" => $course,
-                "TETExamExternalID" => $externalID,
+                "TETExamExternalID" => $externalid,
                 "TETExamType" => "open",
                 "TETTeacherExternalID" => $TeacherExternalID,
                 "Year" => -1,
