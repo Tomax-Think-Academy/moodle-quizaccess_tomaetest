@@ -132,7 +132,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
         $verificationtimings = $mform->addElement('select', 'tomaetest_verificationTiming', "Verification timing", quizaccess_tomaetest_utils::$verificationtimings, $lockedatts);
 
-        $verificationtype = $mform->addElement('select', 'tomaetest_verificationType', "Verification type", quizaccess_tomaetest_utils::$verificationtypes, $lockedatts);
+        $verificationtype = $mform->addElement('select',
+         'tomaetest_verificationType', "Verification type",
+          quizaccess_tomaetest_utils::$verificationtypes, $lockedatts);
 
         $mform->addElement('checkbox', 'tomaetest_proctoringType_computer', 'Proctoring Types', 'Computer Camera', $lockedatts);
         $mform->addElement('checkbox', 'tomaetest_proctoringType_monitor', 'Monitor Recording', '', $lockedatts);
