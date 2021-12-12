@@ -127,12 +127,12 @@ class tomaetest_connection
             "PassToTG" => $scanningmodule
         ];
 
-        $result = self::syncToTomaETest($quiz->id, $quizname, $date, $coursename, $externalid, $teacherid, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $thirdparty, $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
+        $result = self::sync_to_tomaetest($quiz->id, $quizname, $date, $coursename, $externalid, $teacherid, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $thirdparty, $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
         return $result;
     }
 
 
-    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $exam3rdPartyConfig, $scanningmodule, $blockthirdparty, $relogin, $scanningtime) {
+    static function sync_to_tomaetest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $exam3rdPartyConfig, $scanningmodule, $blockthirdparty, $relogin, $scanningtime) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
