@@ -273,4 +273,4 @@ class tomaetest_connection
         return json_decode($response, true);
     }
 }
-self::$config = get_config('quizaccess_tomaetest');
+tomaetest_connection::$config = get_config('quizaccess_tomaetest');
