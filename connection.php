@@ -121,9 +121,9 @@ class tomaetest_connection
             $teacherid = quizaccess_tomaetest_utils::get_external_id_for_teacher($user);
         }
 
-        $cmURL = new moodle_url('/mod/quiz/view.php', array('id' => $cmid));
+        $cmurl = new moodle_url('/mod/quiz/view.php', array('id' => $cmid));
         $thirdParty = [
-            "QuizURL" => $cmURL->__toString(),
+            "QuizURL" => $cmurl->__toString(),
             "PassToTG" => $scanningmodule
         ];
 
