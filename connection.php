@@ -132,7 +132,7 @@ class tomaetest_connection
     }
 
 
-    public static function sync_to_tomaetest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $exam3rdpartyconfig, $scanningmodule, $blockthirdparty, $relogin, $scanningtime) {
+    public static function sync_to_tomaetest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $starttime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringtype, $showparticipantonscreen, $exam3rdpartyconfig, $scanningmodule, $blockthirdparty, $relogin, $scanningtime) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
@@ -154,7 +154,7 @@ class tomaetest_connection
                 "TETExamDuration" => $duration,
                 "TETOverallExamOverTime" => 0,
                 "TETExamLockComputer" => ["key" => $lockcomputer],
-                "TETExamStartTime" => $startTime,
+                "TETExamStartTime" => $starttime,
                 "TETExamAuthorizationType" => ["key" => "saml"],
                 "TETExamPasswordTrustNeeded" => ['key' => $verificationTiming],
                 "TETExamEndDelay" => $scanningtime,
@@ -169,7 +169,7 @@ class tomaetest_connection
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamDuration", "number", $duration),
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETOverallExamOverTime", "number", 0),
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamLockComputer", "list", $lockcomputer),
-        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamStartTime", "time", $startTime),
+        //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamStartTime", "time", $starttime),
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamAuthorizationType", "list", 'saml'),
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamPasswordTrustNeeded", "list", $verificationTiming),
         //     quizaccess_tomaetest_utils::create_guide_line_value("TETExamEndDelay", "number", $scanningtime)
