@@ -181,10 +181,10 @@ class tomaetest_connection
             foreach ($keys as $key) {
                 $name = str_replace("tomaetest_appstate_", "", $key);
                 //alert
-                if (tomaetest_connection::$config->{$key} === "1") {
+                if (self::$config->{$key} === "1") {
                     array_push($alertedapps, $name);
                     //deny
-                } else if (tomaetest_connection::$config->{$key} === "2") {
+                } else if (self::$config->{$key} === "2") {
                     array_push($deniedapps, $name);
                 }
             }
@@ -267,4 +267,4 @@ class tomaetest_connection
         return json_decode($response, true);
     }
 }
-tomaetest_connection::$config = get_config('quizaccess_tomaetest');
+self::$config = get_config('quizaccess_tomaetest');
