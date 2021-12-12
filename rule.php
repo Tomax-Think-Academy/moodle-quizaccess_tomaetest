@@ -128,7 +128,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $lockedatts
         );
 
-        $lockcomputer = $mform->addElement('select', 'tomaetest_lockComputer', "Lock type", quizaccess_tomaetest_utils::$lockcomputerenums, $lockedatts);
+        $lockcomputer = $mform->addElement('select',
+         'tomaetest_lockComputer', "Lock type",
+          quizaccess_tomaetest_utils::$lockcomputerenums, $lockedatts);
 
         $verificationtimings = $mform->addElement('select',
          'tomaetest_verificationTiming', "Verification timing",
