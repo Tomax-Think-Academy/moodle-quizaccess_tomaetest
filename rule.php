@@ -238,7 +238,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 foreach ($response['Exams'] as $exam) {
                     $stringforexam = $exam['ExamID'];
 
-                    if (isset($existingExamsMap[$stringforexam]) == false) {
+                    if (isset($existingexamsmap[$stringforexam]) == false) {
                         if (isset($exam['CourseID'])) {
                             $stringforexam = $stringforexam . " , ";
                             $stringforexam = $stringforexam . $exam['CourseID'];
