@@ -168,7 +168,7 @@ class tomaetest_connection
             $data['examParameter']["TETExamVerificationType"] = [["key" => $verificationyype]];
         }
         if ($blockthirdparty) {
-            $alertedAPPS = [];
+            $alertedapps = [];
             $deniedAPPS = [];
 
             $keys = array_filter(array_keys((array)tomaetest_connection::$config), function ($item) {
@@ -182,14 +182,14 @@ class tomaetest_connection
                 $name = str_replace("tomaetest_appstate_", "", $key);
                 //alert
                 if (tomaetest_connection::$config->{$key} === "1") {
-                    array_push($alertedAPPS, $name);
+                    array_push($alertedapps, $name);
                     //deny
                 } else if (tomaetest_connection::$config->{$key} === "2") {
                     array_push($deniedAPPS, $name);
                 }
             }
 
-            $data['examParameter']["TETExamAlertedApps"] = $alertedAPPS;
+            $data['examParameter']["TETExamAlertedApps"] = $alertedapps;
             $data['examParameter']["TETExamDeniedApps"] = $deniedAPPS;
         } else {
         }
