@@ -24,7 +24,7 @@
 require_once(dirname(dirname(__FILE__)) . '../../../../config.php');
 class tomaetest_connection
 {
-    static $config;
+    public static $config;
 
 
     static function sso($quizID, $userID, $parID = null)
