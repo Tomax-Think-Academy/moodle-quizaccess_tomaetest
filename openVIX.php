@@ -57,7 +57,7 @@ if (has_capability("mod/quiz:attempt", $context)) {
     $logintopanel = new moodle_url('/mod/quiz/accessrule/tomaetest/studentSSO.php',
      array('moodleSession' => $moodlesession, "courseModule" => $coursemodule));
     $logintopanel = urlencode($logintopanel);
-    $result = tomaetest_connection::syncToTomaETestFromDatabase($quizid);
+    $result = tomaetest_connection::sync_to_toma_etest_from_database($quizid);
     $externalid = quizaccess_tomaetest_utils::get_external_id_for_participant($USER);
     $participant = tomaetest_connection::post_request("participant/getByUserName/view", ["UserName" => $externalid]);
     if ($participant["success"]) {

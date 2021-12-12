@@ -577,7 +577,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             $record->extradata["VerificationTiming"] = $verificationtiming;
             $record->extradata["ProctoringType"] = $proctoringtype;
 
-            $result = tomaetest_connection::syncToTomaETestFromDatabase($quiz->id, $record);
+            $result = tomaetest_connection::sync_to_toma_etest_from_database($quiz->id, $record);
             if (!$result["success"]) {
                 echo "<script>alert(\"Didn't successfully update TomaETest.\")</script>";
                 $DB->delete_records('quizaccess_tomaetest_main', array('quizid' => $quiz->id));

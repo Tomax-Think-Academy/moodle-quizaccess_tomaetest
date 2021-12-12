@@ -82,7 +82,7 @@ class tomaetest_connection
         return $result;
     }
 
-    public static function syncToTomaETestFromDatabase($quizid, $TETQuiz = null) {
+    public static function sync_to_toma_etest_from_database($quizid, $TETQuiz = null) {
         global $DB;
         if ($TETQuiz === null) {
             $TETQuiz = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
