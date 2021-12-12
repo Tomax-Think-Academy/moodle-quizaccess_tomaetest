@@ -633,7 +633,7 @@ function attempt_submitted($eventdata) {
     }
 }
 
-function updateDisclaimer($arg) {
+function update_disclaimer($arg) {
     $disclaimer = get_config('quizaccess_tomaetest')->disclaimer;
     $result = tomaetest_connection::post_request("/institution/edit", ['ID' => 1, "Attributes" => [
         'TETInstitutionProctoringDisclaimer' => $disclaimer

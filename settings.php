@@ -87,7 +87,7 @@ if ($ADMIN->fulltree) {
     "",
     ''
     );
-    $disclaimerhtml->set_updatedcallback('updateDisclaimer');
+    $disclaimerhtml->set_updatedcallback('update_disclaimer');
     $settings->add($disclaimerhtml);
 
     $settings->add(new
