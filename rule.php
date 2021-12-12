@@ -286,14 +286,14 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $mform->setType('tomaetest_scanningTime', PARAM_INT);
                 $mform->addRule('tomaetest_scanningTime', 'Numeric', 'numeric', null, 'client');
 
-                $buildJSTeachersMap = "var teachersmap = {}; ";
+                $buildjsteachersmap = "var teachersmap = {}; ";
                 foreach ($examsbyteachersmap as $teacher => $value) {
-                    $buildJSTeachersMap = $buildJSTeachersMap . " var examArr = {}; ";
+                    $buildjsteachersmap = $buildjsteachersmap . " var examArr = {}; ";
                     foreach ($value as $exam => $examString) {
                         $examString = str_replace("'", "", $examString);
-                        $buildJSTeachersMap = $buildJSTeachersMap . "examArr['$exam'] = '$examString';";
+                        $buildjsteachersmap = $buildjsteachersmap . "examArr['$exam'] = '$examString';";
                     }
-                    $buildJSTeachersMap = $buildJSTeachersMap . " teachersmap['$teacher'] = examArr;";
+                    $buildjsteachersmap = $buildjsteachersmap . " teachersmap['$teacher'] = examArr;";
                 }
                 $defaultOptionExam = "''";
                 if ($record !== null && $record){
@@ -379,7 +379,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                     }
 
                     function initTeachersHashMap() {
-                        $buildJSTeachersMap
+                        $buildjsteachersmap
                         teachersHashMap = teachersmap;
                     }
 
