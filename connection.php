@@ -94,7 +94,7 @@ class tomaetest_connection
 
         $externalid = $tetquiz->extradata["TETExternalID"];
         $lockcomputer = $tetquiz->extradata["LockComputer"];
-        $verificationType = $tetquiz->extradata["VerificationType"];
+        $verificationyype = $tetquiz->extradata["VerificationType"];
         $verificationTiming = $tetquiz->extradata["VerificationTiming"];
         $proctoringType = $tetquiz->extradata["ProctoringType"];
         $scanningModule = (isset($tetquiz->extradata["ScanningModule"])) ? $tetquiz->extradata["ScanningModule"] : false;
@@ -127,12 +127,12 @@ class tomaetest_connection
             "PassToTG" => $scanningModule
         ];
 
-        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalid, $teacherID, $time, $lockcomputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $thirdParty, $scanningModule, $blockThirdParty, $reLogin, $scanningTime);
+        $result = tomaetest_connection::syncToTomaETest($quiz->id, $quizName, $date, $courseName, $externalid, $teacherID, $time, $lockcomputer, $verificationyype, $verificationTiming, $proctoringType, $showParticipantOnScreen, $thirdParty, $scanningModule, $blockThirdParty, $reLogin, $scanningTime);
         return $result;
     }
 
 
-    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationType, $verificationTiming, $proctoringType, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningModule, $blockThirdParty, $reLogin, $scanningTime) {
+    static function syncToTomaETest($quizid, $name, $date, $course, $externalid, $TeacherExternalID, $startTime, $lockcomputer, $verificationyype, $verificationTiming, $proctoringType, $showParticipantOnScreen, $exam3rdPartyConfig, $scanningModule, $blockThirdParty, $reLogin, $scanningTime) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
@@ -185,16 +185,16 @@ class tomaetest_connection
         //         "value" => $proctoringType
         //     ]
         // ];
-        if (isset($verificationType) && $verificationType != null) {
+        if (isset($verificationyype) && $verificationyype != null) {
             // array_push($data["extraFieldValue"],
             //     [
             //         "objectExtraFieldDefinition" => [
             //             "name" => "TETExamVerificationType",
             //             "fieldType" => "multipleSelect",
             //         ],
-            //         "value" => str_replace("\"", "'", json_encode([$verificationType]))
+            //         "value" => str_replace("\"", "'", json_encode([$verificationyype]))
             //     ]);
-            $data['examParameter']["TETExamVerificationType"] = [["key" => $verificationType]];
+            $data['examParameter']["TETExamVerificationType"] = [["key" => $verificationyype]];
         }
         if ($blockThirdParty) {
             $alertedAPPS = [];
