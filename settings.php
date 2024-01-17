@@ -205,13 +205,51 @@ if ($ADMIN->fulltree) {
     '',
     quizaccess_tomaetest_utils::$verificationtimings
     ));
-    $settings->add(new admin_setting_configselect(
-    'quizaccess_tomaetest/tomaetest_verificationType',
-    'Default Verification Types',
-    '',
-    '',
-    quizaccess_tomaetest_utils::$verificationtypes
+
+    // Verification Types
+    $settings->add(new admin_setting_configcheckbox(
+        'quizaccess_tomaetest/tomaetest_verificationType_camera',
+        "Default Verification Type - Identity",
+        "",
+        ''
     ));
+    $settings->add(new admin_setting_configcheckbox(
+        'quizaccess_tomaetest/tomaetest_verificationType_manual',
+        "Default Verification Type - Manual",
+        "",
+        ''
+    ));
+    $settings->add(new admin_setting_configcheckbox(
+        'quizaccess_tomaetest/tomaetest_verificationType_room',
+        "Default Verification Type - Room",
+        "",
+        ''
+    ));
+    $settings->add(new admin_setting_configcheckbox(
+        'quizaccess_tomaetest/tomaetest_verificationType_password',
+        "Default Verification Type - Password",
+        "",
+        ''
+    ));
+
+    // JavaScript to enforce constraint
+    echo ("<script type='text/javascript'>
+        document.addEventListener('DOMContentLoaded', function () {
+            let cameraCheckbox = document.getElementById('id_s_quizaccess_tomaetest_tomaetest_verificationType_camera');
+            let manualCheckbox = document.getElementById('id_s_quizaccess_tomaetest_tomaetest_verificationType_manual');
+            let verificationTiming = document.getElementById('id_s_quizaccess_tomaetest_tomaetest_verificationTiming');
+
+
+            function updateConstraint() {
+                manualCheckbox.disabled = cameraCheckbox.checked;
+                cameraCheckbox.disabled = manualCheckbox.checked;
+            }
+
+            cameraCheckbox.addEventListener('change', updateConstraint);
+            manualCheckbox.addEventListener('change', updateConstraint);
+            updateConstraint(); // Initialize on page load
+        }, {once: true});
+    </script>");
 
 
     // Proctoring Types.
@@ -224,6 +262,12 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox(
     'quizaccess_tomaetest/tomaetest_proctoringType_monitor',
     "Default Proctoring Type - Monitor Recording",
+    "",
+    ''
+    ));
+    $settings->add(new admin_setting_configcheckbox(
+    'quizaccess_tomaetest/tomaetest_proctoringType_second',
+    "Default Proctoring Type - Second Camera",
     "",
     ''
     ));

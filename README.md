@@ -3,7 +3,7 @@ Tomax’s proctoring plugin ensure exam integrity and provide faculty and studen
 TomaEtest’s solution enables instructors to efficiently and pleasantly manage and secure the exam process.
 
 TomaEtest’s plugin integrates with the Moodle exam and offers seamless integration.
-Contact us for a free trial with full access to all features at sales@tomaxltd.com
+Contact us for a free trial with full access to all features at sales@tomax.io
 
 * **Test anytime, from anywhere**
 Students can take the exam on their device or the institution’s device.
@@ -29,8 +29,8 @@ Instructors, invigilators, and students can safely communicate with each other d
 
 # Installation
 Download the two plugins and install them through the moodle user interface
-1. [TomaETest quiz access rule](https://s3.eu-central-1.amazonaws.com/public.tomagrade.com/ApplicationSetup/WindowsSetup/TET-accessrule-moodle.zip)
-2. [TomaETest quiz report](https://s3.eu-central-1.amazonaws.com/public.tomagrade.com/ApplicationSetup/WindowsSetup/TET-report-moodle.zip)
+1. [TomaETest quiz access rule](https://downloads.tomax.io/MoodlePlugins/ETest/TET-accessrule-moodle.zip)
+2. [TomaETest quiz report](https://downloads.tomax.io/MoodlePlugins/ETest/TET-report-moodle.zip)
 
 ## Setup
 Go to "Site Administration" > "Plugins" > "Activity modules" > "Quiz" > "TomaETest quiz access"
@@ -63,9 +63,11 @@ configure only if using the Scanning module
 	4. Camera - The verification will be with the students camera.
 	   It will ask the student to take a picture of his face and his identification card,
 	   then it will be sent to verification to the monitor side.
+	5. Room - This involves capturing a 360-degree video of the examination room using the Tomax dedicated mobile app for verification purposes.
 6. Proctoring Type
 	1. Computer Camera - The frontal computer camera, this will record the student’s actions during the exam using his frontal camera and later on will be analyzed using an AI.
 	2. Monitor Recording - The computer’s screen will be recorded and later on analyzed using an AI.
+	3. Second camera - The second camera supervision module allows for monitoring the examinees from additional angles and “live” proctoring from the exam monitor by additional video footage of the examinee using his mobile phone.
 
 ### <u>TomaETest Dashboard Permission</u>
 1. In order to allow certain roles to access the TomaETest Monitor, please allow the following capability “mod/quizaccess_tomaetest:viewTomaETestMonitor” to the appropriate roles
@@ -92,7 +94,7 @@ After clicking, the TomaETest client will open up and he will be able to start u
 # Subscription
 This plugin integrates with Tomax TomaETTest solution which is provided as a subscription.
 Receive a free trial with full access to all Tomax’s features.
-For more information please contact us at sales@tomaxltd.com
+For more information please contact us at sales@tomax.io
 for experiencing with a demo version you can use
 
 # Dependencies
