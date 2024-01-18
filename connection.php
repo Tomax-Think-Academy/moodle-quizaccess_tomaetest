@@ -30,6 +30,9 @@ class tomaetest_connection
 
     public static function sso($quizid, $userid, $parid = null) {
         $record = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
+        if (!$record) {
+            return false;
+        }
         $id = $record->extradata["TETID"];
         $externalid = quizaccess_tomaetest_utils::get_teacher_id($userid);
         $examid = $record->extradata["TETExternalID"];
@@ -95,7 +98,7 @@ class tomaetest_connection
 
         $externalid = $tetquiz->extradata["TETExternalID"];
         $lockcomputer = $tetquiz->extradata["LockComputer"];
-        $verificationyype = $tetquiz->extradata["VerificationType"];
+        $verificationtype = $tetquiz->extradata["VerificationType"];
         $verificationtiming = $tetquiz->extradata["VerificationTiming"];
         $proctoringtype = $tetquiz->extradata["ProctoringType"];
         $scanningmodule = (isset($tetquiz->extradata["ScanningModule"])) ? $tetquiz->extradata["ScanningModule"] : false;
@@ -128,7 +131,7 @@ class tomaetest_connection
         ];
 
         $result = self::sync_to_tomaetest($quiz->id, $quizname, $date, $coursename,
-         $externalid, $teacherid, $time, $lockcomputer, $verificationyype,
+         $externalid, $teacherid, $time, $lockcomputer, $verificationtype,
           $verificationtiming, $proctoringtype, $showparticipantonscreen, $thirdparty,
            $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
         return $result;
@@ -137,7 +140,7 @@ class tomaetest_connection
 
     public static function sync_to_tomaetest($quizid, $name, $date, $course,
      $externalid, $teacherexternalid, $starttime, $lockcomputer,
-      $verificationyype, $verificationtiming, $proctoringtype,
+      $verificationtype, $verificationtiming, $proctoringtype,
        $showparticipantonscreen, $exam3rdpartyconfig, $scanningmodule,
         $blockthirdparty, $relogin, $scanningtime) {
         $duration = 1000000;
@@ -167,13 +170,12 @@ class tomaetest_connection
                 "TETExamEndDelay" => $scanningtime,
                 "TETExamProctoringType" => array_map(function($proctoringtype){
                     return ["key" => $proctoringtype];
-                }, $proctoringtype)
-
+                }, $proctoringtype),
+                "TETExamVerificationType" => array_map(function($verificationtype){
+                    return ["key" => $verificationtype];
+                }, $verificationtype),
             ]
         ];
-        if (isset($verificationyype) && $verificationyype != null) {
-            $data['examParameter']["TETExamVerificationType"] = [["key" => $verificationyype]];
-        }
         if ($blockthirdparty) {
             $alertedapps = [];
             $deniedapps = [];

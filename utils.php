@@ -49,7 +49,15 @@ class quizaccess_tomaetest_utils
     public static $verificationtypes = [
         "camera" => "Camera",
         "manual" => "Manual",
+        "room" => "Room",
         "password" => "Password",
+        "no" => "Without"
+    ];
+
+    public static $proctoringtypes = [
+        "monitor_recording_proctoring" => "Monitor Recording",
+        "computer_cam_proctoring" => "Computer Camera",
+        "second_cam_proctoring" => "Second Camera",
         "no" => "Without"
     ];
 
@@ -258,7 +266,7 @@ class quizaccess_tomaetest_utils
         return array_map(function ($user) {
             $newuser = new stdClass();
 
-            $newuser->Role = "ROLE_MOODLE";
+            $newuser->EtestRole = "lecturer";
             $newuser->TETExternalID = static::get_external_id_for_teacher($user);
             $newuser->UserName = static::get_external_id_for_teacher($user);
             $newuser->TETUserLastName = $user->lastname;
@@ -330,7 +338,7 @@ class quizaccess_tomaetest_utils
         } else {
             $tetuserid = $tetuserresponse["data"]["Entity"];
         }
-        $tetroleresponse = tomaetest_connection::post_request("role/getByName/view", ["Name" => "ROLE_MOODLE"]);
+        $tetroleresponse = tomaetest_connection::post_request("role/getByName/view", ["Name" => "lecturer"]);
 
         // Need to sync at least one exam to create ROLE_MOODLE...
         if (!$tetroleresponse["success"]) {

@@ -136,18 +136,49 @@ class quizaccess_tomaetest extends quiz_access_rule_base
          'tomaetest_verificationTiming', "Verification timing",
           quizaccess_tomaetest_utils::$verificationtimings, $lockedatts);
 
-        $verificationtype = $mform->addElement('select',
-         'tomaetest_verificationType', "Verification type",
-          quizaccess_tomaetest_utils::$verificationtypes, $lockedatts);
+        $mform->addElement('checkbox', 'tomaetest_verificationType_camera', 'Verification Types', 'Identity', $lockedatts);
+        $mform->addElement('checkbox', 'tomaetest_verificationType_manual', 'Manual', '', $lockedatts);
+        $mform->addElement('checkbox', 'tomaetest_verificationType_room', 'Room', '', $lockedatts);
+        $mform->addElement('checkbox', 'tomaetest_verificationType_password', 'Password', '', $lockedatts);
 
         $mform->addElement('checkbox', 'tomaetest_proctoringType_computer', 'Proctoring Types', 'Computer Camera', $lockedatts);
         $mform->addElement('checkbox', 'tomaetest_proctoringType_monitor', 'Monitor Recording', '', $lockedatts);
-        $mform->addElement('checkbox', 'tomaetest_proctoringType_second', 'Second Camera', '', ["disabled"]);
-        $mform->addElement('checkbox', 'tomaetest_proctoringType_room', 'Room Verification', '', ["disabled"]);
+        $mform->addElement('checkbox', 'tomaetest_proctoringType_second', 'Second Camera', '', $lockedatts);
 
         $mform->addElement('checkbox', 'tomaetest_showParticipant', 'Show Participant on screen', ' ', $lockedatts);
         $mform->addElement('checkbox', 'tomaetest_blockThirdParty', 'Block Third Party', ' ', $lockedatts);
         $mform->addElement('checkbox', 'tomaetest_requireReLogin', 'Require Re-Login Process', ' ', $lockedatts);
+
+        // JavaScript to enforce constraint
+        echo ("<script type='text/javascript'>
+            document.addEventListener('DOMContentLoaded', function () {
+                let verificationTiming = document.getElementById('id_tomaetest_verificationTiming');
+                let cameraCheckbox = document.getElementById('id_tomaetest_verificationType_camera');
+                let manualCheckbox = document.getElementById('id_tomaetest_verificationType_manual');
+                let roomCheckbox = document.getElementById('id_tomaetest_verificationType_room');
+                let passwordCheckbox = document.getElementById('id_tomaetest_verificationType_password');
+
+                function clearTypes(event) {
+                    if (event.target.value === 'noVerification') {
+                        cameraCheckbox.checked = false;
+                        manualCheckbox.checked = false;
+                        roomCheckbox.checked = false;
+                        passwordCheckbox.checked = false;
+                    }
+                }
+                function updateConstraint() {
+                    manualCheckbox.disabled = cameraCheckbox.checked;
+                    cameraCheckbox.disabled = manualCheckbox.checked;
+                }
+    
+                cameraCheckbox.addEventListener('change', updateConstraint);
+                manualCheckbox.addEventListener('change', updateConstraint);
+                updateConstraint(); // Initialize on page load
+
+                verificationTiming.addEventListener('change', clearTypes);
+                clearTypes(); // Initialize on page load
+            }, {once: true});
+        </script>");
 
         if ($config->tomagrade_sync_further === "1") {
 
@@ -413,13 +444,15 @@ class quizaccess_tomaetest extends quiz_access_rule_base
             }
         }
         // IF tomaetest_allow disabled..
+        $mform->disabledIf("tomaetest_verificationType_camera", "tomaetest_allow");
+        $mform->disabledIf("tomaetest_verificationType_manual", "tomaetest_allow");
+        $mform->disabledIf("tomaetest_verificationType_room", "tomaetest_allow");
+        $mform->disabledIf("tomaetest_verificationType_password", "tomaetest_allow");
         $mform->disabledIf("tomaetest_proctoringType_computer", "tomaetest_allow");
         $mform->disabledIf("tomaetest_proctoringType_monitor", "tomaetest_allow");
         $mform->disabledIf("tomaetest_proctoringType_second", "tomaetest_allow");
-        $mform->disabledIf("tomaetest_proctoringType_room", "tomaetest_allow");
         $mform->disabledIf("tomaetest_showParticipant", "tomaetest_allow");
         $mform->disabledIf("tomaetest_lockComputer", "tomaetest_allow");
-        $mform->disabledIf("tomaetest_verificationType", "tomaetest_allow");
         $mform->disabledIf("tomaetest_verificationTiming", "tomaetest_allow");
         $mform->disabledIf("tomaetest_scan_module", "tomaetest_allow");
         $mform->disabledIf("tomaetest_realted_user", "tomaetest_allow");
@@ -428,7 +461,13 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         $mform->disabledIf("tomaetest_requireReLogin", "tomaetest_allow");
         $mform->disabledIf("tomaetest_scanningTime", "tomaetest_allow");
         // If no verification timing, no verification type.
-        $mform->disabledIf("tomaetest_verificationType", "tomaetest_verificationTiming", "eq", "noVerification");
+        $mform->hideIf("tomaetest_verificationType_camera", "tomaetest_verificationTiming", "eq", "noVerification");
+        $mform->hideIf("tomaetest_verificationType_manual", "tomaetest_verificationTiming", "eq", "noVerification");
+        $mform->hideIf("tomaetest_verificationType_room", "tomaetest_verificationTiming", "eq", "noVerification");
+        $mform->hideIf("tomaetest_verificationType_password", "tomaetest_verificationTiming", "eq", "noVerification");
+        // Identity and Manual can't be chosen together
+        $mform->disabledIf("tomaetest_verificationType_camera", "tomaetest_verificationType_manual", 'checked');
+        $mform->disabledIf("tomaetest_verificationType_manual", "tomaetest_verificationType_camera", 'checked');
         // Show Participant on  screen only if computer camera is enabled.
         $mform->disabledIf("tomaetest_showParticipant", "tomaetest_proctoringType_computer");
 
@@ -440,7 +479,21 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                     $lockcomputer->setSelected($extradata["LockComputer"]);
                 }
                 if (isset($extradata["VerificationType"])) {
-                    $verificationtype->setSelected($extradata["VerificationType"]);
+                    $verificationtype = $extradata["VerificationType"];
+                    foreach ($verificationtype as $verification) {
+                        if ($verification === "camera") {
+                            $mform->setDefault('tomaetest_verificationType_camera', true);
+                        }
+                        if ($verification === "manual") {
+                            $mform->setDefault('tomaetest_verificationType_manual', true);
+                        }
+                        if ($verification === "room") {
+                            $mform->setDefault('tomaetest_verificationType_room', true);
+                        }
+                        if ($verification === "password") {
+                            $mform->setDefault('tomaetest_verificationType_password', true);
+                        }
+                    }
                 }
                 if (isset($extradata["VerificationTiming"])) {
                     $verificationtimings->setSelected($extradata["VerificationTiming"]);
@@ -483,13 +536,17 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                         }
                     }
                 }
-            } else if ($quizid == "") {
+            }
+            else if ($quizid == "") {
 
                 $mform->setDefault('tomaetest_allow', $config->tomaetest_allow);
 
                 $lockcomputer->setSelected($config->tomaetest_lockComputer);
 
-                $verificationtype->setSelected($config->tomaetest_verificationType);
+                $mform->setDefault('tomaetest_verificationType_camera', $config->tomaetest_verificationType_camera);
+                $mform->setDefault('tomaetest_verificationType_manual', $config->tomaetest_verificationType_manual);
+                $mform->setDefault('tomaetest_verificationType_room', $config->tomaetest_verificationType_room);
+                $mform->setDefault('tomaetest_verificationType_password', $config->tomaetest_verificationType_password);
 
                 $verificationtimings->setSelected($config->tomaetest_verificationTiming);
 
@@ -498,8 +555,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
                 $mform->setDefault('tomaetest_showParticipant', $config->tomaetest_showParticipant);
 
                 $mform->setDefault('tomaetest_proctoringType_computer', $config->tomaetest_proctoringType_computer);
-
                 $mform->setDefault('tomaetest_proctoringType_monitor', $config->tomaetest_proctoringType_monitor);
+                $mform->setDefault('tomaetest_proctoringType_second', $config->tomaetest_proctoringType_second);
+
                 $mform->setDefault('tomaetest_blockThirdParty', $config->tomaetest_blockThirdParty);
                 $mform->setDefault('tomaetest_requireReLogin', $config->tomaetest_requireReLogin);
                 $mform->setDefault('tomaetest_scanningTime', $config->tomaetest_scanningTime);
@@ -528,8 +586,24 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         if (isset($quiz->tomaetest_allow) && ($quiz->tomaetest_allow == true)) {
 
             $lockcomputer = isset($quiz->tomaetest_lockComputer) ? $quiz->tomaetest_lockComputer : "no";
-            $verificationtype = isset($quiz->tomaetest_verificationType) ? $quiz->tomaetest_verificationType : null;
+            $verificationtype = [];
+            if (isset($quiz->tomaetest_verificationType_camera) && $quiz->tomaetest_verificationType_camera === "1") {
+                array_push($verificationtype, "camera");
+            }
+            if (isset($quiz->tomaetest_verificationType_manual) && $quiz->tomaetest_verificationType_manual === "1") {
+                array_push($verificationtype, "manual");
+            }
+            if (isset($quiz->tomaetest_verificationType_room) && $quiz->tomaetest_verificationType_room === "1") {
+                array_push($verificationtype, "room");
+            }
+            if (isset($quiz->tomaetest_verificationType_password) && $quiz->tomaetest_verificationType_password === "1") {
+                array_push($verificationtype, "password");
+            }
+
             $verificationtiming = isset($quiz->tomaetest_verificationTiming) ? $quiz->tomaetest_verificationTiming : null;
+            if (empty($verificationtype) || $verificationtiming === "noVerification") {
+                $verificationtype = ["no"];
+            }
 
             if (isset($quiz->tomaetest_showParticipant) && $quiz->tomaetest_showParticipant === "1") {
                 $record->extradata["ShowParticipant"] = true;
@@ -545,6 +619,9 @@ class quizaccess_tomaetest extends quiz_access_rule_base
 
             if (isset($quiz->tomaetest_proctoringType_second) && $quiz->tomaetest_proctoringType_second === "1") {
                 array_push($proctoringtype, "second_cam_proctoring");
+            }
+            if (empty($proctoringtype)) {
+                $proctoringtype = ["no"];
             }
             $relateduser = null;
             if (isset($quiz->tomaetest_realted_user) && !empty($quiz->tomaetest_realted_user)) {
