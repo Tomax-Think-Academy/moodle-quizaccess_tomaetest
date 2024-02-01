@@ -162,8 +162,14 @@ if ($ADMIN->fulltree) {
     'quizaccess_tomaetest/tomagrade_sync_further',
     "Scanned exams should be ID Matched",
     "",
-    '1'
+    '0'
     ));
+    echo ("<script type='text/javascript'>
+        document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.getElementById('id_s_quizaccess_tomaetest_tomagrade_sync_further');
+            checkbox.disabled = true;
+        });
+    </script>");
 
 
 

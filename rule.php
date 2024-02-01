@@ -26,12 +26,12 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 global $CFG;
-require_once($CFG->dirroot . '/mod/quiz/accessrule/accessrulebase.php');
+
 require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/connection.php");
 require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/utils.php");
 require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/tomagradeConnection.php");
 
-class quizaccess_tomaetest extends quiz_access_rule_base
+class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
 {
 
     protected $extradata;
@@ -46,7 +46,7 @@ class quizaccess_tomaetest extends quiz_access_rule_base
         }
     }
 
-    public static function make(quiz $quizobj, $timenow, $canignoretimelimits) {
+    public static function make(mod_quiz\quiz_settings $quizobj, $timenow, $canignoretimelimits) {
         global $USER;
         $cmid = quizaccess_tomaetest_utils::get_cmid($quizobj->get_quiz()->id);
         $context = context_module::instance($cmid);

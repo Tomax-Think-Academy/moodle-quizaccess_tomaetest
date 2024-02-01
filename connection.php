@@ -239,6 +239,13 @@ class tomaetest_connection
 
     public static function post_request($method, $postdata, $parameters = "") {
         $config = static::$config;
+        if (!(isset($config->domain) && isset($config->apikey) && isset($config->userid))) {
+            static::$config = get_config('quizaccess_tomaetest');
+            $config = static::$config;
+            if (!(isset($config->domain) && isset($config->apikey) && isset($config->userid))) {
+                return ["success" => false];
+            }
+        }
         etest_log("================== post $method to :$config->domain ====================");
         $url = "https://$config->domain.tomaetest.com/TomaETest/api/dashboard/WS/$method$parameters";
 

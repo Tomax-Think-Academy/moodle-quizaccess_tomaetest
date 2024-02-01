@@ -23,7 +23,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 $capabilities = array(
-    'mod/quizaccess_tomaetest:viewTomaETestMonitor' => array(
+    'mod/quizaccess_tomaetest:viewtomaetestmonitor' => array(
         'captype'      => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes'   => array(
@@ -32,7 +32,7 @@ $capabilities = array(
             'manager'          => CAP_ALLOW
         )
     ),
-    'mod/quizaccess_tomaetest:viewTomaETestAIR' => array(
+    'mod/quizaccess_tomaetest:viewtomaetestair' => array(
         'captype'      => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes'   => array(
