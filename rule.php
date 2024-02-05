@@ -656,9 +656,13 @@ class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
 
             $result = tomaetest_connection::sync_to_toma_etest_from_database($quiz->id, $record);
             if (!$result["success"]) {
-                echo "<script>alert(\"Didn't successfully update TomaETest.\")</script>";
+                $errmsg = "Didn't successfully update TomaETest.";
+                if (!empty($result["missingparams"])) {
+                    $errmsg = $errmsg . "\\nMandatory Settings are missing: " . implode(", ", $result["missingparams"]);
+                }
+                echo "<script>alert(\"$errmsg\")</script>";
                 $DB->delete_records('quizaccess_tomaetest_main', array('quizid' => $quiz->id));
-                return false;
+                throw new moodle_exception('syncerror', 'quizaccess_tomaetest', '', '', json_encode($result));
             }
             $record->extradata["TETID"] = $result["data"]["ID"];
             $record->extradata["TETSebHeader"] = $result["data"]["Attributes"]["TETSebHeader"];

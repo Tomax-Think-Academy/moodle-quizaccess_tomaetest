@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die;
+require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/classes/settings/admin_setting_requiredconfigpasswordunmask.php");
 
 if ($ADMIN->fulltree) {
     require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/rule.php");
@@ -60,21 +61,21 @@ if ($ADMIN->fulltree) {
     '1'
     ));
 
-    $settings->add(new admin_setting_configtext(
+    $settings->add(new admin_setting_requiredtext(
     'quizaccess_tomaetest/domain',
     "Domain",
     "",
     ''
     ));
 
-    $settings->add(new admin_setting_configpasswordunmask(
+    $settings->add(new admin_setting_requiredconfigpasswordunmask(
     'quizaccess_tomaetest/userid',
     "TomaETest UserID",
     "",
     ''
     ));
 
-    $settings->add(new admin_setting_configpasswordunmask(
+    $settings->add(new admin_setting_requiredconfigpasswordunmask(
     'quizaccess_tomaetest/apikey',
     "TomaETest APIKey",
     "",
