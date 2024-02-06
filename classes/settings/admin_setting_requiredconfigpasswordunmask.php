@@ -22,6 +22,22 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = "TomaETest quiz access";
+require_once($CFG->libdir . '/adminlib.php');
 
-$string['syncerror'] = "There was an error syncing to TomaETest";
+class admin_setting_requiredconfigpasswordunmask extends admin_setting_configpasswordunmask {
+
+    /**
+     * Validate data before storage.
+     *
+     * @param string $data The string to be validated.
+     * @return bool|string true for success or error string if invalid.
+     */
+    public function validate($data) {
+        $cleaned = clean_param($data, PARAM_TEXT);
+        if ($cleaned === '') {
+            return get_string('required');
+        }
+
+        return parent::validate($data);
+    }
+}
