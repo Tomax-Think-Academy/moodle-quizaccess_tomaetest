@@ -305,7 +305,7 @@ if ($ADMIN->fulltree) {
     "quizaccess_permissions_config",
     "TomaETest Dashboard Permission",
     "In order to define the roles which are allowed to access TomaETest Dashboard,
-     please assign the capability 'mod/quizaccess_tomaetest:viewTomaETestMonitor' to the appropriate role.<br>
+     please assign the capability 'mod/quizaccess_tomaetest:viewtomaetestmonitor' to the appropriate role.<br>
      OPTIONAL: This is the link to the ExamCode enter page: <a target='_blank' href='$examcodeenter'>$examcodeenter</a>"
     ));
 
@@ -315,7 +315,7 @@ if ($ADMIN->fulltree) {
     "quizaccess_permissions_config_2",
     "TomaETest Integrity Management Permission",
     "In order to define the roles which are allowed to access TomaETest Integrity Report,
-     please assign the capability 'mod/quizaccess_tomaetest:viewTomaETestAIR' to the appropriate role.<br>
+     please assign the capability 'mod/quizaccess_tomaetest:viewtomaetestair' to the appropriate role.<br>
      OPTIONAL: The link to view the Integrity Management is: <a target='_blank' href='$logintointegritymanagement'>$logintointegritymanagement </a>"
     ));
 

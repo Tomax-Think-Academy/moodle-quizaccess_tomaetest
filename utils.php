@@ -283,14 +283,14 @@ class quizaccess_tomaetest_utils
         if ($quizid === null) {
             $systemcontext = context_system::instance();
             $teachers = [];
-            if (has_capability("mod/quizaccess_tomaetest:viewTomaETestMonitor", $systemcontext, $userid)) {
+            if (has_capability("mod/quizaccess_tomaetest:viewtomaetestmonitor", $systemcontext, $userid)) {
                 array_push($teachers, $DB->get_record('user', array("id" => $userid)));
             }
             return $teachers;
         }
         $cmid = static::get_cmid($quizid);
         $context = context_module::instance($cmid);
-        $teachers = get_users_by_capability($context, "mod/quizaccess_tomaetest:viewTomaETestMonitor");
+        $teachers = get_users_by_capability($context, "mod/quizaccess_tomaetest:viewtomaetestmonitor");
         if ($userid !== null) {
             $teachers = array_filter($teachers, function ($user) use ($userid) {
                 return $user->id === $userid;
@@ -302,14 +302,14 @@ class quizaccess_tomaetest_utils
 
     public static function get_moodle_teachers_by_course($courseid) {
         $context = context_course::instance($courseid);
-        return get_users_by_capability($context, "mod/quizaccess_tomaetest:viewTomaETestMonitor");
+        return get_users_by_capability($context, "mod/quizaccess_tomaetest:viewtomaetestmonitor");
     }
 
     public static function get_moodle_allowed_integrity_management($userid = null) {
         global $DB;
         $systemcontext = context_system::instance();
         $teachers = [];
-        if (has_capability("mod/quizaccess_tomaetest:viewTomaETestAIR", $systemcontext, $userid)) {
+        if (has_capability("mod/quizaccess_tomaetest:viewtomaetestair", $systemcontext, $userid)) {
             array_push($teachers, $DB->get_record('user', array("id" => $userid)));
         }
         return $teachers;
