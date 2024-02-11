@@ -324,7 +324,7 @@ class quizaccess_tomaetest_utils
         $tetuserresponse = tomaetest_connection::post_request("user/getByExternalID/view", ["ExternalID" => $user->TETExternalID]);
 
         if (!$tetuserresponse["success"]) {
-            if (!$user->UserName) {
+            if (empty($user->UserName)) {
                 return "ExternalID/UserName Missing - Please make sure the chosen \"Teacher identifier\" exists.";
             }
             $sendingobject = [
