@@ -266,7 +266,7 @@ class quizaccess_tomaetest_utils
         return array_map(function ($user) {
             $newuser = new stdClass();
 
-            $newuser->EtestRole = "lecturer";
+            $newuser->EtestRole = "ROLE_MOODLE";
             $newuser->TETExternalID = static::get_external_id_for_teacher($user);
             $newuser->UserName = static::get_external_id_for_teacher($user);
             $newuser->TETUserLastName = $user->lastname;
@@ -324,6 +324,9 @@ class quizaccess_tomaetest_utils
         $tetuserresponse = tomaetest_connection::post_request("user/getByExternalID/view", ["ExternalID" => $user->TETExternalID]);
 
         if (!$tetuserresponse["success"]) {
+            if (empty($user->UserName)) {
+                return "ExternalID/UserName Missing - Please make sure the chosen \"Teacher identifier\" exists.";
+            }
             $sendingobject = [
                 "UserName" => $user->UserName,
                 "Attributes" => $user
@@ -338,7 +341,7 @@ class quizaccess_tomaetest_utils
         } else {
             $tetuserid = $tetuserresponse["data"]["Entity"];
         }
-        $tetroleresponse = tomaetest_connection::post_request("role/getByName/view", ["Name" => "lecturer"]);
+        $tetroleresponse = tomaetest_connection::post_request("role/getByName/view", ["Name" => "ROLE_MOODLE"]);
 
         // Need to sync at least one exam to create ROLE_MOODLE...
         if (!$tetroleresponse["success"]) {

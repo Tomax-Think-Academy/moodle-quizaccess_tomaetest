@@ -49,7 +49,7 @@ class tomaetest_connection
 
     public static function sso_integrity_management($userid) {
         $externalid = quizaccess_tomaetest_utils::get_teacher_id($userid);
-        $data = ["userExternalID" => $externalid, "externalLocation" => "air"];
+        $data = ["userExternalID" => $externalid, "externalLocation" => "management/integrityManagement?showtoolbar=false"];
         $result = static::post_request("auth/login/SafeGenerateToken", $data);
         if ($result["success"] == true) {
             return $result["data"]["url"];
