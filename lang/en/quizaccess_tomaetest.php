@@ -25,3 +25,7 @@
 $string['pluginname'] = "TomaETest quiz access";
 
 $string['syncerror'] = "There was an error syncing to TomaETest";
+
+$string['well_connected'] = "Your system is well connected!";
+$string['connection_auth_error'] = "Please check your APIKey and UserID";
+$string['no_open_connection'] = "It seems you do not have an open connection to TomaETest";
