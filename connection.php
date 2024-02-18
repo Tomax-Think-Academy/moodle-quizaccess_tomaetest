@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(dirname(dirname(__FILE__)) . '../../../../config.php');
+require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/rule.php");
 require_login();
 class tomaetest_connection
 {
@@ -64,6 +65,14 @@ class tomaetest_connection
     public static function get_exam_specific_information($id) {
         return $result = static::post_request(
             "exam/view?ID=$id",
+            []
+        );
+        return $result;
+    }
+
+    public static function get_exams() {
+        $result = static::post_request(
+            "exam/list",
             []
         );
         return $result;
