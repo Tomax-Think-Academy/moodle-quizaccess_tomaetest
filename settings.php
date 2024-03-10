@@ -325,5 +325,29 @@ if ($ADMIN->fulltree) {
         "TomaETest Connection Check",
         "Click here to check your connection (save the changes before checking): <button type='button' onclick='window.open(\"$checkconnection\", \"_self\")'>Check Connection</button>"
     ));
+
+    $settings->add(new admin_setting_heading(
+        "quizaccess_proxy_settings",
+        "Proxy Settings",
+        ""
+    ));
+    $settings->add(new admin_setting_configcheckbox(
+        'quizaccess_tomaetest/tomaetest_useProxy',
+        "Use Proxy",
+        "",
+        '0'
+    ));
+    $settings->add(new admin_setting_configtext(
+        'quizaccess_tomaetest/proxyURL',
+        "Proxy URL",
+        "",
+        ''
+    ));
+    $settings->add(new admin_setting_configtext(
+        'quizaccess_tomaetest/proxyPort',
+        "Proxy Port",
+        "",
+        ''
+    ));
 }
 

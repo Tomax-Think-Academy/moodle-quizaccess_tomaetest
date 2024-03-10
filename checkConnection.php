@@ -44,6 +44,8 @@ if (isset($res)) {
     }
 } else {
     write(get_string('no_open_connection' , 'quizaccess_tomaetest'));
+    $res = $connection->check_internet();
+    write('Internet Connection: ' . json_encode($res));
 }
 echo ("<script>history.back();</script>");
 
