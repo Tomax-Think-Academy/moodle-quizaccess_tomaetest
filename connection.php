@@ -271,7 +271,7 @@ class tomaetest_connection
             }
         }
         etest_log("================== post $method to :$config->domain ====================");
-        $url = "https://$config->domain.tomaetest.com/TomaETestRon/api/dashboard/WS/$method$parameters";
+        $url = "https://$config->domain.tomaetest.com/TomaETest/api/dashboard/WS/$method$parameters";
 
         etest_log("url : " . $url);
         etest_log("postdata : " . json_encode($postdata));
