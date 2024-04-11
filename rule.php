@@ -149,6 +149,9 @@ class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
         $mform->addElement('checkbox', 'tomaetest_blockThirdParty', 'Block Third Party', ' ', $lockedatts);
         $mform->addElement('checkbox', 'tomaetest_requireReLogin', 'Require Re-Login Process', ' ', $lockedatts);
 
+        $mform->addElement('editor', 'tomaetest_proctoringGuidelines', 'Proctoring Guidelines');
+        $mform->setType('tomaetest_proctoringGuidelines', PARAM_RAW);
+
         // JavaScript to enforce constraint
         echo ("<script type='text/javascript'>
             document.addEventListener('DOMContentLoaded', function () {
@@ -517,6 +520,10 @@ class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
                     $mform->setDefault('tomaetest_scanningTime', $extradata["ScanningTime"]);
                 }
 
+                if (isset($extradata["proctoringGuidelines"]) && $extradata["proctoringGuidelines"]) {
+                    $mform->setDefault('tomaetest_proctoringGuidelines', $extradata["proctoringGuidelines"]);
+                }
+
                 if (isset($extradata["TeacherID"]) && !empty($extradata["TeacherID"])) {
                     $user = $DB->get_record('user', array('id' => $extradata["TeacherID"]));
                     $mform->setDefault('tomaetest_realted_user', $user->id);
@@ -654,19 +661,32 @@ class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
             $record->extradata["VerificationTiming"] = $verificationtiming;
             $record->extradata["ProctoringType"] = $proctoringtype;
 
-            $result = tomaetest_connection::sync_to_toma_etest_from_database($quiz->id, $record);
-            if (!$result["success"]) {
+            if (isset($quiz->tomaetest_proctoringGuidelines) && !empty($quiz->tomaetest_proctoringGuidelines)) {
+                $record->extradata["proctoringGuidelines"] = $quiz->tomaetest_proctoringGuidelines;
+            }
+
+            $syncresult = tomaetest_connection::sync_to_toma_etest_from_database($quiz->id, $record);
+            if (!$syncresult["success"]) {
                 $errmsg = "Didn't successfully update TomaETest.";
-                if (!empty($result["missingparams"])) {
-                    $errmsg = $errmsg . "\\nMandatory Settings are missing: " . implode(", ", $result["missingparams"]);
+                if (!empty($syncresult["missingparams"])) {
+                    $errmsg = $errmsg . "\\nMandatory Settings are missing: " . implode(", ", $syncresult["missingparams"]);
                 }
                 echo "<script>alert(\"$errmsg\")</script>";
                 $DB->delete_records('quizaccess_tomaetest_main', array('quizid' => $quiz->id));
-                throw new moodle_exception('syncerror', 'quizaccess_tomaetest', '', '', json_encode($result));
+                throw new moodle_exception('syncerror', 'quizaccess_tomaetest', '', '', json_encode($syncresult));
             }
-            $record->extradata["TETID"] = $result["data"]["ID"];
-            $record->extradata["TETSebHeader"] = $result["data"]["Attributes"]["TETSebHeader"];
-            $record->extradata["TETExamLink"] = $result["data"]["Attributes"]["TETExamLink"];
+            $tetid = $syncresult["data"]["ID"];
+            $proctoringguidelines = $quiz->tomaetest_proctoringGuidelines['text'];
+            $guidelinesresult = tomaetest_connection::set_proctoring_guidelines($tetid, $proctoringguidelines);
+            if (!$guidelinesresult["success"]) {
+                $errmsg = "Didn't successfully update TomaETest.";
+                echo "<script>alert(\"$errmsg\")</script>";
+                $DB->delete_records('quizaccess_tomaetest_main', array('quizid' => $quiz->id));
+                throw new moodle_exception('syncerror', 'quizaccess_tomaetest', '', '', json_encode($guidelinesresult));
+            }
+            $record->extradata["TETID"] = $tetid;
+            $record->extradata["TETSebHeader"] = $syncresult["data"]["Attributes"]["TETSebHeader"];
+            $record->extradata["TETExamLink"] = $syncresult["data"]["Attributes"]["TETExamLink"];
             quizaccess_tomaetest_utils::update_record($record);
         } else {
             $DB->delete_records('quizaccess_tomaetest_main', array('quizid' => $quiz->id));

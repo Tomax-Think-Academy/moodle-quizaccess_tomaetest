@@ -246,6 +246,12 @@ class tomaetest_connection
         return static::post_request("exam/tsimport/insert", $data);
     }
 
+    public static function set_proctoring_guidelines($tetid, $text)
+    {
+        $result = static::post_request("exam/setProctoringGuidelines/edit", ['ExamID' => $tetid, "value" => $text, "fromMoodle" => true]);
+        return $result;
+    }
+
     public static function post_request($method, $postdata, $parameters = "") {
         $config = static::$config;
         if (empty($config->domain) || empty($config->apikey) || empty($config->userid)) {
