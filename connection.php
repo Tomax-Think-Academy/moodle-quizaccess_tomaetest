@@ -248,7 +248,10 @@ class tomaetest_connection
 
     public static function set_proctoring_guidelines($tetid, $text)
     {
-        $result = static::post_request("exam/setProctoringGuidelines/edit", ['ExamID' => $tetid, "value" => $text, "fromMoodle" => true]);
+        global $USER;
+
+        $userexternalid = quizaccess_tomaetest_utils::get_external_id_for_teacher($USER);
+        $result = static::post_request("exam/setProctoringGuidelines/edit", ['ExamID' => $tetid, "value" => $text, "fromMoodle" => true, "userExternalID" => $userexternalid]);
         return $result;
     }
 
@@ -268,7 +271,7 @@ class tomaetest_connection
             }
         }
         etest_log("================== post $method to :$config->domain ====================");
-        $url = "https://$config->domain.tomaetest.com/TomaETest/api/dashboard/WS/$method$parameters";
+        $url = "https://$config->domain.tomaetest.com/TomaETestRon/api/dashboard/WS/$method$parameters";
 
         etest_log("url : " . $url);
         etest_log("postdata : " . json_encode($postdata));
