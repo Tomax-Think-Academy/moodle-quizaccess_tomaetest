@@ -30,10 +30,11 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 
-$quizid = isset($_GET["quizID"]) ? $_GET["quizID"] : false;
+$quizid = optional_param('quizID', false, PARAM_INT);
 
 if ($quizid === false) {
-    echo 'window.close()';
+    echo "<script>window.close();</script>";
+    return;
 }
 
 $quiz = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
