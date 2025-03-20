@@ -55,6 +55,7 @@ if (has_capability("mod/quiz:attempt", $context)) {
 
     $coursemodule = $cmid;
     $moodlesession = $_COOKIE['MoodleSession' . $CFG->sessioncookie];
+    $moodlesession = clean_param($moodlesession, PARAM_ALPHANUM);
     $logintopanel = new moodle_url('/mod/quiz/accessrule/tomaetest/studentSSO.php',
      array('moodleSession' => $moodlesession, "courseModule" => $coursemodule));
     $logintopanel = urlencode($logintopanel);
