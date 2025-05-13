@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-$plugin->version = 2025031900;
+$plugin->version = 2025051300;
 $plugin->requires = 2010042803;
 $plugin->component = 'quizaccess_tomaetest';
 $plugin->maturity = MATURITY_STABLE;
