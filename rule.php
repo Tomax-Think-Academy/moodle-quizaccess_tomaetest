@@ -83,7 +83,7 @@ class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
         mod_quiz_mod_form $quizform,
         MoodleQuickForm $mform
     ) {
-        global $DB, $USER;
+        global $DB, $USER, $PAGE;
 
         if (!quizaccess_tomaetest_utils::is_etest_plugin_enabled()) {
             return;
@@ -153,7 +153,7 @@ class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
         $mform->setType('tomaetest_proctoringGuidelines', PARAM_RAW);
 
         // JavaScript to enforce constraint
-        echo ("<script type='text/javascript'>
+        $PAGE->requires->js_init_code("
             document.addEventListener('DOMContentLoaded', function () {
                 let verificationTiming = document.getElementById('id_tomaetest_verificationTiming');
                 let cameraCheckbox = document.getElementById('id_tomaetest_verificationType_camera');
@@ -173,7 +173,7 @@ class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
                     manualCheckbox.disabled = cameraCheckbox.checked;
                     cameraCheckbox.disabled = manualCheckbox.checked;
                 }
-    
+
                 cameraCheckbox.addEventListener('change', updateConstraint);
                 manualCheckbox.addEventListener('change', updateConstraint);
                 updateConstraint(); // Initialize on page load
@@ -181,7 +181,7 @@ class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
                 verificationTiming.addEventListener('change', clearTypes);
                 clearTypes(); // Initialize on page load
             }, {once: true});
-        </script>");
+        ");
 
         if ($config->tomagrade_sync_further === "1") {
 
@@ -676,7 +676,7 @@ class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
                 throw new moodle_exception('syncerror', 'quizaccess_tomaetest', '', '', json_encode($syncresult));
             }
             $tetid = $syncresult["data"]["ID"];
-            $proctoringguidelines = $quiz->tomaetest_proctoringGuidelines['text'];
+           // $proctoringguidelines = $quiz->tomaetest_proctoringGuidelines['text'];
             $guidelinesresult = tomaetest_connection::set_proctoring_guidelines($tetid, $proctoringguidelines);
             if (!$guidelinesresult["success"]) {
                 $errmsg = "Didn't successfully update TomaETest.";
