@@ -137,6 +137,13 @@ if ($ADMIN->fulltree) {
     PARAM_INT
     ));
 
+    $settings->add(new admin_setting_configcheckbox(
+        'quizaccess_tomaetest/tomaetest_limit_course_students',
+        "Limit quiz only to course participants",
+        "",
+        '0'
+    ));
+
 
 
     $settings->add(new admin_setting_heading(

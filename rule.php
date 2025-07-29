@@ -27,11 +27,20 @@ if (!defined('MOODLE_INTERNAL')) {
 
 global $CFG;
 
+// This work-around is required until Moodle 4.2.
+if (class_exists('\mod_quiz\local\access_rule_base')) {
+    class_alias('\mod_quiz\local\access_rule_base', '\quizaccess_parent_class_alias');
+    class_alias('\mod_quiz\quiz_settings', '\quizaccess_quiz_settings_class_alias');
+} else {
+    require_once($CFG->dirroot . '/mod/quiz/accessrule/accessrulebase.php');
+    class_alias('\quiz_access_rule_base', '\quizaccess_parent_class_alias');
+    class_alias('\quiz', '\quizaccess_quiz_settings_class_alias');
+}
 require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/connection.php");
 require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/utils.php");
 require_once($CFG->dirroot . "/mod/quiz/accessrule/tomaetest/tomagradeConnection.php");
 
-class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
+class quizaccess_tomaetest extends quizaccess_parent_class_alias
 {
 
     protected $extradata;
@@ -46,7 +55,7 @@ class quizaccess_tomaetest extends mod_quiz\local\access_rule_base
         }
     }
 
-    public static function make(mod_quiz\quiz_settings $quizobj, $timenow, $canignoretimelimits) {
+    public static function make(quizaccess_quiz_settings_class_alias $quizobj, $timenow, $canignoretimelimits) {
         global $USER;
         $cmid = quizaccess_tomaetest_utils::get_cmid($quizobj->get_quiz()->id);
         $context = context_module::instance($cmid);

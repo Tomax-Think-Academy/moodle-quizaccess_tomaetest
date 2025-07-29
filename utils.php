@@ -232,6 +232,12 @@ class quizaccess_tomaetest_utils
         $context = context_module::instance($cmid);
 
         $students = get_users_by_capability($context, "mod/quiz:attempt");
+        if (tomaetest_connection::$config->tomaetest_limit_course_students === "1") {
+            // list($course, $cm) = get_course_and_cm_from_cmid($cmid, 'quiz');
+            $cm = get_coursemodule_from_id('quiz', $cmid, 0, false, MUST_EXIST);
+            $course_context = context_course::instance($cm->course);
+            $students = get_enrolled_users($course_context, "mod/quiz:attempt", 0, 'u.*', null, 0, 0, true);
+        }
         $students = static::moodle_participants_to_tet_participants($students);
 
         return $students;

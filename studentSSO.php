@@ -23,14 +23,15 @@
  */
 
 require_once(dirname(dirname(__FILE__)) . '../../../../config.php');
+// require_login();
 if (!defined('MOODLE_INTERNAL')) {
     die('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
 
 
-$value = $_GET["moodleSession"];
-$coursemodule = $_GET["courseModule"];
+$value = optional_param('moodleSession', "", PARAM_ALPHANUM);
+$coursemodule = optional_param('courseModule', "", PARAM_ALPHANUM);
 $sessionname = 'MoodleSession' . $CFG->sessioncookie;
 $sessionpath = $CFG->sessioncookiepath;
 $sessiondomain = $CFG->sessioncookiedomain;

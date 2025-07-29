@@ -30,10 +30,11 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 
-$quizid = isset($_GET["quizID"]) ? $_GET["quizID"] : false;
+$quizid = optional_param('quizID', false, PARAM_INT);
 
 if ($quizid === false) {
-    echo 'window.close()';
+    echo "<script>window.close();</script>";
+    return;
 }
 
 $quiz = quizaccess_tomaetest_utils::get_etest_quiz($quizid);
@@ -54,6 +55,7 @@ if (has_capability("mod/quiz:attempt", $context)) {
 
     $coursemodule = $cmid;
     $moodlesession = $_COOKIE['MoodleSession' . $CFG->sessioncookie];
+    $moodlesession = clean_param($moodlesession, PARAM_ALPHANUM);
     $logintopanel = new moodle_url('/mod/quiz/accessrule/tomaetest/studentSSO.php',
      array('moodleSession' => $moodlesession, "courseModule" => $coursemodule));
     $logintopanel = urlencode($logintopanel);
