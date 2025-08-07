@@ -685,7 +685,7 @@ class quizaccess_tomaetest extends quizaccess_parent_class_alias
                 throw new moodle_exception('syncerror', 'quizaccess_tomaetest', '', '', json_encode($syncresult));
             }
             $tetid = $syncresult["data"]["ID"];
-           // $proctoringguidelines = $quiz->tomaetest_proctoringGuidelines['text'];
+            $proctoringguidelines = $quiz->tomaetest_proctoringGuidelines['text'];
             $guidelinesresult = tomaetest_connection::set_proctoring_guidelines($tetid, $proctoringguidelines);
             if (!$guidelinesresult["success"]) {
                 $errmsg = "Didn't successfully update TomaETest.";
