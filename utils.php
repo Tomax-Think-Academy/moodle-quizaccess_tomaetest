@@ -67,6 +67,11 @@ class quizaccess_tomaetest_utils
         "atExam" => "During Exam"
     ];
 
+    public static $allowedAppsOptions = [
+        "babylon" => "Babylon", 
+        "almareader" => "Alma Reader"
+    ];
+
     public static function check_access($tetsebheader, $extradata) {
         if (
             ((array_key_exists('HTTP_USER_AGENT', $_SERVER)

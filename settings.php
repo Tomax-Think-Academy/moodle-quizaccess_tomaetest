@@ -305,6 +305,14 @@ if ($ADMIN->fulltree) {
     10,
     PARAM_INT
     ));
+    
+    $settings->add(new admin_setting_configmultiselect(
+        'quizaccess_tomaetest/tomaetest_allowed_apps',
+        "Default SEB Allowed Applications",
+        "Select the applications that will be allowed to run during the exam when using SEB.",
+        [],
+        quizaccess_tomaetest_utils::$allowedAppsOptions
+    ));
 
 
     $examcodeenter = new moodle_url('/mod/quiz/accessrule/tomaetest/examCode.php');
@@ -357,4 +365,3 @@ if ($ADMIN->fulltree) {
         ''
     ));
 }
-
