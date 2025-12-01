@@ -115,6 +115,7 @@ class tomaetest_connection
         $showparticipantonscreen = (isset($tetquiz->extradata["ShowParticipant"])) ? $tetquiz->extradata["ShowParticipant"] : false;
         $relogin = (isset($tetquiz->extradata["ReLogin"])) ? $tetquiz->extradata["ReLogin"] : false;
         $scanningtime = (isset($tetquiz->extradata["ScanningTime"])) ? $tetquiz->extradata["ScanningTime"] : 0;
+        $examAllowedApps = $tetquiz->extradata["ExamAllowedApps"] ?? [];
 
         date_default_timezone_set('UTC');
         if (isset($quiz->timeopen) && $quiz->timeopen != 0) {
@@ -142,7 +143,7 @@ class tomaetest_connection
         $result = self::sync_to_tomaetest($quiz->id, $quizname, $date, $coursename,
          $externalid, $teacherid, $time, $lockcomputer, $verificationtype,
           $verificationtiming, $proctoringtype, $showparticipantonscreen, $thirdparty,
-           $scanningmodule, $blockthirdparty, $relogin, $scanningtime);
+           $scanningmodule, $blockthirdparty, $relogin, $scanningtime, $examAllowedApps);
         return $result;
     }
 
@@ -151,7 +152,7 @@ class tomaetest_connection
      $externalid, $teacherexternalid, $starttime, $lockcomputer,
       $verificationtype, $verificationtiming, $proctoringtype,
        $showparticipantonscreen, $exam3rdpartyconfig, $scanningmodule,
-        $blockthirdparty, $relogin, $scanningtime) {
+        $blockthirdparty, $relogin, $scanningtime, $examAllowedApps) {
         $duration = 1000000;
         $data = [
             "bankExamDTO" => null,
@@ -183,6 +184,9 @@ class tomaetest_connection
                 "TETExamVerificationType" => array_map(function($verificationtype){
                     return ["key" => $verificationtype];
                 }, $verificationtype),
+                "TETExamAllowedApps" => array_map(function($app){
+                    return ["key" => $app];
+                }, $examAllowedApps)
             ]
         ];
         if ($blockthirdparty) {

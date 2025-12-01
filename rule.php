@@ -156,6 +156,14 @@ class quizaccess_tomaetest extends quizaccess_parent_class_alias
 
         $mform->addElement('checkbox', 'tomaetest_showParticipant', 'Show Participant on screen', ' ', $lockedatts);
         $mform->addElement('checkbox', 'tomaetest_blockThirdParty', 'Block Third Party', ' ', $lockedatts);
+
+        // Allowed Apps for SEB
+        $mform->addElement('html', '<span>Select the applications that will be allowed to run during the exam when using SEB.</span><br>');
+        $allowedAppsElement = $mform->addElement('select', 
+            'tomaetest_allowed_apps', 'SEB Allowed Applications', 
+            quizaccess_tomaetest_utils::$allowedAppsOptions, $lockedatts);
+        $allowedAppsElement->setMultiple(true);
+
         $mform->addElement('checkbox', 'tomaetest_requireReLogin', 'Require Re-Login Process', ' ', $lockedatts);
 
         $mform->addElement('editor', 'tomaetest_proctoringGuidelines', 'Proctoring Guidelines');
@@ -472,6 +480,7 @@ class quizaccess_tomaetest extends quizaccess_parent_class_alias
         $mform->disabledIf("tomaetest_blockThirdParty", "tomaetest_allow");
         $mform->disabledIf("tomaetest_requireReLogin", "tomaetest_allow");
         $mform->disabledIf("tomaetest_scanningTime", "tomaetest_allow");
+        $mform->disabledIf("tomaetest_allowed_apps", "tomaetest_allow");
         // If no verification timing, no verification type.
         $mform->hideIf("tomaetest_verificationType_camera", "tomaetest_verificationTiming", "eq", "noVerification");
         $mform->hideIf("tomaetest_verificationType_manual", "tomaetest_verificationTiming", "eq", "noVerification");
@@ -577,6 +586,8 @@ class quizaccess_tomaetest extends quizaccess_parent_class_alias
                 $mform->setDefault('tomaetest_blockThirdParty', $config->tomaetest_blockThirdParty);
                 $mform->setDefault('tomaetest_requireReLogin', $config->tomaetest_requireReLogin);
                 $mform->setDefault('tomaetest_scanningTime', $config->tomaetest_scanningTime);
+
+                $allowedAppsElement->setSelected($config->tomaetest_allowed_apps ?? []);
             }
         }
     }
@@ -673,6 +684,8 @@ class quizaccess_tomaetest extends quizaccess_parent_class_alias
             if (isset($quiz->tomaetest_proctoringGuidelines) && !empty($quiz->tomaetest_proctoringGuidelines)) {
                 $record->extradata["proctoringGuidelines"] = $quiz->tomaetest_proctoringGuidelines;
             }
+            
+            $record->extradata["ExamAllowedApps"] = $quiz->tomaetest_allowed_apps ?? [];
 
             $syncresult = tomaetest_connection::sync_to_toma_etest_from_database($quiz->id, $record);
             if (!$syncresult["success"]) {
