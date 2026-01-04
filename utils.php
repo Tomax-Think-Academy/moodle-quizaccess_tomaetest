@@ -152,8 +152,16 @@ class quizaccess_tomaetest_utils
         return $record;
     }
 
+    public static function isValidExamLink($examLink){
+        return (bool) preg_match('/^[0-9a-f]{8}$/', $examLink);
+    }
+
     public static function get_quiz_by_exam_code($code) {
         global $DB;
+        $isValidCode = self::isValidExamLink($code);
+        if (!$isValidCode) {
+            return false;
+        }
         $record = $DB->get_record_sql(
             "select * from {quizaccess_tomaetest_main} where extradata like ?",
             ["%\"TETExamLink\":\"$code\"%"]
